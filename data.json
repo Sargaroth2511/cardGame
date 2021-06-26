@@ -4,7 +4,8 @@
      "url":"url",
      "vMax":200,
      "power":408,
-     "acc":5.7,"reach":436,
+     "acc":5.7,
+     "reach":436,
      "weight":2595,
      "price":84450
   },
@@ -17,75 +18,5 @@
     "reach":330,
     "weight":1355,
     "price":39000
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-//   {
-//     "name": "",
-//     "url": "",
-//     "vMax": ,
-//     "power": ,
-//     "acc": ,
-//     "reach": ,
-//     "weight": ,
-//     "price" :   
-//   },
-  }]
+  }
+]
