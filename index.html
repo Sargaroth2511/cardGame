@@ -8,16 +8,16 @@
 </head>
 <body>
     <div class="navbar"><h1> Play Quartett</h1></div>
-    <div class="playground">
+    <div class="playground">  <div id="play1Cards">Deck <br>16 <br>Cards</div><div id="play2Cards">Deck <br>16 <br>Cards</div><div id="startgame"> START GAME</div>        
        <div class="card c1"><img src="Images/Corvette.jpg" alt="Corvette" class="card-image" id = "img1">
         <form action="click" id="form1">
             <div class = "name" id = "n1">Name</div>
             <button id="vmaxbtn1"><span class="class" >Vmax</span><span class="value" id="vMax1">Wert</span> </button>
-            <button id="powbtn1"><span class="class">Hubraum</span><span class="value" id="dis1">Wert</span> </button>
-            <button id="accbtn1"><span class="class">Gewicht</span><span class="value" id ="wei1">Wert</span> </button>
-            <button id="reacbtn1"><span class="class">Zylinder</span><span class="value" id="cyl1">Wert</span> </button>
-            <button id="weibtn1"><span class="class">Leistung</span><span class="value" id= "pow1">Wert</span> </button>
-            <button id="pribtn1"><span class="class">U/min</span><span class="value" id="rpm1">Wert</span> </button>
+            <button id="disbtn1"><span class="class">Hubraum</span><span class="value" id="dis1">Wert</span> </button>
+            <button id="weibtn1"><span class="class">Gewicht</span><span class="value" id ="wei1">Wert</span> </button>
+            <button id="cylbtn1"><span class="class">Zylinder</span><span class="value" id="cyl1">Wert</span> </button>
+            <button id="powbtn1"><span class="class">Leistung</span><span class="value" id= "pow1">Wert</span> </button>
+            <button id="rpmbtn1"><span class="class">U/min</span><span class="value" id="rpm1">Wert</span> </button>
         </form>
     </div>
 
@@ -25,13 +25,20 @@
         <form action="click" id="form2">
             <div class = "name" id = "n2">Name</div>
             <button id="vmaxbtn2"><span class="class" >Vmax</span><span class="value" id="vMax2">Wert</span> </button>
-            <button id="powbtn2"><span class="class">Hubraum</span><span class="value" id="dis2">Wert</span> </button>
-            <button id="accbtn2"><span class="class">Gewicht</span><span class="value" id ="wei2">Wert</span> </button>
-            <button id="reacbtn2"><span class="class">Zylinder</span><span class="value" id="cyl2">Wert</span> </button>
-            <button id="weibtn2"><span class="class">Leistung</span><span class="value" id= "pow2">Wert</span> </button>
-            <button id="pribtn2"><span class="class">U/min</span><span class="value" id="rpm2">Wert</span> </button>
+            <button id="disbtn2"><span class="class">Hubraum</span><span class="value" id="dis2">Wert</span> </button>
+            <button id="weibtn2"><span class="class">Gewicht</span><span class="value" id ="wei2">Wert</span> </button>
+            <button id="cylcbtn2"><span class="class">Zylinder</span><span class="value" id="cyl2">Wert</span> </button>
+            <button id="powbtn2"><span class="class">Leistung</span><span class="value" id= "pow2">Wert</span> </button>
+            <button id="rpmbtn2"><span class="class">U/min</span><span class="value" id="rpm2">Wert</span> </button>
         </form>
     </div>
+   
+
+    <div class="drawcards">There are <span id="drawcardcnt">no</span> Cards in the Middle </div>
+    </div>
+  
+    
+    <script src="declarations.js"></script>
     <script src="decks.js"></script>
     <script src="compareFuncs.js"></script>
     <script src="app.js"></script>

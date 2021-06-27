@@ -34,6 +34,32 @@ h1 {
    height: 60em;
 }
 
+#play1Cards {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(50, 145, 145, 0.267);
+    left: 18rem;
+    top: 2rem;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.3rem;
+}
+
+#play2Cards {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(50, 145, 145, 0.267);
+    right: 18rem;
+    top: 2rem;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.3rem;
+}
+
 .card {
     top: 1em;
     position: relative;
@@ -45,6 +71,7 @@ h1 {
     height: 32em;
     width: 20em;
     border-radius: 2px;
+    
 }
 
 .card-image {
@@ -78,6 +105,7 @@ form {
 }
 
 button {
+    cursor: pointer;
     height: 17%;
     width: 100%;
 }
@@ -96,3 +124,40 @@ button:hover {
     margin: 10px;
 }
 
+.drawcards {
+    position: absolute;
+    top: 35rem;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    background-color: hsla(175, 83%, 9%, 0.644);
+    height: 2em;
+    padding: 10px;
+    color: white;
+    border-radius: 4%;
+}
+
+#startgame {
+    margin: 0;
+    padding-top: 17px;
+    position: absolute;
+    width: 6rem;
+    height: 6rem;
+    top: 13rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 4%;
+    right: 10em;
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: rgba(14, 87, 87, 0.486);
+    cursor: pointer;
+}
+
+#startgame:hover {
+    transform:scale(1.04);
+
+}
+/* @media only screen and (max-width: 768px) {
+    .c2 {
+        display: none;
+    }
+} */

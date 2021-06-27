@@ -53,3 +53,7 @@ function shuffleArray(eleCarDeck) {
  let play2Deck = deckShuffled.slice(deckShuffled.length / 2);
 //  console.log('player1 deck : ', play1Deck);
 //  console.log('player2 deck : ', play2Deck);
+
+
+
+
