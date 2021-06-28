@@ -3,6 +3,8 @@ upDateCards();
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
 startGame();
+setInterval (kiPlay, 5000);
+upDateCards();
 });
 
 vMaxBtn.addEventListener('click', e => {
@@ -12,8 +14,10 @@ vMaxBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length ===0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+        upDateCards();
+
+    }});
 
 disBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -22,8 +26,10 @@ disBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+        upDateCards();
+
+    }});
 
 weiBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -32,8 +38,10 @@ weiBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+        upDateCards();
+
+    }});
     
 cylBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -42,8 +50,10 @@ cylBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+        upDateCards();
+
+    }});
 
 powBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -52,8 +62,9 @@ powBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+    upDateCards();
+}});
 
 
 rpmBtn.addEventListener('click', e => {
@@ -63,8 +74,10 @@ rpmBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
-});
+    } else {
+        upDateCards();
+
+    }});
 
 
 
