@@ -2,80 +2,90 @@ upDateCards();
 
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
-startGame();
-setInterval (kiPlay, 5000);
 upDateCards();
+startGame();
+kiPlay();
+// upDateCards();
 });
 
 vMaxBtn.addEventListener('click', e => {
     e.preventDefault();
-    compvMax();
+    popupHeader.textContent = 'Vmax!'
+    animateVmax();
+    // setTimeout(compvMax, 3000);
+
+
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length ===0) {
         alert('Player 1 wins!')
-    } else {
-        upDateCards();
+    // } else {upDateCards();
+        // setTimeout(upDateCards, 4000);
 
     }});
 
 disBtn.addEventListener('click', e => {
     e.preventDefault();
-    compDisplace();
+    popupHeader.textContent = 'Hubraum!'
+    animateDis();
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-        upDateCards();
+        
 
     }});
 
 weiBtn.addEventListener('click', e => {
     e.preventDefault();
-    compWeight();
+    popupHeader.textContent = 'Gewicht!'
+    animateWei();
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-        upDateCards();
+        
 
     }});
     
 cylBtn.addEventListener('click', e => {
     e.preventDefault();
-    compCyli();
+    popupHeader.textContent = 'Zylinder!'
+    animateCyl();
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-        upDateCards();
+        
 
     }});
 
 powBtn.addEventListener('click', e => {
     e.preventDefault();
-    compPow();
+    popupHeader.textContent = 'Leistung!'
+    animatePow();
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-    upDateCards();
+    
 }});
 
 
 rpmBtn.addEventListener('click', e => {
     e.preventDefault();
-    compRpm();
+    popupHeader.textContent = 'Umdrehungen pro Minute!'
+    animateRpm();
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-        upDateCards();
+        
 
     }});
 
@@ -88,7 +98,7 @@ vMaxBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
 
 disBtn2.addEventListener('click', e => {
@@ -98,7 +108,7 @@ disBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
 
 weiBtn2.addEventListener('click', e => {
@@ -108,7 +118,7 @@ weiBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
     
 cylBtn2.addEventListener('click', e => {
@@ -118,7 +128,7 @@ cylBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
 
 powBtn2.addEventListener('click', e => {
@@ -128,7 +138,7 @@ powBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
 
 rpmBtn2.addEventListener('click', e => {
@@ -138,6 +148,6 @@ rpmBtn2.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {upDateCards();}
+    } else {}
 });
 

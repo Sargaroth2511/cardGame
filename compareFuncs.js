@@ -1,28 +1,248 @@
+const animateVmax2 = async () => {
+    let x = ((play2Deck[0].vMax / 450) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].vMax
+           compvMax();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].vMax);
+};
+
+const animateVmax = async () => {
+    compPopup.style.display = 'block';
+    compPopupOuter.style.display = 'block';
+    let x = ((play1Deck[0].vMax / 450) * 100);
+    let barwidth1 = Math.round(x);   
+    let output = 0;
+    let timer1 = setInterval(() => {
+       innerBar1.style.width = `${output}%`;
+       if (output === barwidth1){
+           clearInterval(timer1);
+           innerBar1.textContent = play1Deck[0].vMax;
+           animateVmax2();
+
+       } else {
+           output ++;
+       }
+   }, 15);
+
+   console.log('barwidth1' ,barwidth1, play1Deck[0].vMax);
+};
 
 
+
+const animateDis2 = async () => {
+    let x = ((play2Deck[0].displace / 8500) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].displace
+           compDisplace();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].displace);
+};
+
+const animateDis = async () => {
+     compPopup.style.display = 'block';
+     compPopupOuter.style.display = 'block';
+     let x = ((play1Deck[0].displace / 8500) * 100);
+     let barwidth1 = Math.round(x);   
+     let output = 0;
+     let timer1 = setInterval(() => {
+        innerBar1.style.width = `${output}%`;
+        if (output === barwidth1){
+            clearInterval(timer1);
+            innerBar1.textContent = play1Deck[0].displace;
+            animateDis2();
+
+        } else {
+            output ++;
+        }
+    }, 15);
+
+    console.log('barwidth1' ,barwidth1, play1Deck[0].displace);
+};
+
+
+const animateWei2 = async () => {
+    let x = ((play2Deck[0].weight / 3000) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].weight
+           compWeight();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].weight);
+};
+
+const animateWei = async () => {
+     compPopup.style.display = 'block';
+     compPopupOuter.style.display = 'block';
+     let x = ((play1Deck[0].weight / 3000) * 100);
+     let barwidth1 = Math.round(x);   
+     let output = 0;
+     let timer1 = setInterval(() => {
+        innerBar1.style.width = `${output}%`;
+        if (output === barwidth1){
+            clearInterval(timer1);
+            innerBar1.textContent = play1Deck[0].weight;
+            animateWei2();
+
+        } else {
+            output ++;
+        }
+    }, 15);
+
+    console.log('barwidth1' ,barwidth1, play1Deck[0].weight);
+};
+
+
+const animateCyl2 = async () => {
+    let x = ((play2Deck[0].cylinder / 16) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].cylinder
+           compCyli();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].cylinder);
+};
+
+const animateCyl = async () => {
+     compPopup.style.display = 'block';
+     compPopupOuter.style.display = 'block';
+     let x = ((play1Deck[0].cylinder / 16) * 100);
+     let barwidth1 = Math.round(x);   
+     let output = 0;
+     let timer1 = setInterval(() => {
+        innerBar1.style.width = `${output}%`;
+        if (output === barwidth1){
+            clearInterval(timer1);
+            innerBar1.textContent = play1Deck[0].cylinder;
+            animateCyl2();
+
+        } else {
+            output ++;
+        }
+    }, 15);
+
+    console.log('barwidth1' ,barwidth1, play1Deck[0].cylinder);
+};
+
+
+const animatePow2 = async () => {
+    let x = ((play2Deck[0].power / 1600) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].power
+           compPow();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].power);
+};
+
+const animatePow = async () => {
+     compPopup.style.display = 'block';
+     compPopupOuter.style.display = 'block';
+     let x = ((play1Deck[0].power / 1600) * 100);
+     let barwidth1 = Math.round(x);   
+     let output = 0;
+     let timer1 = setInterval(() => {
+        innerBar1.style.width = `${output}%`;
+        if (output === barwidth1){
+            clearInterval(timer1);
+            innerBar1.textContent = play1Deck[0].power;
+            animatePow2();
+
+        } else {
+            output ++;
+        }
+    }, 15);
+
+    console.log('barwidth1' ,barwidth1, play1Deck[0].power);
+};
+
+
+const animateRpm2 = async () => {
+    let x = ((play2Deck[0].rpm / 9000) * 100);
+    let barwidth2 = Math.round(x);   
+    let output = 0;
+    let timer2 = setInterval(() => {
+       innerBar2.style.width = `${output}%`;
+       if (output === barwidth2){
+           clearInterval(timer2);
+           innerBar2.textContent = play2Deck[0].rpm
+           compRpm();
+       } else {
+           output ++;
+       }
+   }, 15);
+   console.log(barwidth2, play2Deck[0].rpm);
+};
+
+const animateRpm = async () => {
+     compPopup.style.display = 'block';
+     compPopupOuter.style.display = 'block';
+     let x = ((play1Deck[0].rpm / 9000) * 100);
+     let barwidth1 = Math.round(x);   
+     let output = 0;
+     let timer1 = setInterval(() => {
+        innerBar1.style.width = `${output}%`;
+        if (output === barwidth1){
+            clearInterval(timer1);
+            innerBar1.textContent = play1Deck[0].rpm;
+            animateRpm2();
+
+        } else {
+            output ++;
+        }
+    }, 15);
+
+    console.log('barwidth1' ,barwidth1, play1Deck[0].rpm);
+};
 
 const kiPlay = () => {
     let num = (Math.random() * elements2.length);
     if (vMaxBtn.disabled) {
-        if (num < 1) {compvMax()}
-        else if (num >= 1 && num < 2) {compDisplace()}
-        else if (num >= 2 && num < 3) {compWeight()}
-        else if (num >= 3 && num < 4) {compCyli()}
-        else if (num >= 4 && num < 5) {compPow()}
-        else if (num < 6) {compRpm()}
-    };
-    upDateCards();
+        if (num < 1) {animateVmax();popupHeader.textContent = 'Vmax!';}
+        else if (num >= 1 && num < 2) {animateDis();popupHeader.textContent = 'Hubraum!';}
+        else if (num >= 2 && num < 3) {animateWei();popupHeader.textContent = 'Gewicht!';}
+        else if (num >= 3 && num < 4) {animateCyl();popupHeader.textContent = 'Zylinder!';}
+        else if (num >= 4 && num < 5) {animatePow();popupHeader.textContent = 'Leistung!';}
+        else if (num < 6) {animateRpm();popupHeader.textContent = 'Umrehungen pro Minute';}
+    }; console.log(num);
 };
-
-// const kIInterval = setInterval (kiPlay, 3000);
-// const clearKI = () => {
-//     if (vMaxBtn.disabled != true) {
-//         clearInterval(kIInterval)
-//     };
-// };
-
-
-
 
 
 const play1sturne = () => {
@@ -285,6 +505,6 @@ const startGame =() => {
         console.log('P2 starts')
         play2sturne();
     };
-    upDateCards();
+    // upDateCards();
 };
 

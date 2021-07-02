@@ -156,8 +156,103 @@ button:hover {
     transform:scale(1.04);
 
 }
-/* @media only screen and (max-width: 768px) {
-    .c2 {
-        display: none;
-    }
-} */
+#comp_popupouter {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(50, 145, 145, 0.267);
+    z-index: 12;
+    top:0;
+    display: none;
+
+}
+
+#comp_popupinner {
+    position: absolute;
+    width: 30%;
+    height: 35%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    top:25%;
+    background-color: rgba(17, 58, 58, 0.897);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    right: 35%;
+
+    display: none;
+
+     
+}
+
+#comp_popupinner h3 {
+    color: rgb(221, 179, 223);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 10px;
+}
+
+.compbar1 {
+    position: absolute;
+    top: 30%;
+    background-color: thistle;
+    width: 90%;
+    height: 15%;
+    border-radius: 7px;
+    left: 5%;
+}
+
+#innerbar1 {
+    overflow: hidden;
+    width: 0px;
+    height: 100%;
+    background-color: orangered;
+    font-size: 1.5rem;
+
+}
+
+
+.compbar2 {
+    position: absolute;
+    top: 60%;
+    background-color: thistle;
+    width: 90%;
+    height: 15%;
+    border-radius: 7px;
+    left: 5%;
+}
+
+#innerbar2 {
+    overflow: hidden;
+    width: 0px;
+    height: 100%;
+    background-color: orangered;
+    font-size: 1.5rem;
+
+}
+}
+
+h4 {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 1.5rem;
+    color: rgb(19, 1, 1);
+}
+
+#closebtn {
+    position: absolute;
+    top: 82%;
+    left: 80%;
+    width: 15%;
+    height: 12%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: thistle;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#closebtn:hover {
+    transform: scale(1.04);
+}

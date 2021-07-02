@@ -48,6 +48,56 @@ const elements1 = form1.elements;
 const form2 = document.querySelector("#form2")
 const elements2 = form2.elements;
 
+const innerBar1 = document.querySelector('#innerbar1');
+const innerBar2 = document.querySelector('#innerbar2');
+
+const compPopupOuter =document.querySelector('#comp_popupouter')
+const compPopup = document.querySelector('#comp_popupinner');
+const closeBtn = document.querySelector('#closebtn');
+const popupHeader = document.querySelector('h3');
+
+const nexTurn = () => {
+    compPopup.style.display = 'none';
+    compPopupOuter.style.display = 'none';
+    innerBar1.textContent = '0';
+    innerBar2.textContent = '0';
+    innerBar1.style.width = '0';
+    innerBar2.style.width = '0';
+    if (play1Deck.length === 0) {
+        alert('Player 2 wins');
+    } else if (play2Deck.length ===0) {
+        alert('Player 1 wins!')
+    };    
+    upDateCards();
+    kiPlay();
+};
+
+// closeBtn.addEventListener ('click', e => {
+//     e.preventDefault();
+//     nexTurn();
+// });
+
+compPopupOuter.addEventListener ('click', e => {
+    e.preventDefault();
+    nexTurn();
+});
+
+
+
+
+
+//  closeBtn.addEventListener ('click', e => {
+//     e.preventDefault();
+//     compPopup.style.display = 'none';
+//     compPopupOuter.style.display = 'none';
+//     innerBar1.textContent = '0';
+//     innerBar2.textContent = '0';
+//     upDateCards();
+//     kiPlay();
+    
+// });
+
+
 const drawCards = [];
 
 const upDateCards = () => {
