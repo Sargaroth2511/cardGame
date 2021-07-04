@@ -7,20 +7,23 @@
     <title>Play Quartet</title>
 </head>
 <body>
-    <div class="navbar"><h1> Play Quartett</h1></div>
+  
     <div class="playground">  
-        <div id="comp_popupouter"><div id="comp_popupinner">
-            <h3>Check your Speed!</h3>
-            <div class= "compbar1">
-                <div id="innerbar1"><h4>0</h4></div></div>
-            <div class="compbar2">
-                <div id="innerbar2"><h4>0</h4></div></div>
-                <div id="closebtn">Close</div>
+        <div class="navbar"><h1> Play Quartett</h1></div>
+        <div id="comp_popupouter">
+            <div id="comp_popupinner">
+                <h3>Check your Speed!</h3>
+                <div class= "compbar1">
+                    <div id="innerbar1"></div>
+                </div>
+                <div class="compbar2">
+                    <div id="innerbar2"></div>
+                </div>
+            <div id="closebtn">Close</div>
         </div>
         </div>    
             
-            <div id="play1Cards">Deck <br>16 <br>Cards</div><div id="play2Cards">Deck <br>16 <br>Cards</div><div id="startgame"> START GAME</div>        
-       <div class="card c1"><img src="Images/Corvette.jpg" alt="Corvette" class="card-image" id = "img1">
+       <div class="card c1"><img src="Images/Corvette.jpg" alt="Corvette" class="card-image" id = "img1"><div id="play1Cards">Deck <br>16 <br>Cards</div>
         <form action="click" id="form1">
             <div class = "name" id = "n1">Name</div>
             <button id="vmaxbtn1"><span class="class" >Vmax</span><span class="value" id="vMax1">Wert</span> </button>
@@ -30,9 +33,11 @@
             <button id="powbtn1"><span class="class">Leistung</span><span class="value" id= "pow1">Wert</span> </button>
             <button id="rpmbtn1"><span class="class">U/min</span><span class="value" id="rpm1">Wert</span> </button>
         </form>
-    </div>
+        </div>
 
-    <div class="card c2"><img src="Images/MercedesSL300.jpg" alt="MercedesSL300" class="card-image" id ="img2">
+        <div class="card c2"><img src="Images/MercedesSL300.jpg" alt="MercedesSL300" class="card-image" id ="img2">
+        <div id="play2Cards">Deck <br>16 <br>Cards</div>
+        <div id="startgame"> START GAME</div>   
         <form action="click" id="form2">
             <div class = "name" id = "n2">Name</div>
             <button id="vmaxbtn2"><span class="class" >Vmax</span><span class="value" id="vMax2">Wert</span> </button>

@@ -67,10 +67,10 @@ const nexTurn = () => {
         alert('Player 2 wins');
     } else if (play2Deck.length ===0) {
         alert('Player 1 wins!')
-    };    
-    upDateCards();
-    kiPlay();
-};
+    } else {    
+        upDateCards();
+        kiPlay();
+}};
 
 // closeBtn.addEventListener ('click', e => {
 //     e.preventDefault();

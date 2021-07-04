@@ -6,7 +6,7 @@ const animateVmax2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].vMax
+           innerBar2.textContent = `${play2Deck[0].vMax} km/h`
            compvMax();
        } else {
            output ++;
@@ -16,8 +16,8 @@ const animateVmax2 = async () => {
 };
 
 const animateVmax = async () => {
-    compPopup.style.display = 'block';
-    compPopupOuter.style.display = 'block';
+    compPopup.style.display = 'flex';
+    compPopupOuter.style.display = 'flex';
     let x = ((play1Deck[0].vMax / 450) * 100);
     let barwidth1 = Math.round(x);   
     let output = 0;
@@ -25,7 +25,7 @@ const animateVmax = async () => {
        innerBar1.style.width = `${output}%`;
        if (output === barwidth1){
            clearInterval(timer1);
-           innerBar1.textContent = play1Deck[0].vMax;
+           innerBar1.textContent = `${play1Deck[0].vMax} km/h`
            animateVmax2();
 
        } else {
@@ -46,7 +46,7 @@ const animateDis2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].displace
+           innerBar2.textContent = `${play2Deck[0].displace} ccm`
            compDisplace();
        } else {
            output ++;
@@ -56,8 +56,8 @@ const animateDis2 = async () => {
 };
 
 const animateDis = async () => {
-     compPopup.style.display = 'block';
-     compPopupOuter.style.display = 'block';
+     compPopup.style.display = 'flex';
+     compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].displace / 8500) * 100);
      let barwidth1 = Math.round(x);   
      let output = 0;
@@ -65,7 +65,7 @@ const animateDis = async () => {
         innerBar1.style.width = `${output}%`;
         if (output === barwidth1){
             clearInterval(timer1);
-            innerBar1.textContent = play1Deck[0].displace;
+            innerBar1.textContent = `${play1Deck[0].displace} ccm`
             animateDis2();
 
         } else {
@@ -85,7 +85,7 @@ const animateWei2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].weight
+           innerBar2.textContent = `${play2Deck[0].weight} kg`
            compWeight();
        } else {
            output ++;
@@ -95,8 +95,8 @@ const animateWei2 = async () => {
 };
 
 const animateWei = async () => {
-     compPopup.style.display = 'block';
-     compPopupOuter.style.display = 'block';
+     compPopup.style.display = 'flex';
+     compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].weight / 3000) * 100);
      let barwidth1 = Math.round(x);   
      let output = 0;
@@ -104,7 +104,7 @@ const animateWei = async () => {
         innerBar1.style.width = `${output}%`;
         if (output === barwidth1){
             clearInterval(timer1);
-            innerBar1.textContent = play1Deck[0].weight;
+            innerBar1.textContent = `${play1Deck[0].weight} kg`
             animateWei2();
 
         } else {
@@ -124,7 +124,7 @@ const animateCyl2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].cylinder
+           innerBar2.textContent = `${play2Deck[0].cylinder} Zylinder`
            compCyli();
        } else {
            output ++;
@@ -134,8 +134,8 @@ const animateCyl2 = async () => {
 };
 
 const animateCyl = async () => {
-     compPopup.style.display = 'block';
-     compPopupOuter.style.display = 'block';
+     compPopup.style.display = 'flex';
+     compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].cylinder / 16) * 100);
      let barwidth1 = Math.round(x);   
      let output = 0;
@@ -143,7 +143,7 @@ const animateCyl = async () => {
         innerBar1.style.width = `${output}%`;
         if (output === barwidth1){
             clearInterval(timer1);
-            innerBar1.textContent = play1Deck[0].cylinder;
+            innerBar1.textContent = `${play1Deck[0].cylinder} Zylinder`
             animateCyl2();
 
         } else {
@@ -163,7 +163,7 @@ const animatePow2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].power
+           innerBar2.textContent = `${play2Deck[0].power} PS`
            compPow();
        } else {
            output ++;
@@ -173,8 +173,8 @@ const animatePow2 = async () => {
 };
 
 const animatePow = async () => {
-     compPopup.style.display = 'block';
-     compPopupOuter.style.display = 'block';
+     compPopup.style.display = 'flex';
+     compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].power / 1600) * 100);
      let barwidth1 = Math.round(x);   
      let output = 0;
@@ -182,7 +182,7 @@ const animatePow = async () => {
         innerBar1.style.width = `${output}%`;
         if (output === barwidth1){
             clearInterval(timer1);
-            innerBar1.textContent = play1Deck[0].power;
+            innerBar1.textContent = `${play1Deck[0].power} PS`
             animatePow2();
 
         } else {
@@ -202,7 +202,7 @@ const animateRpm2 = async () => {
        innerBar2.style.width = `${output}%`;
        if (output === barwidth2){
            clearInterval(timer2);
-           innerBar2.textContent = play2Deck[0].rpm
+           innerBar2.textContent = `${play2Deck[0].rpm} U/min`
            compRpm();
        } else {
            output ++;
@@ -212,8 +212,8 @@ const animateRpm2 = async () => {
 };
 
 const animateRpm = async () => {
-     compPopup.style.display = 'block';
-     compPopupOuter.style.display = 'block';
+     compPopup.style.display = 'flex';
+     compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].rpm / 9000) * 100);
      let barwidth1 = Math.round(x);   
      let output = 0;
@@ -221,7 +221,7 @@ const animateRpm = async () => {
         innerBar1.style.width = `${output}%`;
         if (output === barwidth1){
             clearInterval(timer1);
-            innerBar1.textContent = play1Deck[0].rpm;
+            innerBar1.textContent = `${play1Deck[0].rpm} U/min`
             animateRpm2();
 
         } else {
@@ -240,7 +240,7 @@ const kiPlay = () => {
         else if (num >= 2 && num < 3) {animateWei();popupHeader.textContent = 'Gewicht!';}
         else if (num >= 3 && num < 4) {animateCyl();popupHeader.textContent = 'Zylinder!';}
         else if (num >= 4 && num < 5) {animatePow();popupHeader.textContent = 'Leistung!';}
-        else if (num < 6) {animateRpm();popupHeader.textContent = 'Umrehungen pro Minute';}
+        else if (num < 6) {animateRpm();popupHeader.textContent = 'Umrehungen pro Minute!';}
     }; console.log(num);
 };
 

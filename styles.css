@@ -16,22 +16,23 @@ h1 {
     font-size: 3em;
 }
 
-.navbar {
-    justify-self: center;
-    background-color: rgb(4, 126, 126);
-    height: 6em;
-    width: 100%;
-}
+
 
 .playground {
    display: flex;
    justify-content: center;
-   gap: 5rem;
-   background-color: lightcyan;
-   top: 6.5em;
-   position: absolute;
+   gap: 4rem;
+   height: 60rem;
    width: 100%;
-   height: 60em;
+
+}
+
+.navbar {
+    position: absolute;
+    background-color: rgb(4, 126, 126);
+    height: 6rem;
+    width: 100%;
+    text-align: center;
 }
 
 #play1Cards {
@@ -40,8 +41,9 @@ h1 {
     height: 5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgba(50, 145, 145, 0.267);
-    left: 18rem;
-    top: 2rem;
+    right:  23rem;
+
+    top: 3rem;
     text-align: center;
     padding-top: 5px;
     font-size: 1.3rem;
@@ -51,25 +53,25 @@ h1 {
     position: absolute;
     width: 5rem;
     height: 5rem;
+    top: 3rem;
+    left: 23rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgba(50, 145, 145, 0.267);
-    right: 18rem;
-    top: 2rem;
     text-align: center;
     padding-top: 5px;
     font-size: 1.3rem;
 }
 
 .card {
-    top: 1em;
+    top: 7rem;
     position: relative;
     display: flex;
     justify-content: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); /* this adds the "card" effect */
     text-align: center;
     background-color: #f1f1f1;
-    height: 32em;
-    width: 20em;
+    height: 32rem;
+    width: 20rem;
     border-radius: 2px;
     
 }
@@ -126,7 +128,7 @@ button:hover {
 
 .drawcards {
     position: absolute;
-    top: 35rem;
+    top: 40rem;
     font-size: 1.5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     background-color: hsla(175, 83%, 9%, 0.644);
@@ -145,7 +147,7 @@ button:hover {
     top: 13rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     border-radius: 4%;
-    right: 10em;
+    left: 23rem;
     text-align: center;
     font-size: 1.5rem;
     background-color: rgba(14, 87, 87, 0.486);
@@ -160,17 +162,19 @@ button:hover {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(50, 145, 145, 0.267);
+    background-color: rgba(85, 88, 88, 0.226);
     z-index: 12;
     top:0;
+    display: flex;
     display: none;
+    justify-content: center;
 
 }
 
 #comp_popupinner {
     position: absolute;
-    width: 30%;
-    height: 35%;
+    width: 32rem;
+    height: 18rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
     z-index: 10;
     top:25%;
@@ -178,8 +182,6 @@ button:hover {
     border-radius: 5px;
     display: flex;
     justify-content: center;
-    right: 35%;
-
     display: none;
 
      
@@ -203,12 +205,13 @@ button:hover {
 }
 
 #innerbar1 {
-    overflow: hidden;
+    padding-top: 7px;
     width: 0px;
     height: 100%;
     background-color: orangered;
     font-size: 1.5rem;
-
+    color: rgb(19, 1, 1);
+    text-indent: 7px;
 }
 
 
@@ -223,21 +226,16 @@ button:hover {
 }
 
 #innerbar2 {
-    overflow: hidden;
+    padding-top: 7px;
     width: 0px;
     height: 100%;
     background-color: orangered;
     font-size: 1.5rem;
-
-}
-}
-
-h4 {
-    margin-top: 5px;
-    margin-left: 5px;
-    font-size: 1.5rem;
     color: rgb(19, 1, 1);
+    text-indent: 7px;
 }
+
+
 
 #closebtn {
     position: absolute;
@@ -249,10 +247,38 @@ h4 {
     background-color: thistle;
     display: flex;
     justify-content: center;
-    padding: 5px;
+    padding: 8px;
     cursor: pointer;
 }
 
 #closebtn:hover {
     transform: scale(1.04);
+}
+
+@media (max-width: 1080px) {
+
+    .c1 {
+        transform: scale(0.9);
+        top: 60%;
+        position: absolute;
+        font-size: 1.5rem;
+       
+    }
+
+    .drawcards {
+        top: 39rem;
+    }
+
+    .c2 {
+        transform: scale(0.9);
+        top: 8%;
+        position: absolute;
+        font-size: 1.5rem;
+       
+    }
+
+    button {
+        font-size: 1.3rem;
+    }
+
 }

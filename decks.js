@@ -19,7 +19,11 @@ const eleCarDeck = [
     new LuxuryCar ('LCb1', 'Ruf RT 12', 340, 3746, 1500, 6, 650, 7000),
     new LuxuryCar ('LCb2', 'Lexus LC 500', 270, 4969, 1935, 8, 477, 7100),
     new LuxuryCar ('LCb3', 'Mercedes AMG GT', 304, 3982, 1645, 8, 462, 6000),
-    new LuxuryCar ('LCb4', 'Mazanti Eventra', 350, 7000, 1300, 8, 701, 6600)
+    new LuxuryCar ('LCb4', 'Mazanti Eventra', 350, 7000, 1300, 8, 701, 6600),
+    new LuxuryCar ('LCc1', 'McLaren 720 S', 341, 3994, 1283, 8, 720, 7500),
+    new LuxuryCar ('LCc2', 'Maserati Quattroporte', 280, 4700, 1700, 8, 530, 8250),
+    new LuxuryCar ('LCc3', 'Audi R8 V10 plus', 317, 5204, 1570, 10, 550, 8000),
+    new LuxuryCar ('LCc4', 'Panoz Abruzzi', 340, 6200, 1400, 8, 640, 6500)
 ];
 
  function compareprice(a, b) {
