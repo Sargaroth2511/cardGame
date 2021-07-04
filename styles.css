@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
   }
   
 body {
@@ -23,7 +24,7 @@ h1 {
    justify-content: center;
    gap: 4rem;
    height: 60rem;
-   width: 100%;
+   width: 100vw;
 
 }
 
@@ -140,7 +141,7 @@ button:hover {
 
 #startgame {
     margin: 0;
-    padding-top: 17px;
+    padding-top: 10px;
     position: absolute;
     width: 6rem;
     height: 6rem;
@@ -262,7 +263,7 @@ button:hover {
     }
 
     .c1 {
-        transform: scale(0.9);
+        transform: scale(0.85);
         top: 60%;
         position: absolute;
         font-size: 1.5rem;
@@ -270,11 +271,11 @@ button:hover {
     }
 
     .drawcards {
-        top: 40rem;
+        top: 55%;
     }
 
     .c2 {
-        transform: scale(0.9);
+        transform: scale(0.85);
         top: 8%;
         position: absolute;
         font-size: 1.5rem;
@@ -284,5 +285,19 @@ button:hover {
     button {
         font-size: 1.3rem;
     }
+
+    #play1Cards {
+        right: 21rem;
+    }
+
+    #play2Cards {
+        left: 21rem;
+    }
+
+    #startgame {
+        top: 125%;
+        left: 21rem;
+    }
+
 
 }
