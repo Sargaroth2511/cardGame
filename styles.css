@@ -141,7 +141,7 @@ button:hover {
 
 #startgame {
     margin: 0;
-    padding-top: 10px;
+    padding-top: 7px;
     position: absolute;
     width: 6rem;
     height: 6rem;
@@ -162,7 +162,7 @@ button:hover {
 #comp_popupouter {
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 120%;
     background-color: rgba(85, 88, 88, 0.226);
     z-index: 12;
     top:0;
@@ -271,7 +271,7 @@ button:hover {
     }
 
     .drawcards {
-        top: 55%;
+        top: 58%;
     }
 
     .c2 {

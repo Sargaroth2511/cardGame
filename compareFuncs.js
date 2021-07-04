@@ -505,6 +505,14 @@ const startGame =() => {
         console.log('P2 starts')
         play2sturne();
     };
-    // upDateCards();
+    shuffleArray(luxusCarDeck);
+    const deckShuffled = luxusCarDeck; 
+    play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
+    play2Deck = deckShuffled.slice(deckShuffled.length / 2);
+    // console.log(play1Deck);
+    upDateCards();
+    // return play1Deck, play2Deck;
+ 
+
 };
 

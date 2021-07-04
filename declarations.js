@@ -72,31 +72,10 @@ const nexTurn = () => {
         kiPlay();
 }};
 
-// closeBtn.addEventListener ('click', e => {
-//     e.preventDefault();
-//     nexTurn();
-// });
-
 compPopupOuter.addEventListener ('click', e => {
     e.preventDefault();
     nexTurn();
 });
-
-
-
-
-
-//  closeBtn.addEventListener ('click', e => {
-//     e.preventDefault();
-//     compPopup.style.display = 'none';
-//     compPopupOuter.style.display = 'none';
-//     innerBar1.textContent = '0';
-//     innerBar2.textContent = '0';
-//     upDateCards();
-//     kiPlay();
-    
-// });
-
 
 const drawCards = [];
 

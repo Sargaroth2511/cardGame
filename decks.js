@@ -11,7 +11,7 @@ class LuxuryCar {
     }
 }
 
-const eleCarDeck = [
+const luxusCarDeck = [
     new LuxuryCar ('LCa1', 'Bentley Continental GT', 318, 5998, 2320, 12, 575, 6000),
     new LuxuryCar ('LCa2', 'Porsche Panamera Turbo', 303, 4806, 2019, 8, 500, 6000),
     new LuxuryCar ('LCa3', 'BMW 650i Grand Coupé', 250, 4395, 1940, 8, 450, 6000),
@@ -39,20 +39,20 @@ const eleCarDeck = [
     return comparison;
 }
 // Sorted Arrays
-const eleCarDeckSortPrice = eleCarDeck.sort(compareprice);
+const luxusCarDeckSortPrice = luxusCarDeck.sort(compareprice);
 
 // Random Arrays
-function shuffleArray(eleCarDeck) {
-    for (var i = eleCarDeck.length - 1; i > 0; i--) {
+function shuffleArray(luxusCarDeck) {
+    for (var i = luxusCarDeck.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = eleCarDeck[i];
-        eleCarDeck[i] = eleCarDeck[j];
-        eleCarDeck[j] = temp;
+        var temp = luxusCarDeck[i];
+        luxusCarDeck[i] = luxusCarDeck[j];
+        luxusCarDeck[j] = temp;
     }
 }
 
- shuffleArray(eleCarDeck);
- const deckShuffled = eleCarDeck; 
+ shuffleArray(luxusCarDeck);
+ const deckShuffled = luxusCarDeck; 
  let play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
  let play2Deck = deckShuffled.slice(deckShuffled.length / 2);
 //  console.log('player1 deck : ', play1Deck);

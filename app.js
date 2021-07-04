@@ -2,10 +2,9 @@ upDateCards();
 
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
-upDateCards();
 startGame();
 kiPlay();
-// upDateCards();
+
 });
 
 vMaxBtn.addEventListener('click', e => {
