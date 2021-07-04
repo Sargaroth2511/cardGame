@@ -257,6 +257,10 @@ button:hover {
 
 @media (max-width: 1080px) {
 
+    html {
+        font-size: 11px;
+    }
+
     .c1 {
         transform: scale(0.9);
         top: 60%;
@@ -266,7 +270,7 @@ button:hover {
     }
 
     .drawcards {
-        top: 39rem;
+        top: 40rem;
     }
 
     .c2 {
