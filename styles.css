@@ -299,5 +299,24 @@ button:hover {
         left: 21rem;
     }
 
+    .compbar1 {
+        position: absolute;
+        top: 60%;
+        background-color: thistle;
+        width: 90%;
+        height: 15%;
+        border-radius: 7px;
+        left: 5%;
+    }
+
+    .compbar2 {
+        position: absolute;
+        top: 30%;
+        background-color: thistle;
+        width: 90%;
+        height: 15%;
+        border-radius: 7px;
+        left: 5%;
+
 
 }

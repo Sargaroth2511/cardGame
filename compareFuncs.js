@@ -16,6 +16,7 @@ const animateVmax2 = async () => {
 };
 
 const animateVmax = async () => {
+    popupHeader.textContent = 'Vmax!';
     compPopup.style.display = 'flex';
     compPopupOuter.style.display = 'flex';
     let x = ((play1Deck[0].vMax / 450) * 100);
@@ -56,6 +57,7 @@ const animateDis2 = async () => {
 };
 
 const animateDis = async () => {
+     popupHeader.textContent = 'Hubraum!';
      compPopup.style.display = 'flex';
      compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].displace / 8500) * 100);
@@ -95,6 +97,7 @@ const animateWei2 = async () => {
 };
 
 const animateWei = async () => {
+     popupHeader.textContent = 'Gewicht!';
      compPopup.style.display = 'flex';
      compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].weight / 3000) * 100);
@@ -134,6 +137,7 @@ const animateCyl2 = async () => {
 };
 
 const animateCyl = async () => {
+     popupHeader.textContent = 'Zylinder!';
      compPopup.style.display = 'flex';
      compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].cylinder / 16) * 100);
@@ -173,6 +177,7 @@ const animatePow2 = async () => {
 };
 
 const animatePow = async () => {
+     popupHeader.textContent = 'Leistung!';
      compPopup.style.display = 'flex';
      compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].power / 1600) * 100);
@@ -212,6 +217,7 @@ const animateRpm2 = async () => {
 };
 
 const animateRpm = async () => {
+     popupHeader.textContent = 'Umrehungen pro Minute!';
      compPopup.style.display = 'flex';
      compPopupOuter.style.display = 'flex';
      let x = ((play1Deck[0].rpm / 9000) * 100);
@@ -235,14 +241,63 @@ const animateRpm = async () => {
 const kiPlay = () => {
     let num = (Math.random() * elements2.length);
     if (vMaxBtn.disabled) {
-        if (num < 1) {animateVmax();popupHeader.textContent = 'Vmax!';}
-        else if (num >= 1 && num < 2) {animateDis();popupHeader.textContent = 'Hubraum!';}
-        else if (num >= 2 && num < 3) {animateWei();popupHeader.textContent = 'Gewicht!';}
-        else if (num >= 3 && num < 4) {animateCyl();popupHeader.textContent = 'Zylinder!';}
-        else if (num >= 4 && num < 5) {animatePow();popupHeader.textContent = 'Leistung!';}
-        else if (num < 6) {animateRpm();popupHeader.textContent = 'Umrehungen pro Minute!';}
+        if (num < 1) {animateVmax();}
+        else if (num >= 1 && num < 2) {animateDis();}
+        else if (num >= 2 && num < 3) {animateWei();}
+        else if (num >= 3 && num < 4) {animateCyl();}
+        else if (num >= 4 && num < 5) {animatePow();}
+        else if (num < 6) {animateRpm();}
     }; console.log(num);
 };
+
+
+
+const cleverKI = () => {
+    if (vMaxBtn.disabled) {
+       
+
+
+        let searchItem = (element) => element.vMax === play2Deck[0].vMax;
+        let vMaxObj = {function :animateVmax, position: 0 };
+        vMaxObj.position = (luxusCarDeckSortvMax.findIndex(searchItem));
+
+        searchItem = (element) => element.displace === play2Deck[0].displace;
+        let displaceObj = {function :animateDis, position: 0 };
+        displaceObj.position = (luxusCarDeckSortDispl.findIndex(searchItem));
+
+        searchItem = (element) => element.weight === play2Deck[0].weight;
+        let weiObj = {function :animateWei, position: 0 };
+        weiObj.position = (luxusCarDeckSortWei.findIndex(searchItem));
+
+        searchItem = (element) => element.cylinder === play2Deck[0].cylinder;
+        let cylObj = {function :animateCyl, position: 0 };
+        cylObj.position = (luxusCarDeckSortCyl.findIndex(searchItem));
+
+        searchItem = (element) => element.power === play2Deck[0].power;
+        let powObj = {function :animatePow, position: 0 };
+        powObj.position = (luxusCarDeckSortPow.findIndex(searchItem));
+
+        searchItem = (element) => element.rpm === play2Deck[0].rpm;
+        let rpmObj = {function :animateRpm, position: 0 };
+        rpmObj.position = (luxusCarDeckSortRpm.findIndex(searchItem));
+
+        let positionArray = [];
+         positionArray.push(vMaxObj, displaceObj, weiObj, cylObj, powObj, rpmObj);
+
+
+
+        setTimeout (()  => { positionArray.sort ((a, b) => {
+            return a.position - b.position
+        })}, 0);
+
+        console.log(positionArray);
+        setTimeout (() => {positionArray[0].function()}, 0);
+
+    };
+};
+
+
+
 
 
 const play1sturne = () => {
@@ -505,14 +560,11 @@ const startGame =() => {
         console.log('P2 starts')
         play2sturne();
     };
-    shuffleArray(luxusCarDeck);
-    const deckShuffled = luxusCarDeck; 
+    shuffleArray(deckShuffled);
     play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
     play2Deck = deckShuffled.slice(deckShuffled.length / 2);
-    // console.log(play1Deck);
     upDateCards();
-    // return play1Deck, play2Deck;
- 
+
 
 };
 

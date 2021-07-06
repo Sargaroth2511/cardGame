@@ -26,33 +26,20 @@ const luxusCarDeck = [
     new LuxuryCar ('LCc4', 'Panoz Abruzzi', 340, 6200, 1400, 8, 640, 6500)
 ];
 
- function compareprice(a, b) {
-    const priceA = a.price;
-    const priceB = b.price;
 
-    let comparison = 0;
-    if (priceA > priceB) {
-        comparison = 1;
-    } else if ( priceA < priceB) {
-        comparison = -1;
-    }
-    return comparison;
-}
-// Sorted Arrays
-const luxusCarDeckSortPrice = luxusCarDeck.sort(compareprice);
+const deckShuffled = luxusCarDeck; 
 
 // Random Arrays
-function shuffleArray(luxusCarDeck) {
-    for (var i = luxusCarDeck.length - 1; i > 0; i--) {
+const shuffleArray = (deckshuffled) => {
+    for (var i = deckShuffled.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = luxusCarDeck[i];
-        luxusCarDeck[i] = luxusCarDeck[j];
-        luxusCarDeck[j] = temp;
+        var temp = deckShuffled[i];
+        deckShuffled[i] = deckShuffled[j];
+        deckShuffled[j] = temp;
     }
 }
 
- shuffleArray(luxusCarDeck);
- const deckShuffled = luxusCarDeck; 
+ shuffleArray(deckShuffled);
  let play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
  let play2Deck = deckShuffled.slice(deckShuffled.length / 2);
 //  console.log('player1 deck : ', play1Deck);
@@ -60,4 +47,72 @@ function shuffleArray(luxusCarDeck) {
 
 
 
+const sortVmax = (a, b,) => {
+      if ( a.vMax < b.vMax ){
+        return 1;
+      }
+      if ( a.vMax > b.vMax ){
+        return -1;
+      }
+      return 0;
+    }
 
+const sortDispl = (a, b,) => {
+      if ( a.displace < b.displace ){
+        return 1;
+      }
+      if ( a.displace > b.displace ){
+        return -1;
+      }
+      return 0;
+    }
+    
+const sortWei = (a, b,) => {
+      if ( a.weight > b.weight ){
+        return 1;
+      }
+      if ( a.weight < b.weight ){
+        return -1;
+      }
+      return 0;
+    }
+    
+const sortCyl = (a, b,) => {
+      if ( a.cylinder < b.cylinder ){
+        return 1;
+      }
+      if ( a.cylinder > b.cylinder ){
+        return -1;
+      }
+      return 0;
+    }
+    
+const sortPow = (a, b,) => {
+      if ( a.power < b.power ){
+        return 1;
+      }
+      if ( a.power > b.power ){
+        return -1;
+      }
+      return 0;
+    }
+    
+const sortRpm = (a, b,) => {
+      if ( a.rpm < b.rpm ){
+        return 1;
+      }
+      if ( a.rpm > b.rpm ){
+        return -1;
+      }
+      return 0;
+    }    
+    
+const luxusCarDeckSortvMax = Array.from(luxusCarDeck.sort(sortVmax));
+const luxusCarDeckSortDispl =Array.from(luxusCarDeck.sort(sortDispl));
+const luxusCarDeckSortWei =Array.from(luxusCarDeck.sort(sortWei));
+const luxusCarDeckSortCyl =Array.from(luxusCarDeck.sort(sortCyl));
+const luxusCarDeckSortPow =Array.from(luxusCarDeck.sort(sortPow));
+const luxusCarDeckSortRpm =Array.from(luxusCarDeck.sort(sortRpm));
+
+
+console.log(luxusCarDeckSortDispl);

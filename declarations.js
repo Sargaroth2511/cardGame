@@ -69,7 +69,7 @@ const nexTurn = () => {
         alert('Player 1 wins!')
     } else {    
         upDateCards();
-        kiPlay();
+        cleverKI();
 }};
 
 compPopupOuter.addEventListener ('click', e => {
