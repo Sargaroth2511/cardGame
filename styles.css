@@ -256,7 +256,7 @@ button:hover {
     transform: scale(1.04);
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1126px) {
 
     html {
         font-size: 11px;
@@ -317,6 +317,32 @@ button:hover {
         height: 15%;
         border-radius: 7px;
         left: 5%;
+    }    
 
+}
+
+/* index css */
+
+
+#startform {
+    display: flex;
+    top: 15rem;
+    justify-content: center;
+
+    
+}
+
+#startform input {
+    width: 250px;
+    height: 5rem;
+    font-size: 2rem;
+    margin-top: 3rem;
+    border-radius: 20rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+#startform input:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
 
 }
