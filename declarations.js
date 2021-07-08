@@ -41,41 +41,21 @@ const rpmBtn2 = document.querySelector ('#rpmbtn2');
 
 
 const drawfield = document.querySelector ('#drawcardcnt');
-const startBtn = document.querySelector ('#startgame')
-const form1 = document.querySelector("#form1")
-const elements1 = form1.elements;
+const startBtn = document.querySelector ('#startgame');
+const form1 = document.querySelector("#form1");
+const form2 = document.querySelector("#form2");
 
-const form2 = document.querySelector("#form2")
-const elements2 = form2.elements;
 
 const innerBar1 = document.querySelector('#innerbar1');
 const innerBar2 = document.querySelector('#innerbar2');
-
-const compPopupOuter =document.querySelector('#comp_popupouter')
+const compPopupOuter =document.querySelector('#popupouter')
 const compPopup = document.querySelector('#comp_popupinner');
 const closeBtn = document.querySelector('#closebtn');
 const popupHeader = document.querySelector('h3');
 
-const nexTurn = () => {
-    compPopup.style.display = 'none';
-    compPopupOuter.style.display = 'none';
-    innerBar1.textContent = '0';
-    innerBar2.textContent = '0';
-    innerBar1.style.width = '0';
-    innerBar2.style.width = '0';
-    if (play1Deck.length === 0) {
-        alert('Player 2 wins');
-    } else if (play2Deck.length ===0) {
-        alert('Player 1 wins!')
-    } else {    
-        upDateCards();
-        cleverKI();
-}};
 
-compPopupOuter.addEventListener ('click', e => {
-    e.preventDefault();
-    nexTurn();
-});
+
+
 
 const drawCards = [];
 

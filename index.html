@@ -12,8 +12,34 @@
             <h2>Spiele das Kult-Game Online!</h2>
         </div>
         <form action="click" id = "startform">
-         <a href="luxCarGame.html"><input type="button" value="Start Game"></a> 
+         <a href="luxCarGame.html"><input type="button" value="Schnelles Spiel"></a>
+         <input type="button" value="Neues Spiel">
+         <input type="button" value="Meine Decks">
+         <input type="button" value="Einstellungen">
+         <input type="button" value="Platzhalter">
         </form>
+        <div class="popupouter" id="choose-deck-popout">
+            <div id="choosedeck">
+                <form id = "deck-form" action="submit">
+                    <input type="radio" name="Deck" id="luxCarGame" value="luxCarGame">
+                    <label for="luxCarGame">Luxus Cars</label>
+                    <input type="radio" name="Deck" id="NextDeck">
+                    <label for="NextDeck">Next Deck</label>
+                    <input type="radio" name="Deck" id="NextDeck2">
+                    <label for="NextDeck2">Next Deck2</label>
+                    <input type="radio" name="Deck" id="NextDeck3">
+                    <label for="NextDeck3">Next Deck3</label>
+                    <input type="radio" name="Deck" id="NextDeck4">
+                    <label for="NextDeck4">Next Deck4</label>
+                    <input type="radio" name="Deck" id="NextDeck5">
+                    <label for="NextDeck5">Next Deck4</label>
+                    <div>
+                        <button type="submit">Spiel Starten</button>
+                      </div>
+                </form>
+                <div class="backbtn">Zurück</div>
+            </div>
+        </div>
     </div>
 
 
@@ -23,10 +49,6 @@
 
 
 
-
-    <script src="decks.js"></script>    
-    <script src="declarations.js"></script>
-    <script src="compareFuncs.js"></script>
-    <script src="app.js"></script>
+    <script src="indexListeners.js"></script>
 </body>
 </html>

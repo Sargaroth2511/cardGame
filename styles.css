@@ -10,6 +10,14 @@ body {
     justify-content: center ;
     position: relative;
   }
+
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none; 
+    color: black;
+  }
   
 h1 {
     text-align: center;
@@ -20,10 +28,11 @@ h1 {
 
 
 .playground {
+   position: relative; 
    display: flex;
    justify-content: center;
    gap: 4rem;
-   height: 60rem;
+   height: 100vh;
    width: 100vw;
 
 }
@@ -99,7 +108,7 @@ h1 {
     padding-left: 4px;
 }
 
-form {
+.card form {
     position: absolute;
     width: 95%;
     height: 55%;
@@ -159,7 +168,7 @@ button:hover {
     transform:scale(1.04);
 
 }
-#comp_popupouter {
+.popupouter {
     position: absolute;
     width: 100vw;
     height: 120%;
@@ -256,6 +265,14 @@ button:hover {
     transform: scale(1.04);
 }
 
+#backbtn {
+    top: 28rem;
+    width: 7rem;  
+    left: -15rem;
+    position: relative;  
+
+}
+
 @media (max-width: 1126px) {
 
     html {
@@ -319,6 +336,11 @@ button:hover {
         left: 5%;
     }    
 
+    #backbtn {
+        
+
+    }
+
 }
 
 /* index css */
@@ -326,15 +348,18 @@ button:hover {
 
 #startform {
     display: flex;
-    top: 15rem;
+    top: 8rem;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
 
     
 }
 
 #startform input {
     width: 250px;
-    height: 5rem;
+    height: 4rem;
     font-size: 2rem;
     margin-top: 3rem;
     border-radius: 20rem;
@@ -344,5 +369,103 @@ button:hover {
 #startform input:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
+}
 
+#choosedeck {
+    position: relative;
+    margin-top: 10rem;
+    width: 35rem;
+    height: 35rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+}
+
+#choosedeck form {
+    display: grid;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    row-gap: 2rem;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+}
+
+
+
+#choosedeck input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+  }
+
+#choosedeck label {
+    background-color: #ddd;
+    padding-top: 4rem;
+    border: 2px solid #444;
+    border-radius: 4px;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+    
+}
+
+#choosedeck input[type="radio"]:checked + label {
+    border-color: rgb(148, 212, 204);
+    border-width:  2px;
+    box-shadow:  0 8px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+
+#choosedeck label:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
+  }
+
+  #choosedeck > form > label:nth-child(2){
+    background-image: url("images/LCa1.jpg");
+    background-size: cover;
+
+}  
+
+.backbtn {
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    width: 15%;
+    height: 10%;
+    z-index: 15;
+    background-color: #ddd;
+    border-radius: 4px;
+    border: 2px solid #444;
+    text-align: center;
+    padding-top: 0.7rem;
+    font-size: 1.3rem;
+}
+
+.backbtn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+}
+
+#choosedeck > form > div > button {
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
+    width: 15%;
+    height: 10%;
+    z-index: 15;
+    background-color: #ddd;
+    border-radius: 4px;
+    border: 2px solid #444;
+    text-align: center;
+    padding-top: 0.3rem;
+    font-size: 1.3rem;
+}
+
+#choosedeck > form > div > button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
 }

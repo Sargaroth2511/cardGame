@@ -298,7 +298,8 @@ const cleverKI = () => {
 
 
 
-
+const elements1 = form1.elements;
+const elements2 = form2.elements;
 
 const play1sturne = () => {
     for (let ii = 0, len1 = elements1.length; ii < len1; ++ii) {
@@ -333,7 +334,26 @@ const pushDraw2 = () => {
     };  
 };
 
+const nexTurn = () => {
+    compPopup.style.display = 'none';
+    compPopupOuter.style.display = 'none';
+    innerBar1.textContent = '0';
+    innerBar2.textContent = '0';
+    innerBar1.style.width = '0';
+    innerBar2.style.width = '0';
+    if (play1Deck.length === 0) {
+        alert('Player 2 wins');
+    } else if (play2Deck.length ===0) {
+        alert('Player 1 wins!')
+    } else {    
+        upDateCards();
+        cleverKI();
+}};
 
+compPopupOuter.addEventListener ('click', e => {
+    e.preventDefault();
+    nexTurn();
+});
 
 
 
