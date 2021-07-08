@@ -175,7 +175,7 @@ button:hover {
     background-color: rgba(85, 88, 88, 0.226);
     z-index: 12;
     top:0;
-    display: flex;
+    display: grid;
     display: none;
     justify-content: center;
 
@@ -425,7 +425,7 @@ button:hover {
   }
 
   #choosedeck > form > label:nth-child(2){
-    background: url("images/LCa1.jpg");
+    background-image: url("images/LCa1.jpg");
     background-size: cover;
     background-attachment:scroll;
 
@@ -470,4 +470,26 @@ button:hover {
 #choosedeck > form > div > button:hover {
     transform: scale(1.02);
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+}
+
+#choose-multi-or-cpu {
+    position: absolute;
+    width: 100vw;
+    height: 120%;
+    background-color: rgba(85, 88, 88, 0.226);
+    z-index: 10;
+    top:0;
+    display: grid;
+    display: none;
+    justify-content: center;
+    
+}
+
+#CPUorMulti {
+    margin-top: 50%;
+    width: 35rem;
+    height: 20rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+
 }
