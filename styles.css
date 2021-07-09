@@ -388,13 +388,13 @@ button:hover {
 
 
 
-#choosedeck input[type="radio"] {
+input[type="radio"] {
     opacity: 0;
     position: fixed;
     width: 0;
   }
 
-#choosedeck label {
+label {
     position: relative;
     background-color: #ddd;
     padding: 3px;
@@ -407,14 +407,14 @@ button:hover {
     
 }
 
-#choosedeck input[type="radio"]:checked + label {
+input[type="radio"]:checked + label {
     border-color: rgb(148, 212, 204);
     border-width:  2px;
     box-shadow:  0 8px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
 
-#choosedeck label:hover {
+label:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
   }
@@ -456,7 +456,7 @@ button:hover {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
 }
 
-#choosedeck > form > div > button {
+#choosedeck > form > button {
     position: absolute;
     bottom: 3%;
     right: 5%;
@@ -471,29 +471,53 @@ button:hover {
     font-size: 1.3rem;
 }
 
-#choosedeck > form > div > button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
-}
 
 #choose-multi-or-cpu {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 120%;
     background-color: rgba(85, 88, 88, 0.226);
     z-index: 10;
     top:0;
     display: grid;
-    display: none;
+    /* display: none; */
     justify-content: center;
+    grid-template-columns: 30rem;
+    padding-top: 17rem;
     
 }
 
-#CPUorMulti {
-    margin-top: 50%;
-    width: 35rem;
-    height: 20rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+#CPUorMulti form {
+    position: relative;
+    height: 30rem;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
     background-color: rgba(85, 88, 88, 0.699);
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 80%;
+    grid-template-rows: 30% 30%;
+    row-gap: 3rem;
+    padding-top: 3rem;
 
+}
+
+#CPUorMulti form label {
+    padding-top: 2rem;
+}
+
+
+#CPUorMulti button[type='submit'] {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    width: 8rem;
+}
+
+
+#CPUorMulit-backtn {
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    width: 8rem;
+    z-index: 15;
 }

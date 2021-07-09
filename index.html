@@ -36,15 +36,24 @@
                     <label for="NextDeck4">Next Deck4</label>
                     <input type="radio" name="Deck" id="NextDeck5">
                     <label for="NextDeck5">Next Deck4</label>
-                    <div>
-                        <button type="submit">Spiel Starten</button>
-                      </div>
+                    <button type="submit">Spiel Starten</button>
                 </form>
                 <button id="choose-deck-backbtn">Zurück</button>
             </div>
         </div>
+
         <div id="choose-multi-or-cpu">
-            <div id="CPUorMulti"></div>
+            <div id="CPUorMulti">
+                <form action="submit" id="CPUorMulti-form">
+                    <input type="radio" name ="CPUorMulti" id="CPU" value="CPU">
+                    <label for="CPU">Spiel gegen den Computer</label>
+                    <input type="radio" name ="CPUorMulti" id="Online" value="Online">
+                    <label for="Online">Online Spiel</label>
+                    <button type="submit">Weiter</button>
+                
+                <button id="CPUorMulit-backtn">Zurück</button>
+            </form>
+            </div>
         </div>    
     </div>
 
