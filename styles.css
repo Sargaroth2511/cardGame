@@ -45,31 +45,28 @@ h1 {
     text-align: center;
 }
 
-#play1Cards {
+.playercards{
     position: absolute;
     width: 5rem;
     height: 5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     background-color: rgba(50, 145, 145, 0.267);
-    right:  23rem;
-
-    top: 3rem;
     text-align: center;
     padding-top: 5px;
     font-size: 1.3rem;
 }
 
+#play1Cards {
+    right:  23rem;
+    top: 3rem;
+ 
+}
+
 #play2Cards {
-    position: absolute;
-    width: 5rem;
-    height: 5rem;
     top: 3rem;
     left: 23rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: rgba(50, 145, 145, 0.267);
-    text-align: center;
-    padding-top: 5px;
-    font-size: 1.3rem;
+
+   
 }
 
 .card {
@@ -120,10 +117,13 @@ button {
     cursor: pointer;
     height: 17%;
     width: 100%;
+    border-radius: 4%;
 }
 
 button:hover {
     transform: scale(1.02);
+    transform: scale(1.02);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
 }
 
 .class {
@@ -149,25 +149,18 @@ button:hover {
 }
 
 #startgame {
-    margin: 0;
     padding-top: 7px;
     position: absolute;
     width: 6rem;
     height: 6rem;
     top: 13rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-    border-radius: 4%;
     left: 23rem;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background-color: rgba(14, 87, 87, 0.486);
-    cursor: pointer;
 }
 
-#startgame:hover {
-    transform:scale(1.04);
 
-}
 .popupouter {
     position: absolute;
     width: 100vw;
@@ -270,6 +263,7 @@ button:hover {
     width: 7rem;  
     left: -15rem;
     position: relative;  
+    font-size: 1.3rem;
 
 }
 
@@ -373,7 +367,7 @@ button:hover {
 
 #choosedeck {
     position: relative;
-    margin-top: 10rem;
+    margin-top: 13rem;
     width: 35rem;
     height: 35rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
@@ -401,8 +395,9 @@ button:hover {
   }
 
 #choosedeck label {
+    position: relative;
     background-color: #ddd;
-    padding-top: 4rem;
+    padding: 3px;
     border: 2px solid #444;
     border-radius: 4px;
     font-size: 2rem;
@@ -424,15 +419,24 @@ button:hover {
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
   }
 
-  #deck-form > label:nth-child(1){
-    background-image: url("images/LCa1.jpg");
-    background-size: cover;
-    background-attachment:scroll;
+.choose-deck-img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    object-fit: cover;
+}
+
+.choose-deck-name {
+    position: absolute;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+}
 
 
-}  
-
-.backbtn {
+#choose-deck-backbtn {
     position: absolute;
     bottom: 3%;
     left: 5%;

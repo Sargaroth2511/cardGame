@@ -12,7 +12,7 @@
             <h2>Spiele das Kult-Game Online!</h2>
         </div>
         <form action="click" id = "startform">
-         <a href="luxCarGame.html"><input type="button" value="Schnelles Spiel"></a>
+         <input type="button" value="Schnelles Spiel">
          <input type="button" value="Neues Spiel">
          <input type="button" value="Meine Decks">
          <input type="button" value="Einstellungen">
@@ -21,8 +21,10 @@
         <div class="popupouter" id="choose-deck-popout">
             <div id="choosedeck">
                 <form id = "deck-form" action="submit">
-                    <label>
-                    <input type="radio" name="Deck" id="luxCarGame" value="luxCarGame">Luxus Cars
+                    
+                    <input type="radio" name="Deck" id="luxCarGame" value="luxCarGame">
+                    <label for="luxCarGame"><img class="choose-deck-img"  src="Images/LCa1.jpg" alt="Bentley">
+                        <div class="choose-deck-name">Luxus Cars</div>
                     </label>
                     <input type="radio" name="Deck" id="NextDeck">
                     <label for="NextDeck">Next Deck</label>
@@ -38,7 +40,7 @@
                         <button type="submit">Spiel Starten</button>
                       </div>
                 </form>
-                <div class="backbtn">Zurück</div>
+                <button id="choose-deck-backbtn">Zurück</button>
             </div>
         </div>
         <div id="choose-multi-or-cpu">
