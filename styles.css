@@ -31,7 +31,6 @@ h1 {
    position: relative; 
    display: flex;
    justify-content: center;
-   gap: 4rem;
    height: 100vh;
    width: 100vw;
 
@@ -138,10 +137,11 @@ button:hover {
 
 .drawcards {
     position: absolute;
-    top: 40rem;
+    top: 33rem;
     font-size: 1.5rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
     background-color: hsla(175, 83%, 9%, 0.644);
+    right: -13rem;
     height: 2em;
     padding: 10px;
     color: white;
@@ -273,21 +273,29 @@ button:hover {
         font-size: 11px;
     }
 
+    .navbar {
+        display: none;
+    }
+
     .c1 {
         transform: scale(0.85);
-        top: 60%;
+        top: 47%;
         position: absolute;
         font-size: 1.5rem;
        
     }
 
     .drawcards {
-        top: 58%;
+
+        top:-15rem;
+        transform:  translate(-25rem) rotate(0.75turn);
+
+   
     }
 
     .c2 {
         transform: scale(0.85);
-        top: 8%;
+        top: -2%;
         position: absolute;
         font-size: 1.5rem;
        
@@ -330,10 +338,6 @@ button:hover {
         left: 5%;
     }    
 
-    #backbtn {
-        
-
-    }
 
 }
 
