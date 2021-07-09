@@ -30,6 +30,7 @@ h1 {
 .playground {
    position: relative; 
    display: flex;
+   gap: 4rem;
    justify-content: center;
    height: 100vh;
    width: 100vw;
@@ -259,7 +260,7 @@ button:hover {
 }
 
 #backbtn {
-    top: 28rem;
+    top: 25rem;
     width: 7rem;  
     left: -15rem;
     position: relative;  
@@ -273,13 +274,13 @@ button:hover {
         font-size: 11px;
     }
 
-    .navbar {
-        display: none;
-    }
+#navbar {
+    display:none;
+}
 
     .c1 {
         transform: scale(0.85);
-        top: 47%;
+        top: 45%;
         position: absolute;
         font-size: 1.5rem;
        
