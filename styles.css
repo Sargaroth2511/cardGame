@@ -485,7 +485,7 @@ label:hover {
     z-index: 10;
     top:0;
     display: grid;
-    /* display: none; */
+    display: none;
     justify-content: center;
     grid-template-columns: 30rem;
     padding-top: 17rem;
