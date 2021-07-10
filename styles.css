@@ -523,6 +523,66 @@ label:hover {
     position: absolute;
     bottom: 3%;
     left: 3%;
-    width: 8rem;
+    width: 7rem;
+    height: 4rem;
     z-index: 15;
+}
+
+#choose-difficulty {
+    position: fixed;
+    width: 100vw;
+    height: 120%;
+    background-color: rgba(85, 88, 88, 0.226);
+    z-index: 10;
+    top:0;
+    display: grid;
+    display: none;
+    justify-content: center;
+    grid-template-columns: 30rem;
+    padding-top: 17rem;
+}
+
+#difficulty-form {
+    position: relative;
+    height: 30rem;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 65%;
+    grid-template-rows: 15% 15% 15%;
+    row-gap: 2rem;
+    padding-top: 7rem;
+}
+
+#difficulty-form div {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    background-color: #ddd;
+    padding: 3px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+}
+
+#difficulty-backbtn {
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    width: 7rem;
+    height: 4rem;
+    z-index: 15;
+}
+
+#difficulty-form button[type='submit'] {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+    width: 7rem;
+    height: 4rem;
 }

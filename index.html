@@ -53,9 +53,22 @@
                     <button id="CPUorMulit-backtn">Zurück</button>
             </form>
             </div>
-
-
-        </div>    
+        </div>
+        
+        <div id="choose-difficulty">
+            <div id="difficulty">
+                <form action="submit" id="difficulty-form">
+                    <div>Schwierigkeit</div>
+                    <input type="radio" name ="Difficulty" id="easy" value="easy" checked>
+                    <label for="easy">Leicht</label>
+                    <input type="radio" name ="Difficulty" id="medium" value="medium">
+                    <label for="medium">Mittel</label>
+                    <input type="radio" name ="Difficulty" id="hard" value="hard">
+                    <label for="hard">Schwer</label>
+                    <button type="submit">Weiter</button>
+                    <button id="difficulty-backbtn">Zurück</button>
+            </form>
+            </div>
     </div>
 
 
@@ -64,7 +77,7 @@
 
 
 
-
+     <script src="decks.js"></script>
     <script src="indexListeners.js"></script>
 </body>
 </html>
