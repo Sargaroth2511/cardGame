@@ -12,14 +12,7 @@ const deckForm = document.querySelector ('#deck-form');
 const onlineForm = document.querySelector ('#CPUorMulti-form')
 const difform = document.querySelector ('#difficulty-form')
 
-let chosenDeck = '';
 
-let lastGame = {
-    deck: 'luxCarGame',
-    difficulty : 'easy',
-    online : false
-
-}
 
 selDecksBackbtn.addEventListener ('click', e => {
     e.preventDefault();
@@ -45,21 +38,25 @@ startForm.addEventListener ('click', e => {
        onlinePopout.style.display = 'grid'
    }
    if(e.target.defaultValue ==='Schnelles Spiel') {
-       window.location.replace(`${lastGame.deck}.html`)
-   }
+       if (localStorage.getItem('online?', 'CPU')) {
+           window.location.replace(`${localStorage.getItem('chosenDeck')}.html`)
+        } else {console.log(localStorage.getItem('online?'))}
+   }    
 });
 
 deckForm.addEventListener ('submit', e => {
     e.preventDefault();
-    chosenDeck = deckForm.Deck.value
-    window.location.replace(`${chosenDeck}.html`)
+    window.location.replace(`${deckForm.Deck.value}.html`);
+    localStorage.setItem('chosenDeck', deckForm.Deck.value);
 });
 
 onlineForm.addEventListener ('submit', e => {
     e.preventDefault();
+    localStorage.setItem('online?', onlineForm.CPUorMulti.value);
     if(onlineForm.CPUorMulti.value === 'CPU') {
         difPopout.style.display = 'grid'
         onlinePopout.style.display = 'none';
+
     }
     if(onlineForm.CPUorMulti.value ==='Online') {
         alert('Diese Funktion ist noch nicht verfügbar');

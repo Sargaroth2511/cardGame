@@ -1,4 +1,5 @@
 upDateCards();
+console.log(localStorage.getItem(  'difficulty'));
 
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
