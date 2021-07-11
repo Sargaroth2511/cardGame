@@ -3,7 +3,7 @@ upDateCards();
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
 startGame();
-cleverKI();
+playKI();
 
 });
 

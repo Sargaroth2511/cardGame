@@ -68,8 +68,8 @@ onlineForm.addEventListener ('submit', e => {
 
  difform.addEventListener ('submit', e => {
     e.preventDefault();
-    difficulty = difform.Difficulty.value;
+    localStorage.setItem('difficulty', difform.Difficulty.value);    
     difPopout.style.display = 'none'
     chooseDeckPopout.style.display = 'grid';
-    console.log(difficulty);
+    
  });

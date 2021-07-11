@@ -115,8 +115,6 @@ const luxusCarDeckSortPow =Array.from(luxusCarDeck.sort(sortPow));
 const luxusCarDeckSortRpm =Array.from(luxusCarDeck.sort(sortRpm));
 
 
-console.log(luxusCarDeckSortDispl);
 
-// Difficulty Variable
 
-let difficulty = '';
+

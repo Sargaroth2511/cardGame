@@ -238,7 +238,7 @@ const animateRpm = async () => {
     console.log('barwidth1' ,barwidth1, play1Deck[0].rpm);
 };
 
-const kiPlay = () => {
+const easyKI = () => {
     let num = (Math.random() * elements2.length);
     if (vMaxBtn.disabled) {
         if (num < 1) {animateVmax();}
@@ -248,6 +248,13 @@ const kiPlay = () => {
         else if (num >= 4 && num < 5) {animatePow();}
         else if (num < 6) {animateRpm();}
     }; console.log(num);
+};
+
+
+const mediumKI = () => {
+    let num = Math.random ();
+    if (num <= 0,85) { easyKI()
+    } else (cleverKI());
 };
 
 
@@ -296,7 +303,17 @@ const cleverKI = () => {
     };
 };
 
-
+const playKI = () => {
+    let difficulty = localStorage.getItem('difficulty');
+    console.log(difficulty);
+    if (difficulty === 'easy'){
+        easyKI();
+    } else if (difficulty === 'medium'){
+        mediumKI();
+    } else if (difficulty === 'hard'){
+        cleverKI();
+    } else {console.log('Difficulty Error')}
+};
 
 const elements1 = form1.elements;
 const elements2 = form2.elements;
@@ -347,7 +364,7 @@ const nexTurn = () => {
         alert('Player 1 wins!')
     } else {    
         upDateCards();
-        cleverKI();
+        playKI();
 }};
 
 compPopupOuter.addEventListener ('click', e => {
