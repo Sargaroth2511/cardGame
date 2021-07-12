@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/88df1645ec.js" crossorigin="anonymous"></script>
     <title>SuperTrump</title>
 </head>
 <body>
@@ -18,10 +19,10 @@
          <input type="button" value="Einstellungen">
          <input type="button" value="Platzhalter">
         </form>
-        <div class="popupouter" id="choose-deck-popout">
-            <div id="choosedeck">
-                <form id = "deck-form" action="submit">
-                    
+
+        <div class="popup-outer" id="choose-deck-popout">
+            <div class= "choosedeck" id="choosedeck">
+                    <form id = "deck-form" action="submit">                    
                     <input type="radio" name="Deck" id="luxCarGame" value="luxCarGame" checked>
                     <label for="luxCarGame"><img class="choose-deck-img"  src="Images/LCa1.jpg" alt="Bentley">
                         <div class="choose-deck-name">Luxus Cars</div>
@@ -38,11 +39,47 @@
                     <label for="NextDeck5">Next Deck4</label>
                     <button type="submit">Spiel Starten</button>
                 </form>
-                <button id="choose-deck-backbtn">Zurück</button>
+                <button class ="choose-deck-backbtn" id="choose-deck-backbtn">Zurück</button>
             </div>
         </div>
 
-        <div id="choose-multi-or-cpu">
+        <div class="popup-outer" id="my-deck-popout">
+            <div class= "choosedeck" id="mydeck">
+                <form id = "my-deck-form" action="submit">                    
+                    <input type="radio" name="MyDeck" id="myluxCarGame" value="luxusCarDeckSortID" checked>
+                    <label for="myluxCarGame"><img class="choose-deck-img"  src="Images/LCa1.jpg" alt="Bentley">
+                        <div class="choose-deck-name">Luxus Cars</div>
+                    </label>
+                    <input type="radio" name="MyDeck" id="MyNextDeck">
+                    <label for="MyNextDeck">Next Deck</label>
+                    <input type="radio" name="MyDeck" id="MyNextDeck2">
+                    <label for="MyNextDeck2">Next Deck2</label>
+                    <input type="radio" name="MyDeck" id="MyNextDeck3">
+                    <label for="MyNextDeck3">Next Deck3</label>
+                    <input type="radio" name="MyDeck" id="MyNextDeck4">
+                    <label for="MyNextDeck4">Next Deck4</label>
+                    <input type="radio" name="MyDeck" id="MyNextDeck5">
+                    <label for="MyNextDeck5">Next Deck4</label>
+                    <button type="submit">Deck anzeigen</button>
+                </form>
+                <button class ="choose-deck-backbtn" id="my-deck-backbtn">Zurück</button>
+            </div>
+            <div class="card" id="my-deck-card"><img src="Images/Corvette.jpg" alt="Corvette" class="card-image" id = "myDeckImg">
+                <i id = "arrowright" class="fas fa-chevron-right"></i>
+                <i id = "arrowleft" class="fas fa-chevron-left"></i>
+                <form action="click" id="my-card-form">
+                    <div class = "name" id = "myCardName">Name</div>
+                    <button id="myvmaxbtn" disabled><span class="class" >Vmax</span><span class="value" id="myvMax">Wert</span> </button>
+                    <button id="mydisbtn" disabled><span class="class">Hubraum</span><span class="value" id="mydis">Wert</span> </button>
+                    <button id="myweibtn" disabled><span class="class">Gewicht</span><span class="value" id ="mywei">Wert</span> </button>
+                    <button id="mycylbtn" disabled><span class="class">Zylinder</span><span class="value" id="mycyl">Wert</span> </button>
+                    <button id="mypowbtn" disabled><span class="class">Leistung</span><span class="value" id= "mypow">Wert</span> </button>
+                    <button id="myrpmbtn" disabled><span class="class">U/min</span><span class="value" id="myrpm">Wert</span> </button>
+                </form>
+            </div>    
+        </div>
+
+        <div class = "popup-outer" id="choose-multi-or-cpu">
             <div id="CPUorMulti">
                 <form action="submit" id="CPUorMulti-form">
                     <input type="radio" name ="CPUorMulti" id="CPU" value="CPU" checked>
@@ -55,7 +92,7 @@
             </div>
         </div>
         
-        <div id="choose-difficulty">
+        <div id="choose-difficulty" class="popup-outer">
             <div id="difficulty">
                 <form action="submit" id="difficulty-form">
                     <div>Schwierigkeit</div>

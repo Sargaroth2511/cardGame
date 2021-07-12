@@ -122,7 +122,6 @@ button {
 
 button:hover {
     transform: scale(1.02);
-    transform: scale(1.02);
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
 }
 
@@ -268,15 +267,30 @@ button:hover {
 
 }
 
+#score {
+    position: absolute;
+    top:25rem;
+    left:23rem;
+    width: 5rem;
+    height: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(50, 145, 145, 0.267);
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+}
+
 @media (max-width: 1126px) {
 
     html {
         font-size: 11px;
     }
 
-#navbar {
+    #navbar {
     display:none;
-}
+    }
 
     .c1 {
         transform: scale(0.85);
@@ -339,6 +353,11 @@ button:hover {
         left: 5%;
     }    
 
+    #score {
+        top:50rem;
+        left: 21rem;
+    }
+
 
 }
 
@@ -370,16 +389,16 @@ button:hover {
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
-#choosedeck {
+.choosedeck {
     position: relative;
-    margin-top: 13rem;
     width: 35rem;
     height: 35rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
     background-color: rgba(85, 88, 88, 0.699);
+    transform: translateX(-7%);
 }
 
-#choosedeck form {
+.choosedeck form {
     display: grid;
     padding: 2rem;
     width: 100%;
@@ -441,7 +460,7 @@ label:hover {
 }
 
 
-#choose-deck-backbtn {
+.choose-deck-backbtn {
     position: absolute;
     bottom: 3%;
     left: 5%;
@@ -461,7 +480,7 @@ label:hover {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
 }
 
-#choosedeck > form > button {
+.choosedeck > form > button {
     position: absolute;
     bottom: 3%;
     right: 5%;
@@ -475,22 +494,10 @@ label:hover {
     padding-top: 0.3rem;
     font-size: 1.3rem;
 }
-
-
-#choose-multi-or-cpu {
-    position: fixed;
-    width: 100vw;
-    height: 120%;
-    background-color: rgba(85, 88, 88, 0.226);
-    z-index: 10;
-    top:0;
-    display: grid;
-    display: none;
-    justify-content: center;
-    grid-template-columns: 30rem;
-    padding-top: 17rem;
-    
+#mydeck form button {
+    font-size: 1.1rem;
 }
+
 
 #CPUorMulti form {
     position: relative;
@@ -528,7 +535,7 @@ label:hover {
     z-index: 15;
 }
 
-#choose-difficulty {
+.popup-outer {
     position: fixed;
     width: 100vw;
     height: 120%;
@@ -539,7 +546,7 @@ label:hover {
     display: none;
     justify-content: center;
     grid-template-columns: 30rem;
-    padding-top: 17rem;
+    padding-top: 15rem;
 }
 
 #difficulty-form {
@@ -585,4 +592,47 @@ label:hover {
     right: 3%;
     width: 7rem;
     height: 4rem;
+}
+
+#my-deck-card {
+    display: none;
+    top:-33rem;
+    transform: scale(120%) translateX(20%)
+}
+
+#myCardName {
+    font-size: 1.3rem;
+}
+
+#my-card-form :disabled {
+    color: black;
+    cursor: default;
+
+}
+
+.fas {
+    position: absolute;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+
+}
+
+i:hover {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+
+i:focus {
+    color: red;
+}
+
+
+
+.fa-chevron-right{
+    transform: translate(2200%, 1500%) scale(500%)
+}
+
+.fa-chevron-left {
+
+    transform: translate(-2200%, 1500%) scale(500%)
 }

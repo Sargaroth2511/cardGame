@@ -47,6 +47,16 @@ const shuffleArray = (deckshuffled) => {
 
 
 
+const sortID = (a, b,) => {
+  if ( a.id < b.id ){
+    return -1;
+  }
+  if ( a.id > b.id ){
+    return 1;
+  }
+  return 0;
+}
+
 const sortVmax = (a, b,) => {
       if ( a.vMax < b.vMax ){
         return 1;
@@ -113,7 +123,7 @@ const luxusCarDeckSortWei =Array.from(luxusCarDeck.sort(sortWei));
 const luxusCarDeckSortCyl =Array.from(luxusCarDeck.sort(sortCyl));
 const luxusCarDeckSortPow =Array.from(luxusCarDeck.sort(sortPow));
 const luxusCarDeckSortRpm =Array.from(luxusCarDeck.sort(sortRpm));
-
+const luxusCarDeckSortID = Array.from(luxusCarDeck.sort(sortID));
 
 
 

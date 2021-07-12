@@ -7,7 +7,8 @@ const animateVmax2 = async () => {
        if (output === barwidth2){
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].vMax} km/h`
-           compvMax();
+           compvMax();         
+           compPopupOuter.addEventListener ('click', closeCompPopup); 
        } else {
            output ++;
        }
@@ -49,6 +50,7 @@ const animateDis2 = async () => {
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].displace} ccm`
            compDisplace();
+           compPopupOuter.addEventListener ('click', closeCompPopup);
        } else {
            output ++;
        }
@@ -89,6 +91,7 @@ const animateWei2 = async () => {
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].weight} kg`
            compWeight();
+           compPopupOuter.addEventListener ('click', closeCompPopup);
        } else {
            output ++;
        }
@@ -129,6 +132,7 @@ const animateCyl2 = async () => {
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].cylinder} Zylinder`
            compCyli();
+           compPopupOuter.addEventListener ('click', closeCompPopup);
        } else {
            output ++;
        }
@@ -169,6 +173,7 @@ const animatePow2 = async () => {
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].power} PS`
            compPow();
+           compPopupOuter.addEventListener ('click', closeCompPopup);
        } else {
            output ++;
        }
@@ -209,6 +214,7 @@ const animateRpm2 = async () => {
            clearInterval(timer2);
            innerBar2.textContent = `${play2Deck[0].rpm} U/min`
            compRpm();
+           compPopupOuter.addEventListener ('click', closeCompPopup);
        } else {
            output ++;
        }
@@ -351,6 +357,11 @@ const pushDraw2 = () => {
     };  
 };
 
+
+if (localStorage.getItem('localScore')=='0'){
+    localStorage.setItem('localScore', '0')
+};
+
 const nexTurn = () => {
     compPopup.style.display = 'none';
     compPopupOuter.style.display = 'none';
@@ -361,16 +372,26 @@ const nexTurn = () => {
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length ===0) {
-        alert('Player 1 wins!')
+        alert('Player 1 wins!');
+        let score = play1Deck.length + Number(localStorage.getItem('localScore'));      
+        localStorage.setItem('localScore', score);
     } else {    
         upDateCards();
         playKI();
 }};
 
-compPopupOuter.addEventListener ('click', e => {
+
+const closeCompPopup = (e) => {
     e.preventDefault();
     nexTurn();
-});
+    compPopupOuter.removeEventListener ('click', closeCompPopup);
+    
+
+};
+
+
+
+
 
 
 

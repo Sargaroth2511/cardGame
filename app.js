@@ -1,28 +1,23 @@
 upDateCards();
-console.log(localStorage.getItem(  'difficulty'));
+
 
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
 startGame();
 playKI();
-
 });
+
 
 vMaxBtn.addEventListener('click', e => {
     e.preventDefault();
     popupHeader.textContent = 'Vmax!'
     animateVmax();
-    // setTimeout(compvMax, 3000);
-
-
     if (play1Deck.length === 0) {
         alert('Player 2 wins');
     } else if (play2Deck.length ===0) {
         alert('Player 1 wins!')
-    // } else {upDateCards();
-        // setTimeout(upDateCards, 4000);
-
     }});
+
 
 disBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -32,10 +27,9 @@ disBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {
-        
-
+    } else {   
     }});
+
 
 weiBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -45,11 +39,10 @@ weiBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {
-        
-
+    } else {       
     }});
     
+
 cylBtn.addEventListener('click', e => {
     e.preventDefault();
     popupHeader.textContent = 'Zylinder!'
@@ -59,9 +52,8 @@ cylBtn.addEventListener('click', e => {
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
     } else {
-        
-
     }});
+
 
 powBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -71,8 +63,7 @@ powBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {
-    
+    } else {    
 }});
 
 
@@ -84,9 +75,7 @@ rpmBtn.addEventListener('click', e => {
         alert('Player 2 wins');
     } else if (play2Deck.length === 0) {
         alert('Player 1 wins!')
-    } else {
-        
-
+    } else {        
     }});
 
 

@@ -53,6 +53,10 @@ const compPopup = document.querySelector('#comp_popupinner');
 const closeBtn = document.querySelector('#closebtn');
 const popupHeader = document.querySelector('h3');
 
+const uiScore = document.querySelector('#score span');
+
+uiScore.textContent = localStorage.getItem('localScore')
+
 
 
 
