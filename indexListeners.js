@@ -56,8 +56,13 @@ startForm.addEventListener ('click', e => {
 
 deckForm.addEventListener ('submit', e => {
     e.preventDefault();
+    if (deckForm.Deck.value === '1') {
+        alert ('Du hast dieses Deck noch nicht');
+        
+    } else {    
     window.location.replace(`${deckForm.Deck.value}.html`);
     localStorage.setItem('chosenDeck', deckForm.Deck.value);
+    };
 });
 
 onlineForm.addEventListener ('submit', e => {
@@ -82,27 +87,15 @@ onlineForm.addEventListener ('submit', e => {
  });
 
 
-const updateMyCard = () => {
-    let i = 0;
-    document.getElementById("myDeckImg").src = 'Images/' + deck[i].id + '.jpg';  
-    myCardName.textContent =deck[i].name;
-    myvMax.textContent = deck[i].vMax;
-    mydis.textContent = deck[i].displace;
-    mywei.textContent = deck[i].weight;
-    mycyl.textContent = deck[i].cylinder;
-    mypow.textContent = deck[i].power;
-    myrpm.textContent = deck[i].rpm;
-}
-
  myDeckForm.addEventListener ('submit', e => {
     e.preventDefault();
     document.querySelector('#my-deck-card').style.display = 'flex'
     myDeck.style.opacity = '0';
-    if (myDeckForm.MyDeck.value =='on') {
+    if (myDeckForm.MyDeck.value ==='1') {
         alert ('Du hast dieses Deck noch nicht')
         document.querySelector('#my-deck-card').style.display = 'none'
         myDeck.style.opacity = '100';
-    };
+    } else {
     let deck = eval(myDeckForm.MyDeck.value);
     let i = 0;
     const updateMyCard = () => {        
@@ -131,7 +124,8 @@ const updateMyCard = () => {
         if (i < deck.length) {
             i++
         } updateMyCard();
-    });    
+    });   
+    } 
 });
 
 
