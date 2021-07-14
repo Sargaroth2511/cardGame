@@ -630,17 +630,12 @@ const startGame =() => {
     setTimeout (() => { setTimeout (() => {
         playKI();
         waitshufflePopouter.style.display = 'none';
+        whostarts.textContent = '';
     },3000);        
         whostarts.textContent = `${num<=0.5 ? 'Spieler 1 fängt an!' : 'Spieler 2 fängt an!'}`; 
         clearInterval(dots);
     },4000); 
-    if (num <= 0.5 ) {
-        console.log('P1 starts!');
-        play1sturne();
-      } else {
-        console.log('P2 starts')
-        play2sturne();
-    };
+    num <= 0.5 ? play1sturne() : play2sturne();
     shuffleArray(deckShuffled);
     play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
     play2Deck = deckShuffled.slice(deckShuffled.length / 2);

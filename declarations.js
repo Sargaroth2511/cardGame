@@ -55,7 +55,7 @@ const popupHeader = document.querySelector('h3');
 
 const uiScore = document.querySelector('#score span');
 
-uiScore.textContent = localStorage.getItem('localScore')
+uiScore.textContent = localStorage.getItem('localScore');
 
 
 
@@ -83,4 +83,5 @@ const upDateCards = () => {
     rpm2.textContent = play2Deck[0].rpm;
     deck2Cards.innerHTML = `Deck <br>${play2Deck.length} <br>Cards`
     drawfield.textContent = drawCards.length;
+    uiScore.textContent = localStorage.getItem('localScore');
 };

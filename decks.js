@@ -23,7 +23,11 @@ const luxusCarDeck = [
     new LuxuryCar ('LCc1', 'McLaren 720 S', 341, 3994, 1283, 8, 720, 7500),
     new LuxuryCar ('LCc2', 'Maserati Quattroporte', 280, 4700, 1700, 8, 530, 8250),
     new LuxuryCar ('LCc3', 'Audi R8 V10 plus', 317, 5204, 1570, 10, 550, 8000),
-    new LuxuryCar ('LCc4', 'Panoz Abruzzi', 340, 6200, 1400, 8, 640, 6500)
+    new LuxuryCar ('LCc4', 'Panoz Abruzzi', 340, 6200, 1400, 8, 640, 6500),
+    new LuxuryCar ('LCd1', 'Bugatti Chiron', 420, 7993, 1995, 16, 1500, 6700 ),
+    new LuxuryCar ('LCd2', 'Koenigsegg Ager', 395, 4700, 1290, 8, 910, 6850),
+    new LuxuryCar ('LCd3', 'Pagani Huayra', 370, 5980, 1350, 12, 700, 7200),
+    new LuxuryCar ('LCd4', 'Rolls-Royce Gost', 250, 6592, 2435, 12, 571, 5250)
 ];
 
 

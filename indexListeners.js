@@ -128,4 +128,8 @@ onlineForm.addEventListener ('submit', e => {
     } 
 });
 
-
+myDeckBackBtn.addEventListener ('click', e => {
+    e.preventDefault();
+document.querySelector('#my-deck-card').style.display = 'none'
+myDeck.style.opacity = '100';
+});
