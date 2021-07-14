@@ -4,7 +4,7 @@ upDateCards();
 startBtn.addEventListener('click', e => { 
 e.preventDefault();
 startGame();
-playKI();
+
 });
 
 

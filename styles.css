@@ -171,10 +171,26 @@ button:hover {
     display: grid;
     display: none;
     justify-content: center;
+   
+    
 
 }
 
-#comp_popupinner {
+
+
+#waitshuffle {
+    display: grid;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2.5rem;
+    color: white;
+    position: relative;
+    top:7rem;
+    transform: translateX(-3%);
+
+
+}
+.comp_popupinner {
     position: absolute;
     width: 32rem;
     height: 18rem;
@@ -190,7 +206,7 @@ button:hover {
      
 }
 
-#comp_popupinner h3 {
+.comp_popupinner h3 {
     color: rgb(221, 179, 223);
     font-size: 1.5rem;
     text-align: center;
@@ -284,6 +300,11 @@ button:hover {
 
 @media (max-width: 1126px) {
 
+    #arrowleft, #arrowright {
+        margin: 0;
+        
+    }
+
     html {
         font-size: 11px;
     }
@@ -357,6 +378,11 @@ button:hover {
         top:50rem;
         left: 21rem;
     }
+
+
+
+
+    
 
 
 }
@@ -622,17 +648,15 @@ i:hover {
 }
 
 
-i:focus {
-    color: red;
-}
-
-
-
 .fa-chevron-right{
-    transform: translate(2200%, 1500%) scale(500%)
+    transform: translate(1900%, 1500%) scale(500%);
+    margin-left: 3rem;
+    
 }
 
 .fa-chevron-left {
 
-    transform: translate(-2200%, 1500%) scale(500%)
+    transform: translate(-1900%, 1500%) scale(500%);
+    margin-right: 3rem;
 }
+

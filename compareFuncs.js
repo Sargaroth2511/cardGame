@@ -258,9 +258,10 @@ const easyKI = () => {
 
 
 const mediumKI = () => {
-    let num = Math.random ();
-    if (num <= 0,85) { easyKI()
-    } else (cleverKI());
+    let num = Math.random();
+    console.log(`num  = ${num}`)
+    if (num <= 0.85) {easyKI()
+    } else {cleverKI()};
 };
 
 
@@ -610,7 +611,29 @@ const compRpm = () => {
 };
 
 const startGame =() => {
+    waitshufflePopouter.style.display = 'grid';
+    window.dotsGoingUp = true;
+    let dots = window.setInterval(() => {
+        if (window.dotsGoingUp)
+            animatedpoints.innerHTML += '.';
+        else {
+            animatedpoints.innerHTML = animatedpoints.innerHTML.substring (1, animatedpoints.innerHTML.length);
+            if (animatedpoints.innerHTML === '')
+                window.dotsGoingUp = true;
+        }
+        if (animatedpoints.innerHTML.length > 10)
+            window.dotsGoingUp = false;    
+    }, 100);
+
+
     let num = Math.random();
+    setTimeout (() => { setTimeout (() => {
+        playKI();
+        waitshufflePopouter.style.display = 'none';
+    },3000);        
+        whostarts.textContent = `${num<=0.5 ? 'Spieler 1 fängt an!' : 'Spieler 2 fängt an!'}`; 
+        clearInterval(dots);
+    },4000); 
     if (num <= 0.5 ) {
         console.log('P1 starts!');
         play1sturne();
