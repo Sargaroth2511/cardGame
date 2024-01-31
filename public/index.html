@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/88df1645ec.js" crossorigin="anonymous"></script>
+    <title>Welcome to Firebase Hosting</title>
+
+    
+    <!-- update the version number as needed -->
+
+    <!-- include only the Firebase features as you need -->
+    <!-- <script defer src="/__/firebase/8.7.1/firebase-auth.js"></script> -->
+    <!-- <script defer src="/__/firebase/8.7.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.7.1/firebase-firestore.js"></script> -->
+
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+
+
+
+  </head>
+  <body>
+    <div class="playground">
+      <div class="navbar"> <h1>Super Trumpf!</h1>
+          <h2>Spiele das Kult-Game Online!</h2>
+      </div>
+      <form action="click" id = "startform" class="startform">
+       <input type="button" value="Platzhalter1">
+       <input type="button" value="Neues Spiel">
+       <input type="button" value="Shop">
+       <input type="button" value="Einstellungen">
+       <input type="button" value="Platzhalter2">
+      </form>
+
+      <div class="popup-outer" id="choose-deck-popout">
+          <div class= "choosedeck" id="choosedeck">
+                  <form id = "deck-form" action="submit">                    
+                  <input type="radio" name="Deck" id="luxCarGame" value="luxCarGame" checked>
+                  <label for="luxCarGame"><img class="choose-deck-img"  src="Images/luxCarGame/LCa1.jpg" alt="Bentley">
+                      <div class="choose-deck-name">Luxus Cars</div>
+                  </label>
+                  <input type="radio" name="Deck" id="autosalon" value="autosalon">
+                  <label for="autosalon"><img class="choose-deck-img"  src="Images/autosalon/ASa1.jpg" alt="Mini Coupé">
+                    <div class="choose-deck-name">Auto- salon</div>
+                </label>
+                  <input type="radio" name="Deck" id="NextDeck2" value="1">
+                  <label for="NextDeck2">Next Deck2</label>
+                  <input type="radio" name="Deck" id="NextDeck3" value="1">
+                  <label for="NextDeck3">Next Deck3</label>
+                  <input type="radio" name="Deck" id="NextDeck4" value="1">
+                  <label for="NextDeck4">Next Deck4</label>
+                  <input type="radio" name="Deck" id="NextDeck5" value="1">
+                  <label for="NextDeck5">Next Deck4</label>
+                  <button type="submit" class="backbtn" id = "gameStart">Freund einladen</button>
+              </form>
+              <button class ="choose-deck-backbtn backbtn" id="choose-deck-backbtn">Zurück</button>
+          </div>
+      </div>
+
+      <div class = "popup-outer" id="choose-multi-or-cpu">
+          <div id="CPUorMulti" class="CPUorMulti" >
+              <form id="CPUorMulti-form">
+                  <div>Gegen Mensch oder CPU?</div>
+                  <button type="submit" name ="CPUorMulti" id="CPU" value="CPU">Spiel gegen Computer</button>
+                  <button type="submit" name ="CPUorMulti" id="Online" value="Online">Spiel gegen Freunde</button>
+                  <button id="CPUorMulit-backtn" class="backbtn">Zurück</button>
+              </form>
+          </div>    
+      </div>
+
+      <div class = "popup-outer" id="signInOuter">
+         <div id="SignIn" class="CPUorMulti">
+           <form action="submit" id="signInForm">
+                 <input type="radio" name ="SignIn" id="Google" value="Google" checked>
+                <label for="Google">Mit Google einloggen</label>
+                <input type="radio" name ="SignIn" id="Anonym" value="Anonym">
+                <label for="Anonym">Anonym einloggen</label>
+                <button type="submit">Weiter</button>
+                 <button id="SignIn-backtn">Zurück</button>
+          </form>
+         </div>
+       </div>
+
+       <div class="popup-outer" id="shopPopupOuter">
+            <form id = "shopform" class="startform">
+                <button type="submit" value="buy">Pack kaufen</button>
+                <button type="submit" value="collection">Meine Sammlung</button>
+                <button type="submit" value="design">Design kaufen</button>
+                <button type="submit" value="sell">Karten verkaufen</button>
+                <button type="submit" class="backbtn" id="shopBackBtn" value= 'back'>Zurück</button>
+
+            </form>
+            
+            <div class="cardPack piece1" id="cardTop"><img src="Images/cardPackTop.png" alt="cardPack"> </div>
+            <div class="cardPack piece2"><img src="Images/cardPackBottom.png" alt="cardPack">
+                <div id="packPrice"></div>
+                <div class="flip-container" id="flipContainer">
+                    <div class="flip-card-inner">
+                        <div class="card boughtCards">
+                            <img src="Images/Corvette.jpg" alt="Corvette" class="card-image img1">
+                            <div class= "transparentCover"></div>  
+                            <div class = "name n1">Name</div>
+                            <form action="click">
+                                <button disabled><div class="property">  Vmax</div><div class="value vMax1"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                                <button disabled><div class="property">Hubraum</div><div class="value dis1">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                                <button disabled><div class="property">Gewicht</div><div class="value wei1"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                                <button disabled><div class="property">Zylinder</div><div class="value cyl1">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                                <button disabled><div class="property">Leistung</div><div class="value pow1">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                                <button disabled><div class="property">U/min</div><div class="value rpm1">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+                            </form>    
+                        </div>
+                        <div class="cover">
+                            <div class="cardback"></div>
+                        </div>  
+                    </div>    
+                </div>
+               
+            </div>
+            <button class="backbtn" id="cardPackBackBtn">Zurück</button> 
+       </div>    
+
+       <div id="nameOuter" class="popup-outer">
+        <div id="sayName" class ="choose">
+            <form action="submit" id="nameForm" class='choose-form'>
+                <div>Wie willst du heißen?</div>
+                <input type="text" id = 'nameField' >
+                <button type="submit"  class="GoOn">Weiter</button>
+                <button id="nameBackbtn" class= "backbtn">Zurück</button>
+             </form>
+        </div>
+       </div>  
+
+       <div id="sendOuter" class="popup-outer">
+        <div id="sendLink" class ="choose">
+            <form action="click" id="sendForm" class='choose-form'>
+                <div>Lade einen Freund per Whatsapp ein</div>
+                <a href="index.html"> <img src="Images/whatsapp.png" alt="Whatsapp" id="whatsappButton"></a>
+                <button id="sendBackbtn" class= "backbtn">Zurück</button>
+             </form>
+        </div>
+       </div>  
+
+ 
+       <div id="chooseMode" class="popup-outer">
+        <div id="mode" class ="choose">
+            <form id="mode-form" class='choose-form'>
+                <div>Modus wählen</div>
+                <button type="submit" name ="mode" id="random" value="random">Zufälliges Deck</button>
+                <button type="submit" name ="mode" id="chose" value="chose">Deck wählen</button>
+                <button type="submit" name ="mode" id="frien" value="friend">Spiel gegen Freunde</button>
+                <button id="mode-backbtn" class= "backbtn">Zurück</button>
+             </form>
+        </div>
+       </div>  
+      
+
+      <div id="choose-difficulty" class="popup-outer">
+          <div id="difficulty" class= "choose">
+              <form id="difficulty-form" class='choose-form'>
+                  <div>Schwierigkeit</div>
+                  <button type = "submit" value="easy">Einfach</button>
+                  <button type = "submit" value="medium">Mittel</button>
+                  <button type = "submit" value="hard">Schwer</button>
+                  <button type = "submit" value = "back" class= "backbtn" >Zurück</button>
+          </form>
+          </div>
+      </div>
+
+    <div class="popupouter" id="loadouter">
+        <div id="loadingwheel">
+            <img src="Images/loadinggear.png" alt="Loading">
+        </div>
+    </div>
+
+  </div>
+   
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+<!-- <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDBBByoJ792ClLYWAJGycLaPzZy33v3Dz4",
+    authDomain: "supertrump-25fe1.firebaseapp.com",
+    databaseURL: "https://supertrump-25fe1-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "supertrump-25fe1",
+    storageBucket: "supertrump-25fe1.appspot.com",
+    messagingSenderId: "189782937751",
+    appId: "1:189782937751:web:eecab656a83c8658fad9d2",
+    measurementId: "G-Y5PZJE9YTF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  firebase.auth();
+  const db = firebase.firestore();
+
+  
+  
+</script>
+           <script src="decks.js"></script>
+           <script src="indexListeners.js"></script>
+     
+
+  </body>
+</html>

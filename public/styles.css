@@ -1,0 +1,1343 @@
+html {
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    align-content: center ;
+    justify-content: center;
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none; 
+    color: black;
+  }
+  
+h1 {
+    text-align: center;
+    margin: 1.5rem;
+    font-size: 3em;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background: linear-gradient(#262626, #eaeaea, #262626);
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+
+    
+    
+    
+
+}
+
+
+
+.playground {
+   position: relative; 
+   display: grid;
+   align-content: center ;
+   justify-content: center;
+   height: 95vh;
+   width: 100vw;
+
+}
+
+
+
+.navbar {
+    position: absolute;
+    background-color: rgba(21, 109, 109, 0.404);
+    width: 100%;
+    text-align: center;
+}
+
+.playercards{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(50, 145, 145, 0.267);
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.3rem;
+}
+
+
+.card {
+    
+    justify-self: center;
+    align-self: center;
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 5, 5, 0.4); /* this adds the "card" effect */
+    text-align: center;
+    background-color: #f1f1f1;
+    height: 55%;
+    width: 70%;
+    max-width: 217px;
+    max-height: 315px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    line-height: 1.2rem;
+  
+}
+
+.c1 {
+    position: absolute;
+    top: 25%;
+    
+   
+}
+
+.c2 {
+    position: absolute;
+    display: none;
+}
+
+
+
+
+.playerDeck{
+    z-index: 15;
+    position: absolute;
+    top: initial;
+    transform:  scale(0.3);
+    
+    
+    
+}
+
+.player1Deck{
+    bottom: -18%;
+    display: none;
+}
+
+.player1Deck > *{
+    pointer-events: none;
+}
+
+.p1Deckonmousedown {
+    transform: translateX(-30%) translateY(-20%) scale(0.6);
+    transition: transform 0.3s
+}
+
+@keyframes movingCardAnimation2 {
+    0% {transform: translateX(-30%) translateY(-20%) scale(0.6)}
+    100% {transform:  translateX(30%) translateY(-20%) scale(0.6)}
+   
+}
+
+@keyframes movingCardAnimation3 {
+    0% {transform: translateX(30%) translateY(-20%) scale(0.6)}
+    100% {transform:  translateX(-30%) translateY(-20%) scale(0.6)}
+   
+}
+
+
+#movingCard {
+    z-index: 16;
+    display: none;
+    transform: translateX(-30%) translateY(-20%) scale(0.6);
+
+}
+
+#movingCardContainer {
+    z-index: 15;
+    display: none;
+    transform: translateX(30%) translateY(-20%) scale(0.6);
+
+}
+
+@keyframes movingCardAnimation1 {
+    /* 10% {transform: scale(0.3) translateX(10%) rotate(5deg)}
+    20% {transform: scale(0.3) translateX(20%) rotate(0deg)} */
+    0% {transform: translateX(-30%) translateY(-20%) scale(0.6)}
+    25% {transform:  translateX(-15%) translateY(-20%) scale(0.6)}
+    50% {transform:  translateX(-30%) translateY(-20%) scale(0.6)}
+    75% {transform:  translateX(-15%) translateY(-20%) scale(0.6)}
+    100% {transform:  translateX(-30%) translateY(-20%) scale(0.6)}
+
+}
+
+.movingCardAnimation1{
+    transform:translateX(-30%) translateY(-20%) scale(0.6);
+
+    animation: movingCardAnimation1 2.5s 0.1s ease-in-out;
+
+}
+
+.movingCardAnimation2 {
+    animation: movingCardAnimation2 0.7s ease-out;
+
+}
+
+.movingCardAnimation3 {
+    animation: movingCardAnimation3 0.7s ease-out;
+
+}
+
+
+@keyframes drawstackAnimationp1c1{
+    0% {top:-13%; opacity: 1; transform: scale(0.3)translateX(-25%); }
+    20% {top:-13%; opacity: 1; transform: scale(0.4)translateX(-25%);}
+    
+
+    70% {top: 57%;}
+    90% {top: 57%; opacity: 1; transform: scale(0.4)translateX(-25%);}
+
+    100% {top:57%; opacity: 0; transform: scale(0)translateX(-25%);}
+}
+
+@keyframes drawstackAnimationp2c1{
+    0% {top:-13%; opacity: 1; transform: scale(0.3)translateX(-25%); }
+    20% {top:-13%; opacity: 1; transform: scale(0.4)translateX(-25%);}
+    
+
+    70% {top: -18%;}
+    90% {top: -18%; opacity: 1; transform: scale(0.4)translateX(-25%);}
+
+    100% {top:-18%; opacity: 0; transform: scale(0)translateX(-25%);}
+}
+
+@keyframes drawstackAnimationp1c2{
+    0% {top:-13%; opacity: 1; transform: scale(0.3)translateX(+25%); }
+    20% {top:-13%; opacity: 1; transform: scale(0.4)translateX(+25%);}
+    
+
+    70% {top: 57%;}
+    90% {top: 57%; opacity: 1; transform: scale(0.4)translateX(+25%);}
+
+    100% {top:57%; opacity: 0; transform: scale(0)translateX(+25%);}
+}
+
+@keyframes drawstackAnimationp2c2{
+    0% {top:-13%; opacity: 1; transform: scale(0.3)translateX(+25%); }
+    20% {top:-13%; opacity: 1; transform: scale(0.4)translateX(+25%);}
+    
+
+    70% {top: -18%;}
+    90% {top: -18%; opacity: 1; transform: scale(0.4)translateX(+25%);}
+
+    100% {top:-18%; opacity: 0; transform: scale(0)translateX(+25%);}
+}
+
+.drawstackAnimationp1c1{
+    animation:2.5s 0.6s drawstackAnimationp1c1;
+}
+
+.drawstackAnimationp1c2{
+    animation:2.5s 0.6s drawstackAnimationp1c2;
+}
+
+.drawstackAnimationp2c1{
+    animation:2.5s 0.6s drawstackAnimationp2c1;
+}
+
+.drawstackAnimationp2c2{
+    animation:2.5s 0.6s drawstackAnimationp2c2;
+}
+
+
+#drawCardsStack1{
+    top: -13%;
+    transform: scale(0.3) translateX(-25%);
+    display: none;
+    
+}
+
+#drawCardsStack2{
+    top: -13%;
+    transform: scale(0.3) translateX(+25%);
+    display: none;
+}
+
+.arrow{
+    font-size: 1.8rem;
+    position: absolute;
+    top: -35%;
+    opacity: 0.7;
+    left: 25%;
+}
+
+#arrleft{
+    left: 75%;
+    display: none;
+}
+
+#arrright{
+    left: 5%;
+    display: none;
+}
+
+
+.cover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 14;
+    align-content: center;
+    justify-content: center;
+    display: none;
+    box-shadow: 0 4px 8px 0 rgb(0 5 5 / 40%);
+    border-radius: 10px;
+    display: flex;
+}
+
+.cardback{
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    height: 95%;
+    width: 92%;
+    background-image: url(Images/loadinggear.png);
+    background-size: 17px;
+    background-position: center;
+    border-radius: 10px;
+    
+
+}
+.transparentCover{
+    position: absolute;
+    z-index: 17;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+
+.player2Deck{
+    top:-12%;
+    display: none;
+    
+}
+
+.card-image {
+    position: absolute;
+    object-fit: cover; 
+    justify-self: center;
+    width: 95%;
+    height: 40%;
+    background-color: cadetblue;
+    margin-top: 5px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); */
+    border-radius: 8px;
+   
+}
+
+.name {
+    position: absolute;
+    justify-self: center;
+    top: 35%;
+    margin-left: 1px;
+    color: lightcyan;
+    background-color: hsla(175, 83%, 9%, 0.644);
+    width: 94%;
+    text-align: left;
+    padding-left: 4px;
+}
+
+.card form {
+    width: 95%;
+    height: 57%;
+    position: absolute;
+    justify-self: center;
+    top: 43%;
+    display: grid;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    grid-template-columns: 50% 50%;
+   
+}
+
+button {
+    height: 17%;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4%;
+}
+
+.card button{
+    position: relative;
+    justify-self: center;
+    border-width: 1px; 
+    border-color: rgba(19, 1, 1, 0.637);
+    border-radius: 5px;
+    height: 93%;
+    width: 98%;
+    text-align: center;
+    
+    
+}
+
+@media (hover: hover) {
+    button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+    }
+  }
+
+
+/* .noHover:hover {
+    box-shadow: none;
+    transform: scale(1);
+} */
+
+button:active {
+    border-style: none;
+}
+
+.cardIcon{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(4) ;   
+    opacity: 0.3;
+    cursor: initial;
+} 
+
+.property {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 3%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
+.value {
+    position: absolute;
+    font-size: 2.5rem;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    
+}
+
+
+
+#startgame {
+    right: 3%;
+    left: auto;
+}
+
+
+.popupouter {
+    position: absolute;
+    width: 100vw;
+    height: 95vh;
+    background-color: rgba(85, 88, 88, 0.226);
+    z-index: 15;
+    top:0;
+    display: grid;
+    display: none;
+    justify-content: center;   
+    align-content: center; 
+}
+
+#popupouter {
+    z-index: 15;
+}
+
+#waitshufflePopouter{
+    z-index: 15;
+    display: none;
+    
+}
+
+#waitshuffle {
+    position: absolute;
+    align-self: center;
+    z-index: 20;
+    display: grid;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2.5rem;
+    color: white;
+}
+
+#waitBackbtn {
+    position: absolute;
+    width: 6rem;  
+    height: 4rem;
+    font-size: 1.3rem;
+    top: 70%;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.8);
+    
+}
+
+.comp_popupinner {
+    position: absolute;
+    justify-self: center; 
+    align-self: center;
+    width: 85%;
+    height: 35%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    background-color: rgba(13, 55, 80, 0.897);
+    transform: translateY(-25%);
+    border-radius: 5px;
+    display: grid;
+    justify-content: center;
+    display: none;
+
+     
+}
+
+.comp_popupinner h3 {
+    color: rgb(221, 179, 223);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 10px;
+}
+
+.compbar1 {
+    position: absolute;
+    top: 30%;
+    background-color: thistle;
+    width: 90%;
+    height: 15%;
+    border-radius: 7px;
+    left: 5%;
+}
+
+.innerbar {
+    padding-top: 7px;
+    width: 0px;
+    height: 100%;
+    background-color: orangered;
+    font-size: 1.5rem;
+    color: rgb(19, 1, 1);
+    text-indent: 7px;
+    overflow:visible;
+    white-space: nowrap;
+}
+
+
+.compbar2 {
+    position: absolute;
+    top: 60%;
+    background-color: thistle;
+    width: 90%;
+    height: 15%;
+    border-radius: 7px;
+    left: 5%;
+    overflow-x: visible;
+
+}
+
+
+#closebtn {
+    position: absolute;
+    top: 82%;
+    left: 80%;
+    width: 15%;
+    height: 12%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: thistle;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+#closebtn:hover {
+    transform: scale(1.04);
+}
+
+#score {
+    position: absolute;
+    bottom: 18%;
+    left: 10%;
+    height: 5%;
+    width: 8%;
+    text-align: center;
+    padding-top: 2%;
+    font-size: 1.3rem;
+}
+
+.coin{
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%) translateY(50%) scale(2.5);
+    opacity: 0.3;
+}
+
+.rank {
+    position: absolute;
+    bottom: 12%;
+    left: 10%;
+    height: 5%;
+    width: 8%;
+    text-align: center;
+    padding-top: 2%;
+    font-size: 1.3rem;
+}
+
+#rankp2{
+    top:2%;
+}
+
+.trophy{
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%) translateY(50%) scale(2.5);
+    opacity: 0.3;
+}
+
+.player2Name{
+    position: absolute;
+    top: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    height: 2rem;
+    left: 50%;
+    padding-top: 2px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    text-align: center;
+    max-width: 35%;
+}
+
+.cardNumber {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    font-size: 1.3rem;
+    text-shadow: rgb(32, 32, 32);
+    justify-self: center;
+    align-self: flex-end;
+    transform: translateX(4.5rem) translateY(-550%);
+}
+
+#endgameouter {
+    align-content: center;
+    display: none;
+}
+
+.endgame {
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    display: grid;
+    width: 85%;
+    height: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(4, 43, 54, 0.637);
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+#whoWins {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+}
+
+#newGame {
+   left: initial;
+   right: 3%;
+}
+
+@keyframes c1Animation{
+    0% {top:50%; opacity: 0; transform: scale(0); }
+    20% {top:50%; opacity: 1; transform: scale(0.7);}
+    
+
+    70% {top: -8%;}
+    90% {top: -8%; opacity: 1; transform: scale(0.7);}
+
+    100% {top:-8%; opacity: 0; transform: scale(0);}
+}
+
+@keyframes c2Animation {
+    0% {top:-6%; opacity: 0; transform: scale(0); }
+    20% {top:-6%; opacity: 1; transform: scale(0.7);}
+    
+
+    70% {top: 52%;}
+    90% {top: 52%; opacity: 1; transform: scale(0.7);}
+
+    100% {top:52%; opacity: 0; transform: scale(0);}
+}
+
+.animationCard1{
+    display: grid;
+    opacity: 0;
+    z-index: 15;
+    position: absolute;
+   
+    transform: scale(0.8);
+    animation: 2.5s 0.4s c1Animation;
+}
+
+.animationCard2{
+    display: grid;
+    opacity: 0;
+    z-index: 15;
+    position: absolute;
+    
+    transform: scale(0.8);
+    animation: 2.5s 0.4s c2Animation;
+    
+}
+
+@keyframes c1DrawAnimation{
+    0% {top:50%; left:25%; opacity: 0; transform: scale(0); }
+    10% {top:50%; left:25%; opacity: 1; transform: scale(0.8);}
+    
+
+    70% {top: -8%; left:25%;}
+    90% {top: -8%; left:25%; opacity: 1; transform: scale(0.5);}
+
+    100% {top:-8%; left:25%; opacity: 0; transform: scale(0);}
+}
+
+@keyframes c2DrawAnimation {
+    0% {top:-6%; right: 25%; opacity: 0; transform: scale(0); }
+    10% {top:-6%; right: 25%; opacity: 1; transform: scale(0.8);}
+    
+
+    70% {top: -8%; right: 25%;}
+    90% {top: -8%; right: 25%; opacity: 1; transform: scale(0.5);}
+
+    100% {top:-8%; right: 25%; opacity: 0; transform: scale(0);}
+}
+
+.animationDrawCard1{
+    display: grid;
+    opacity: 0;
+    z-index: 15;
+    position: absolute;
+   
+    transform: scale(0.8);
+    animation: 2.5s 0.4s c1DrawAnimation;
+}
+
+.animationDrawCard2{
+    display: grid;
+    opacity: 0;
+    z-index: 15;
+    position: absolute;
+    
+    transform: scale(0.8);
+    animation: 2.5s 0.4s c2DrawAnimation;
+}
+
+#form1a > button , #form1b > button {
+    cursor: initial;
+}
+
+#form1a > button:disabled , #form1b > button:disabled {
+    color: black;
+    font-size: 1.3rem;
+    border-color: black;
+}
+
+#form1a > button:hover , #form1b > button:hover {
+    transform: scale(1);
+    box-shadow: none;
+}
+
+button[disabled]:hover{
+    transform: scale(1);
+    box-shadow: none;
+    cursor: initial;
+}
+
+#loadouter{
+    background-color: transparent;
+    display: none;
+    align-items: center;
+}
+
+@keyframes rotateLoadingWheel {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(360deg); }
+    100% { transform: rotate(720deg); }
+
+}
+
+#loadingwheel{
+    opacity: 0.8;
+    
+    animation: rotateLoadingWheel 4s linear infinite;
+    
+}
+
+
+/* index css */
+
+
+.startform {
+    display: grid;
+}
+
+.startform input {
+    width: 250px;
+    height: 4rem;
+    font-size: 2rem;
+    margin: 1.5rem;
+    border-radius: 20rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+.startform input:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+.choosedeck {
+    position: relative;
+    width: 35rem;
+    height: 35rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+    transform: translateX(-7%);
+}
+
+.choosedeck form {
+    display: grid;
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    row-gap: 2rem;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+}
+
+
+
+input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+  }
+
+label {
+    position: relative;
+    background-color: #ddd;
+    padding: 3px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+    
+}
+
+input[type="radio"]:checked + label {
+    border-color: rgb(148, 212, 204);
+    border-width:  2px;
+    box-shadow:  0 8px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+
+label:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.8);
+  }
+
+.choose-deck-img{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100%;
+    object-fit: cover;
+}
+
+.choose-deck-name {
+    position: absolute;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+}
+
+
+/* #choose-deck-backbtn {
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    width: 15%;
+    height: 10%;
+    z-index: 15;
+    background-color: #ddd;
+    border-radius: 4px;
+    border: 2px solid #444;
+    text-align: center;
+    padding-top: 0.7rem;
+    font-size: 1.3rem;
+} */
+
+.backbtn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+}
+
+#gameStart {
+    left: auto;
+    right: 3%;
+}
+
+#my-card-form button {
+    line-height: 1.4rem;
+
+}
+
+#mydeck form button {
+    font-size: 1.1rem;
+}
+
+
+.CPUorMulti form {
+    position: relative;
+    height: 30rem;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    row-gap: 15%;
+}
+
+
+
+
+button[type='submit'] {
+    justify-self: center;
+    align-self: center;
+    width: 22rem;
+    height: 4rem;
+    font-size: 2rem;
+    border-radius: 20rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+
+#CPUorMulit-backtn {
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    width: 7rem;
+    height: 4rem;
+    z-index: 15;
+}
+
+#CPUorMulti {
+    display: grid;
+    
+}
+
+#signInOuter {
+    display: none;
+}
+
+#nameOuter {
+    display: grid;
+    display: none;
+    
+}
+
+#nameOuter2 {
+    z-index: 25;
+    display: grid;
+    display: none;
+    
+}
+
+#sayName{
+    z-index: 24;
+}
+
+#nameForm {
+    display: grid;
+    padding-top: 12rem;
+    
+}
+
+#wait_for_other_player {
+    display: none;
+    background: transparent;
+}
+
+#whatsappButton {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    height: 5rem;
+    -webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+    filter: url("data:image/svg+xml;utf8,<svg height='0' xmlns='http://www.w3.org/2000/svg'><filter id='drop-shadow'><feGaussianBlur in='SourceAlpha' stdDeviation='4'/><feOffset dx='12' dy='12' result='offsetblur'/><feFlood flood-color='rgba(0,0,0,0.5)'/><feComposite in2='offsetblur' operator='in'/><feMerge><feMergeNode/><feMergeNode in='SourceGraphic'/></feMerge></filter></svg>#drop-shadow");
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+
+}
+
+#whatsappButton:hover {
+    transform: scale(1.05);
+}
+#nameField {
+    font-size: 1.3rem;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+}
+
+#SignIn-backtn {
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+    width: 7rem;
+    height: 4rem;
+    z-index: 15;
+}
+
+#signInOuter2{
+    z-index: 25;
+    
+}
+.popup-outer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(85, 88, 88, 0.226);
+    z-index: 15;
+    top:0;
+    display: none;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: 30rem;
+    /* padding-top: 15rem; */
+}
+
+.choose-form {
+    position: relative;
+    height: 30rem;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(85, 88, 88, 0.699);
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 15% 15% 15%;
+    row-gap: 3rem;
+    padding-top: 7rem;
+}
+
+.choose-form div {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    background-color: #ddd;
+    padding: 3px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+}
+
+.CPUorMulti div {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    background-color: #ddd;
+    padding: 3px;
+    border: 2px solid #444;
+    border-radius: 4px;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+}
+
+
+#mode {
+    display: grid;
+}
+
+.backbtn {
+    position: absolute;
+    display: grid;
+    bottom: 3%;
+    left: 3%;
+    width: 7rem !important;
+    height: 4rem !important;
+    border-radius: 5px !important;
+    font-size: 1.5rem !important;
+    align-content: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+
+}
+
+
+
+#shopPopupOuter{
+    display: none;
+    position: absolute;
+    background-color: transparent;
+}
+
+
+
+#shopform{
+    row-gap: 2rem;
+}
+
+.cardPack{
+    position: absolute;
+    justify-self: center;
+    justify-content: center;
+    align-content: center;
+    top: 26%;
+    z-index: auto;
+    /* display: grid; */
+    display: none;
+    /* visibility: hidden; */
+
+}
+
+/* #cardTop{
+    z-index: 14;
+} */
+
+.piece1Transform{
+    transform: translateY(-10px) rotate(3deg) skewX(-5deg);
+    opacity: 0;
+    z-index: 14;
+    transition: transform 1s, opacity 0.5s 1s, z-index 0.1s 2s;
+}
+
+.piece2{
+    top: 25%;
+}
+
+.piece2Transform{
+    transform: translateY(20rem);
+    opacity: 0;
+    z-index: 14;
+    transition: transform 1s ease-in-out 1s, opacity 0.5s 2s, z-index 0.1ms 2s;
+}
+
+.cardPack > img{
+    max-width: 400px;
+    max-height: 380px;
+    height: 100%;
+    width: 100%;
+    z-index: 14;
+    -webkit-filter: drop-shadow(10px 5px 5px #666666);
+        filter: drop-shadow(10px 5px 5px #666666);
+}
+
+#packPrice{
+    display: grid;
+    position: absolute;
+    bottom: 0%;
+    right: 12%;
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    background-color: rgb(247, 178, 89);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    z-index: 17;
+
+
+}
+
+.flip-container{
+    position: absolute;
+    width: 55%;
+    height:80%;
+    z-index: 13;
+    /* visibility: visible; */
+    top: 10%;
+    display: none;
+    background-color: transparent;
+    /* border: 1px solid black; */
+    perspective: 1000px;
+}
+
+.flip-card-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-container.hover .flip-card-inner{
+    transform: rotateY(180deg);
+}
+
+.boughtCards{
+    transform: rotateY(180deg);
+
+    
+}
+
+
+.boughtCards, #boughtCardsCover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden;
+    z-index: 13;
+    /* display: none; */
+}    
+
+
+.boughtCards img{
+    width: 95%;
+    height: 40%;
+}
+
+.boughtCards button[disabled]{
+    color: black;
+}
+
+
+#cardPackBackBtn{
+    display: none;
+}
+
+@keyframes rotate{
+    0%{transform: rotateY(0deg);}
+    100%{transform: rotate(180deg);}
+}
+
+.rotate{
+    animation: 0.8s rotate ;
+
+}
+
+@keyframes shake {
+    0% {transform: translate(2px, 1px) rotate(0deg); } 
+    10% {transform: translate(-1px, -2px) rotate(-1deg); }
+    20% {transform: translate(-3px, 0px) rotate(1deg); }
+    30% {transform: translate(0px, 2px) rotate(0deg); }
+    40% {transform: translate(1px, -1px) rotate(1deg); }
+    50% {transform: translate(-1px, 2px) rotate(-1deg); }
+    60% {transform: translate(-3px, 1px) rotate(0deg); }
+    70% {transform: translate(2px, 1px) rotate(-1deg); }
+    80% {transform: translate(-1px, -1px) rotate(1deg); }
+    90% {transform: translate(2px, 2px) rotate(0deg); }
+    100% {transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes appear {
+    0%{opacity: 0; transform: scale(0);}
+    5%{opacity: 1;}
+    40%{transform: scale(1);}
+    45% {transform: translate(2px, 1px) rotate(0deg); } 
+    50% {transform: translate(-1px, -2px) rotate(-1deg); }
+    55% {transform: translate(-3px, 0px) rotate(1deg); }
+    60% {transform: translate(0px, 2px) rotate(0deg); }
+    65% {transform: translate(1px, -1px) rotate(1deg); }
+    70% {transform: translate(-1px, 2px) rotate(-1deg); }
+    75% {transform: translate(-3px, 1px) rotate(0deg); }
+    80% {transform: translate(2px, 1px) rotate(-1deg); }
+    85% {transform: translate(-1px, -1px) rotate(1deg); }
+    90% {transform: translate(2px, 2px) rotate(0deg); }
+    100% {transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.packAppear{
+    animation: appear;
+    animation-duration: 1.5s;
+}
+
+.shakeElement{
+    /* z-index: auto; */
+    animation: shake;
+    animation-delay: 0.2s;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+}
+
+@media (max-width: 1126px) {
+
+    html {
+        font-size: 11px;
+    }
+
+    #arrowleft, #arrowright {
+        margin: 0;
+        
+    }
+
+    
+    #my-card-form button {
+        line-height: 9px;
+        font-size: 1.3rem;
+    }
+
+
+
+
+
+
+
+
+
+    .compbar1 {
+        position: absolute;
+        top: 60%;
+        background-color: thistle;
+        width: 90%;
+        height: 15%;
+        border-radius: 7px;
+        left: 5%;
+    }
+
+    .compbar2 {
+        position: absolute;
+        top: 30%;
+        background-color: thistle;
+        width: 90%;
+        height: 15%;
+        border-radius: 7px;
+        left: 5%;
+    }    
+
+
+
+
+
+    
+
+
+}
