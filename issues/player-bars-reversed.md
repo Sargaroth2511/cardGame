@@ -19,3 +19,6 @@ Relevant code snippets:
 - Bar animation uses `innerBar1` for the first value and `innerBar2` for the second value.
 - `changeAndResetUI` swaps the `compbar1` and `compbar2` classes, potentially causing the bars to appear in the opposite order.
 
+## Status
+Fixed. `changeAndResetUI` now swaps the corresponding `innerbar` elements so player and computer values align with their visual order.
+
