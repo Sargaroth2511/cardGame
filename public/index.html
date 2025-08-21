@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/88df1645ec.js" crossorigin="anonymous"></script>
     <title>Welcome to Firebase Hosting</title>
 
@@ -25,8 +27,10 @@
   </head>
   <body>
     <div class="playground">
-      <div class="navbar"> <h1>Super Trumpf!</h1>
+      <div class="navbar">
+          <h1>Super Trumpf!</h1>
           <h2>Spiele das Kult-Game Online!</h2>
+          <button id="style-toggle">Modernes Design</button>
       </div>
       <form action="click" id = "startform" class="startform">
        <input type="button" value="Platzhalter1">
@@ -216,7 +220,13 @@
 </script>
            <script src="decks.js"></script>
            <script src="indexListeners.js"></script>
-     
+           <script>
+             const styleToggleBtn = document.getElementById('style-toggle');
+             styleToggleBtn.addEventListener('click', () => {
+               document.body.classList.toggle('modern');
+               styleToggleBtn.textContent = document.body.classList.contains('modern') ? 'Klassisches Design' : 'Modernes Design';
+             });
+           </script>
 
   </body>
 </html>
