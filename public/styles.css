@@ -442,6 +442,13 @@ button:active {
     left: auto;
 }
 
+#style-toggle {
+    top: 3%;
+    left: 3%;
+    right: auto;
+    bottom: auto;
+}
+
 
 .popupouter {
     position: absolute;
