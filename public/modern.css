@@ -55,3 +55,46 @@ body.modern .startform input[type="button"]:hover,
 body.modern .startform button:hover {
   background: #2563eb;
 }
+
+body.modern .backbtn,
+body.modern #startgame,
+body.modern #style-toggle {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+body.modern .backbtn:hover,
+body.modern #startgame:hover,
+body.modern .card button:hover {
+  background: #2563eb;
+}
+
+body.modern .card {
+  background: #1e293b;
+  border: 1px solid #374151;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  color: #f0f0f0;
+}
+
+body.modern .card .property,
+body.modern .card .value,
+body.modern .card .name {
+  color: #f0f0f0;
+}
+
+body.modern .card button {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+body.modern .rank,
+body.modern #score {
+  background: #1e1e1e;
+  color: #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}

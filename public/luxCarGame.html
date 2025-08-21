@@ -4,6 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/88df1645ec.js" crossorigin="anonymous"></script>
     <title>Play Quartet</title>
 
@@ -39,6 +41,7 @@
         <a href="index.html"><button class="backbtn" id="backbtn" >Zurück</button>
         </a>
 
+        <button id="style-toggle" class="backbtn">Modernes Design</button>
         <button id="startgame" class="backbtn"> START</button>
 
         <div class="player2Name" id = "player2Name">Spieler2</div>
@@ -293,9 +296,16 @@
   
 </script>
     
-    <script src="decks.js"></script>    
+    <script src="decks.js"></script>
     <script src="declarations.js"></script>
     <script src="compareFuncs.js"></script>
     <script src="app.js"></script>
+    <script>
+      const styleToggleBtn = document.getElementById('style-toggle');
+      styleToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('modern');
+        styleToggleBtn.textContent = document.body.classList.contains('modern') ? 'Klassisches Design' : 'Modernes Design';
+      });
+    </script>
 </body>
 </html>
