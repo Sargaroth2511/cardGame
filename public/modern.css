@@ -1,0 +1,99 @@
+body.modern {
+  font-family: 'Roboto', sans-serif;
+  background: #121212;
+  color: #f0f0f0;
+}
+
+body.modern .playground {
+  background: #111827;
+  min-height: 100vh;
+}
+
+body.modern .navbar {
+  background: #1e1e1e;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+body.modern .navbar h1 {
+  color: #3b82f6;
+}
+
+body.modern .navbar h2 {
+  color: #9ca3af;
+}
+
+body.modern #style-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+body.modern #style-toggle:hover {
+  background: #2563eb;
+}
+/* generic button styling */
+body.modern button,
+body.modern input[type="button"],
+body.modern input[type="submit"] {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+body.modern button:hover,
+body.modern input[type="button"]:hover,
+body.modern input[type="submit"]:hover {
+  background: #2563eb;
+}
+
+body.modern .backbtn {
+  background: #374151;
+}
+
+body.modern .backbtn:hover {
+  background: #4b5563;
+}
+
+/* popup styling */
+body.modern .popup-outer {
+  background: rgba(0,0,0,0.8);
+}
+
+body.modern .choosedeck,
+body.modern .choose,
+body.modern .CPUorMulti {
+  background: #1f2937;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  color: #f0f0f0;
+}
+
+/* card styling */
+body.modern .card {
+  background: #1f2937;
+  border: 1px solid #374151;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  color: #f0f0f0;
+}
+
+body.modern .card .property {
+  color: #9ca3af;
+}
+
+body.modern .card .value {
+  color: #fff;
+}
