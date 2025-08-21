@@ -91,15 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
             initialY = e.clientY;    
         };
         if (e.target.classList.contains('movingCard')){
-            getCurrentHTMLElementPositition();
+            getCurrentHTMLElementPosition();
             grapHTMLElement();
         } else if (!e.target.classList.contains('movingCard') && zoomed){
             resetPlayerDeck();
         };    
 
-        function getCurrentHTMLElementPositition(){
+        function getCurrentHTMLElementPosition(){
             let compStyles = window.getComputedStyle(e.target),
-            matrix = compStyles['transform'] || style.webkitTransform || style.mozTransform,
+            matrix = compStyles['transform'] || compStyles.webkitTransform || compStyles.mozTransform,
             matrixType = matrix.includes('3d') ? '3d' : '2d',
             matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ');
             if (matrixType === '2d'){
