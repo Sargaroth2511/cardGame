@@ -451,9 +451,11 @@ const startGame = () => {
         setCardPropertyNames();
         clearInterval(dotinterval);
         player1Card.classList.replace('c1', 'c2');
-        player2Card.classList.replace('c2', 'c1'); 
+        player2Card.classList.replace('c2', 'c1');
         compbar1.classList.replace('compbar1', 'compbar2');
         compbar2.classList.replace('compbar2', 'compbar1');
+        compbar1.appendChild(innerBar2);
+        compbar2.appendChild(innerBar1);
         player2Deck.classList.replace('player2Deck', 'player1Deck');
 
         setTimeout (() => {
