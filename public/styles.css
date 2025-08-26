@@ -486,17 +486,13 @@ button:active {
 /* Hyphenated variant used by wait shuffle overlay */
 .popup-outer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;               /* avoid 100vw/100vh scrollbar offset */
     background-color: rgba(85, 88, 88, 0.35);
     z-index: 30;            /* keep overlays above rest */
-    display: none;          /* shown via JS as grid */
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
+    display: none;          /* shown via JS */
+    /* centered layout defaults, child containers can override when visible */
     align-items: center;
+    justify-content: center;
 }
 
 #popupouter {
@@ -506,11 +502,12 @@ button:active {
 #waitshufflePopouter{
     z-index: 40;
     display: none;
-    
 }
 
 #waitshuffle {
-    position: static;        /* participate in overlay grid */
+    position: static;        /* override .comp_popupinner absolute */
+    left: auto;              /* reset inherited left:50% */
+    top: auto;               /* reset inherited top:50% */
     z-index: 20;
     display: grid;
     place-items: center;     /* center text */
@@ -520,7 +517,7 @@ button:active {
     color: white;
     width: 90%;
     max-width: 420px;
-    margin: 0 auto;
+    margin: 0 auto;          /* center within overlay */
     min-height: 10rem;       /* ensure blue box tall enough */
 }
 
@@ -554,6 +551,15 @@ button:active {
      
 }
 
+/* When inside an overlay, center via container and neutralize absolute offsets */
+.popup-outer .comp_popupinner {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+}
+
 /* Ensure consistent sizing for waitshuffle */
 #waitshuffle {
     position: static;
@@ -569,24 +575,21 @@ button:active {
     top: auto; left: auto; right: auto; bottom: auto;
     /* align in grid column */
     align-self: center;
-    justify-self: end;
-    margin: 0;
+    justify-self: center;      /* center under popup */
+    margin-top: 12px;
 }
 
-/* Shuffle overlay: place popup and back button side-by-side */
+/* Shuffle overlay: stack popup and back button, perfectly centered */
 #waitshufflePopouter {
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    align-items: center;
-    grid-auto-flow: column;
-    column-gap: 12px;
-    grid-template-columns: auto auto;
+    place-items: center;      /* center both axes */
+    grid-auto-flow: row;
+    row-gap: 12px;
 }
 
-/* Place back button left, popup right */
-#waitshufflePopouter #waitBackbtn { grid-column: 1; }
-#waitshufflePopouter #waitshuffle { grid-column: 2; justify-self: start; }
+/* Ensure popup is centered */
+#waitshufflePopouter #waitshuffle { justify-self: center; align-self: center; margin: 0 auto; }
+
+/* keep animations on #waitshuffle intact; centering handled by container grid */
 
 .comp_popupinner h3 {
     color: rgb(221, 179, 223);
@@ -1118,17 +1121,10 @@ button[type='submit'] {
 }
 .popup-outer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     background-color: rgba(85, 88, 88, 0.35);
     z-index: 30;
-    display: none;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-    align-items: center;
+    display: none; /* visibility controlled by JS */
 }
 
 .choose-form {
