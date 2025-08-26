@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    let player1Deck = document.querySelector('#player1Deck'),
-        player2Deck = document.querySelector ('#player2Deck'),
-        playerDecks = [player1Deck, player2Deck],
+    let playerDecks = [player1Deck, player2Deck],
         active = false,
         zoomed = false,
         zoomedDeckCards = [],
@@ -237,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
     waitBackbtn.addEventListener ('click', e => {
         e.preventDefault();
         waitshufflePopouter.style.display = 'none';
+        if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+        if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
+        if (typeof dotinterval !== 'undefined' && dotinterval) clearInterval(dotinterval);
         if (playsOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({isRdy : ''})
             clearInterval(dotinterval);

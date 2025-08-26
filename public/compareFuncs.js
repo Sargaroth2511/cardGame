@@ -1,46 +1,59 @@
-let checkedValues = false;
+// Flag to ensure compare/animation sequence runs only once at a time
+let isComparisonInProgress = false;
 
-const getValuesToCompareCards = i => {
-    let card1Entries = Object.entries(play1Deck[0]),
-        card2Entries = Object.entries(play2Deck[0]),
-        cardProperty = card1Entries[i+2][0],
-        card1PropertyValue = card1Entries[i+2][1],
-        card2PropertyValue = card2Entries[i+2][1],
-        chosenDeckProperties = allDeckProperties[chosenDeck];
+// Backward-compatible aliases as wrappers to avoid TDZ
+function getValuesToCompareCards(index){ return compareTopCardsByIndex(index); }
+function startGameFlow(){ return startGame.apply(this, arguments); }
+function toggleCardButtons(){ return setCardButtonsEnabledForTurn.apply(this, arguments); }
+function compareProps(){ return comparePropertyAndAssignCards.apply(this, arguments); }
+function endThisTurn(){ return finishTurnAndResetUI.apply(this, arguments); }
 
-    handleComparingCardValues(card1PropertyValue, card2PropertyValue, 
-                             chosenDeckProperties[i].barwidth, cardProperty,
-                             chosenDeckProperties[i].unit, chosenDeckProperties[i].fullName);
+// Compare the top cards by the selected property index
+const compareTopCardsByIndex = (index) => {
+    let p1TopCardEntries = Object.entries(play1Deck[0]),
+        p2TopCardEntries = Object.entries(play2Deck[0]),
+        selectedPropertyKey = p1TopCardEntries[index+2][0],
+        p1SelectedValue = p1TopCardEntries[index+2][1],
+        p2SelectedValue = p2TopCardEntries[index+2][1],
+        deckProps = allDeckProperties[chosenDeck];
+
+    runComparisonSequence(
+        p1SelectedValue,
+        p2SelectedValue,
+        deckProps[index].barwidth,
+        selectedPropertyKey,
+        deckProps[index].unit,
+        deckProps[index].fullName
+    );
 };
 
-
-const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, propertyValueString, unitString, headingString) => {
+// Run the UI flow to compare values, animate bars/cards, and end the turn
+const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey, unit, headingLabel) => {
     
-    let bar1Length = Math.round(((p1CardValue / barMaxWidth) * 100)),
-        bar2Length = Math.round(((p2CardValue / barMaxWidth) * 100));
+    let p1BarPercent = Math.round(((p1Value / maxBarValue) * 100)),
+        p2BarPercent = Math.round(((p2Value / maxBarValue) * 100));
 
-    // checkedValues assures function only executed once
-    checkedValues = true;
+    // Prevent re-entry while in progress
+    isComparisonInProgress = true;
 
-    setDocOverlayShowComparePopup(headingString);
+    showComparePopup(headingLabel);
 
-    compareProps(propertyValueString, unitString);
+    comparePropertyAndAssignCards(propertyKey, unit);
 
-    await animateBars(innerBar1, bar1Length, p1CardValue, animateBars);
+    await animateStatBar(innerBar1, p1BarPercent, p1Value, animateStatBar);
 
-    await animateCards(p1CardValue, p2CardValue, unitString);
+    await animateOutcomeAnimations(p1Value, p2Value, unit);
 
-    endThisTurn();
+    finishTurnAndResetUI();
 
-
-    function setDocOverlayShowComparePopup(headingString){
+    function showComparePopup(headingString){
         preventDocBeeingClicked.style.display = 'grid';
         popupHeader.textContent = headingString;
         compPopup.style.display = 'flex';
         compPopupOuter.style.display = 'flex';
     };
 
-    async function animateBars(barHTMLElement, barLengthPercentage, cardValue,
+    async function animateStatBar(barHTMLElement, barLengthPercentage, cardValue,
                         animateBarCallback){
         let promise = new Promise (resolve => {
             let output = 0;
@@ -50,13 +63,13 @@ const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, 
                 
                 if (output > barLengthPercentage){
                     clearInterval(barAnimationInterval);
-                    barHTMLElement.textContent = `${cardValue} ${unitString}`;
+                    barHTMLElement.textContent = `${cardValue} ${unit}`;
 
                     if (barHTMLElement === innerBar1){
-                        animateBarCallback(innerBar2, bar2Length, p2CardValue, animateBars) 
+                        animateBarCallback(innerBar2, p2BarPercent, p2Value, animateStatBar) 
                         resolve();
                     } else {
-                        checkedValues = false;
+                        isComparisonInProgress = false;
                         if (playsOnline){
                             db.collection(ourGameName).doc(uniqueOnlineName).update({wantsToCheck: ''});
                         }; 
@@ -67,10 +80,10 @@ const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, 
         return promise;
     };
 
-    async function animateCards(p1CardValue, p2CardValue, unitString){
+    async function animateOutcomeAnimations(p1CardValue, p2CardValue, unitString){
  
-        checkIfLowerIsBetter();
-        doAnimations();
+        applyLowerIsBetterRule();
+        applyAnimations();
 
         return new Promise(resolve => {
             let animatedCards = [animatedCardp1, animatedCardp2];
@@ -84,7 +97,7 @@ const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, 
             });
         });  
         
-        function checkIfLowerIsBetter() {
+        function applyLowerIsBetterRule() {
             allDeckProperties[chosenDeck].forEach(e => {
               if (e.unit === unitString && e.lowerIsBetter === true) {
                 [p1CardValue, p2CardValue] = [p2CardValue, p1CardValue];
@@ -92,36 +105,36 @@ const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, 
             });
         };
 
-        function doAnimations(){
+        function applyAnimations(){
             if (p1CardValue === p2CardValue){
-                addAnimationToCards(animatedCardp1, 'animationDrawCard1');
-                addAnimationToCards(animatedCardp2, 'animationDrawCard2');
+                addCssAnimation(animatedCardp1, 'animationDrawCard1');
+                addCssAnimation(animatedCardp2, 'animationDrawCard2');
             }; 
     
             if (isPlayerOne){
                 if (p1CardValue > p2CardValue) {
-                    addAnimationToCards(animatedCardp2, 'animationCard2')
-                    animateDrawCards('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
+                    addCssAnimation(animatedCardp2, 'animationCard2')
+                    animateDrawStacks('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
                 } else if (p1CardValue < p2CardValue){
-                    addAnimationToCards(animatedCardp1, 'animationCard1')
-                    animateDrawCards('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
+                    addCssAnimation(animatedCardp1, 'animationCard1')
+                    animateDrawStacks('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
                 };   
     
             } else if (!isPlayerOne){
                 if (p1CardValue > p2CardValue) {
-                    addAnimationToCards(animatedCardp2, 'animationCard1')
-                    animateDrawCards('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
+                    addCssAnimation(animatedCardp2, 'animationCard1')
+                    animateDrawStacks('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
                 } else if (p1CardValue < p2CardValue){
-                    addAnimationToCards(animatedCardp1, 'animationCard2')
-                    animateDrawCards('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
+                    addCssAnimation(animatedCardp1, 'animationCard2')
+                    animateDrawStacks('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
                 };   
             };
 
-            function addAnimationToCards(HTMLElement, animationClass){
+            function addCssAnimation(HTMLElement, animationClass){
                 HTMLElement.classList.add(animationClass);
             };  
 
-            function animateDrawCards(drawCardAnimation1, drawCardAnimation2){
+            function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
                 if (drawCards.length > 0){
                     arrright.style.display = 'none';
                     arrleft.style.display = 'none';
@@ -133,38 +146,37 @@ const handleComparingCardValues = async (p1CardValue, p2CardValue, barMaxWidth, 
         };
     };    
 };
-          
 
-const playKI = () => {
+const playAI = () => {
     if (!playsOnline){
         let difficulty = localStorage.getItem('difficulty');
         if (difficulty === 'easy'){
-            easyKI();
+            aiPickRandom();
         } else if (difficulty === 'medium'){
-            mediumKI();
+            aiMedium();
         } else if (difficulty === 'hard'){
-            smartKI();
+            aiSmart();
         } else {console.log('Difficulty Error')}
     };
     
-    function easyKI(){
+    function aiPickRandom(){
         if (vMaxBtn.disabled) {
         let num = (Math.random() * card1Buttons.length);
         let i = Math.floor(num);
-        getValuesToCompareCards(i);
+        compareTopCardsByIndex(i);
         }; 
     };
     
-    function mediumKI(){
+    function aiMedium(){
         let num = Math.random();
         if (num >= 0.85) {
-            easyKI();
+            aiPickRandom();
         } else {
-            smartKI();
+            aiSmart();
         };
     };
     
-    function smartKI(){
+    function aiSmart(){
         if (vMaxBtn.disabled) {
             let indexOfCardValuesArray = [];
     
@@ -181,20 +193,19 @@ const playKI = () => {
                 };
             indexOfCardValuesArray.sort((a, b) => a.index - b.index);
             let numberOfSelectedCardElement = indexOfCardValuesArray[0].i;
-            getValuesToCompareCards(numberOfSelectedCardElement);
+            compareTopCardsByIndex(numberOfSelectedCardElement);
         };
     };
 };
 
-
-const setFirebaseListener = () => {
+const attachFirebaseGameListeners = () => {
     db.collection(ourGameName).doc(uniqueOtherPlayerName)
     .onSnapshot((doc) => {
         let otherUser = doc.data(),
             i = otherUser.wantsToCheck;
-            if(!checkedValues){                    
+            if(!isComparisonInProgress){                    
                 if (i !== '' ){
-                    getValuesToCompareCards(i);
+                    compareTopCardsByIndex(i);
                 }; 
             };          
         db.collection(ourGameName).doc(uniqueOnlineName)
@@ -208,8 +219,7 @@ const setFirebaseListener = () => {
     });         
 };
 
-
-const checkforAWinner = async () =>{
+const checkForWinner = async () =>{
     let winner,
         firstPlayer = onlineName,
         secondPlayer = otherPlayer,
@@ -266,13 +276,11 @@ const checkforAWinner = async () =>{
     };
 };
 
-
-const removeAnimationClass = (HTMLElement, ...classArray ) => {
+const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
     HTMLElement.classList.remove(...classArray)
 }
 
-
-const endThisTurn = async () => {
+const finishTurnAndResetUI = async () => {
     let promise = new Promise((resolve, reject) => {
         if(playsOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({ nextTurn: 'ok'})
@@ -301,15 +309,15 @@ const endThisTurn = async () => {
                                   'animationDrawCard2'];
         let cssAnimatedElements = [drawCardsStack1, drawCardsStack2, animatedCardp1, animatedCardp2]
         cssAnimatedElements.forEach (e => {
-            removeAnimationClass(e, ...cssanimationClasses)
+            removeCssAnimationClasses(e, ...cssanimationClasses)
         });
     })();
 
-    checkforAWinner()
+    checkForWinner()
     .then ((winner) => {
         if (!winner){
             updateUIElements();
-            playKI();
+            playAI();
         };    
     });
     return promise;    
@@ -322,7 +330,7 @@ const animatedCardp2 = document.querySelector('#animatedCard2')
 
 
 
-const toggleCardButtons = (unitString, disableCard1Buttons, disableCard2Buttons) => {
+const setCardButtonsEnabledForTurn = (unitString, disableCard1Buttons, disableCard2Buttons) => {
     let elements1 = form1.elements,
         elements2 = form2.elements;
 
@@ -340,13 +348,13 @@ const toggleCardButtons = (unitString, disableCard1Buttons, disableCard2Buttons)
 };
 
 
-const compareProps = (prop, unitString) => {
+const comparePropertyAndAssignCards = (prop, unitString) => {
 
     if (play1Deck[0][prop] > play2Deck[0][prop]) {
-        playerWins (play1Deck, play2Deck, toggleCardButtons(unitString, false, true),
+        playerWins (play1Deck, play2Deck, setCardButtonsEnabledForTurn(unitString, false, true),
         addDrawCardsToPlayerDeck(play1Deck));
     } else if (play1Deck[0][prop] < play2Deck[0][prop]) {
-        playerWins (play2Deck, play1Deck, toggleCardButtons(unitString, true, false),
+        playerWins (play2Deck, play1Deck, setCardButtonsEnabledForTurn(unitString, true, false),
         addDrawCardsToPlayerDeck(play2Deck))
     } else if (play1Deck[0][prop] === play2Deck[0][prop]) {
         switchWhosNext();
@@ -372,9 +380,9 @@ const compareProps = (prop, unitString) => {
     };    
     function switchWhosNext(){
         if(vMaxBtn2.disabled) {
-            toggleCardButtons('', true, false);
+            setCardButtonsEnabledForTurn('', true, false);
         } else if (vMaxBtn.disabled) {
-            toggleCardButtons('', false, true);
+            setCardButtonsEnabledForTurn('', false, true);
         };
     };
     function addPlayerCardsToDrawCards(){
@@ -391,12 +399,12 @@ const startGame = () => {
     toggleWaitingPopup('Karten werden gemischt', 'grid', startDotinterval);
 
     setTimeout (() => {
-        isPlayerOne ? checkWhoBeginsSendFirebase(prepareUIForGame): changeAndResetUI();
+        isPlayerOne ? determineStarterAndSync(prepareUIForGameUI): updateUIForOtherStarter();
     },4000); 
    
-    shuffleAndDealCards(sendAndGetShuffledCards);
+    shuffleDeckAndDealCards(syncDecksBetweenPlayers);
 
-    async function checkWhoBeginsSendFirebase(nextPrepareUI){
+    async function determineStarterAndSync(nextPrepareUI){
         let num = Math.random();
 
         if(playsOnline){
@@ -409,10 +417,10 @@ const startGame = () => {
                 await docRef.update({myTurn : 'no'})
             };
         };
-        nextPrepareUI(cardNumberp1, num, playKI);
+        nextPrepareUI(cardNumberp1, num, playAI);
     };
 
-    const prepareUIForGame = (HTMLElementCardNumber, num, startGamevsCPU) => {
+    const prepareUIForGameUI = (HTMLElementCardNumber, num, startGamevsCPU) => {
         setCardPropertyNames();
         clearInterval(dotinterval);
         playsOnline ? player2Name.textContent = otherDatabaseDoc.name:
@@ -420,15 +428,17 @@ const startGame = () => {
 
         if (num <= 0.5){
             whostarts.textContent = `${onlineName} fängt an!`
-            toggleCardButtons('', false, true);
+            setCardButtonsEnabledForTurn('', false, true);
         } else {
-            toggleCardButtons('', true, false);
+            setCardButtonsEnabledForTurn('', true, false);
             playsOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
                           whostarts.textContent = `Der Computer fängt an!`;
         };  
 
         setTimeout(() => {
             waitshufflePopouter.style.display = 'none';
+            if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+            if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
             player1Cover.style.display = 'none';
             whostarts.textContent = '';
             startgame.style.display = 'none';
@@ -447,7 +457,7 @@ const startGame = () => {
     };
 
 
-    function changeAndResetUI(){
+    function updateUIForOtherStarter(){
         setCardPropertyNames();
         clearInterval(dotinterval);
         player1Card.classList.replace('c1', 'c2');
@@ -460,6 +470,8 @@ const startGame = () => {
 
         setTimeout (() => {
             waitshufflePopouter.style.display = 'none';
+            if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+            if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
             player2Cover.style.display = 'none'
             whostarts.textContent = '';
             startgame.style.display = 'none';
@@ -472,13 +484,14 @@ const startGame = () => {
     function setCardPropertyNames (){
         allCardButtons.forEach(e => {
             for (let i = 0; i < allDeckProperties[chosenDeck].length; i++){
-                e[i].children[0].textContent = allDeckProperties[chosenDeck][i].localPropertyName;
+                const label = allDeckProperties[chosenDeck][i].fullName.replace(/!$/, '');
+                e[i].children[0].textContent = label;
             };
         });
     };
 
 
-    function shuffleAndDealCards(sendToFirebase){
+    function shuffleDeckAndDealCards(sendToFirebase){
         chosenDeck = localStorage.getItem('chosenDeck');
         deckShuffled = allDecks[chosenDeck];
 
@@ -494,19 +507,19 @@ const startGame = () => {
         updateUIElements();
 
         if (playsOnline){
-            sendToFirebase(setFirebaseListener);
+            sendToFirebase(attachFirebaseGameListeners);
         };
       };
 
 
-    async function sendAndGetShuffledCards(nextAddListener){
+    async function syncDecksBetweenPlayers(nextAddListener){
 
-        isPlayerOne ? await sendDecksToFirebase() : await getDecksFromFirebase(getBeginnerAndUpdateUI);
+        isPlayerOne ? await writeDecksToFirebase() : await fetchDecksFromFirebase(fetchStarterAndUpdateUI);
 
         nextAddListener();
 
 
-        async function sendDecksToFirebase(){
+        async function writeDecksToFirebase(){
             let play1DeckID = [],
                 play2DeckID = [];
         
@@ -522,7 +535,7 @@ const startGame = () => {
         };
 
 
-        async function getDecksFromFirebase(nextGetBeginnerAndUpdateUI){
+        async function fetchDecksFromFirebase(nextGetBeginnerAndUpdateUI){
             let unsubscribe = db.collection(ourGameName).doc(uniqueOtherPlayerName)
             .onSnapshot((doc) => {
                 let otherUserDoc = doc.data();
@@ -549,7 +562,7 @@ const startGame = () => {
             };
         };  
 
-        function getBeginnerAndUpdateUI(){
+        function fetchStarterAndUpdateUI(){
             db.collection(ourGameName).doc(uniqueOnlineName).update({isRdy : ''});
 
             db.collection(ourGameName).doc(uniqueOtherPlayerName).get()
@@ -557,10 +570,10 @@ const startGame = () => {
                 let docu = doc.data();
                 if (docu.myTurn === 'yes'){
                     whostarts.textContent = `${otherPlayer} fängt an!`
-                    toggleCardButtons('', false, true);
+                    setCardButtonsEnabledForTurn('', false, true);
                 } else if (docu.myTurn === 'no'){
                     whostarts.textContent = `${onlineName} fängt an!`
-                    toggleCardButtons('', true, false);
+                    setCardButtonsEnabledForTurn('', true, false);
                 } else console.log('canst get myTurn', docu.myTurn)  
                 }).catch((err) => {
                     console.log ('error getting documents', err)

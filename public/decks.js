@@ -227,7 +227,9 @@ const updateCardsWithChildren = (element, shortCut, arrayPosition) => {
   element.children[0].src = 'Images/' + chosenDeck +'/'+ cardValues[0] +'.jpg';
   element.children[2].textContent = cardValues[1];
   for (let i = 0; i < buttons.children.length; i++){
-      buttons.children[i].children[0].textContent = allDeckProperties[chosenDeck][i].localPropertyName;
+      const rawFullName = allDeckProperties[chosenDeck][i].fullName;
+      const label = rawFullName.replace(/!$/, '').replace(/\s*\/min$/i, '');
+      buttons.children[i].children[0].textContent = label;
       buttons.children[i].children[1].textContent = cardValues[i+2];
   };
 };
@@ -262,6 +264,7 @@ let otherDatabaseDoc = {},
 
 // Animate Dots
 let dotinterval;
+let isWaitingForReady = false;
 
 
 if (!onlineName){
@@ -432,15 +435,22 @@ const startDotinterval = () => {
 
 const toggleWaitingPopup = (text, display, animateDots) =>{
   
-  waiting.textContent = text
+  waiting.textContent = text;
   waitshufflePopouter.style.display = display;
 
+  // Ensure we don't stack multiple dot intervals
+  if (dotinterval) {
+    clearInterval(dotinterval);
+  }
+  if (typeof animatedpoints !== 'undefined' && animatedpoints) {
+    animatedpoints.innerHTML = '';
+  }
   window.dotsGoingUp = true;
 
-  animateDots();
-  
+  if (typeof animateDots === 'function') {
+    animateDots();
+  }
 }
-
 
 
 const getUsers = async (nextStartGame, unsubListener) => {
@@ -476,6 +486,10 @@ const getUsers = async (nextStartGame, unsubListener) => {
 
 
   const checkIfBothPlayersAreRdy = async () => {
+    // Guard against duplicate triggers (clicks or programmatic calls)
+    if (isWaitingForReady) return;
+    isWaitingForReady = true;
+    if (startBtn) startBtn.disabled = true;
     if (playsOnline){
       let num = Math.random();
 

@@ -127,6 +127,45 @@ const compPopup = document.querySelector('#comp_popupinner');
 const closeBtn = document.querySelector('#closebtn');
 const popupHeader = document.querySelector('h3');
 
+// Waiting/Shuffle overlay and misc UI
+const waitshufflePopouter = document.querySelector('#waitshufflePopouter');
+const waiting = document.querySelector('#waiting');
+const whostarts = document.querySelector('#whostarts');
+const startgame = document.querySelector('#startgame');
+const player1Cover = document.querySelector('#player1Cover');
+const player2Cover = document.querySelector('#player2Cover');
+const player1Deck = document.querySelector('#player1Deck');
+const player2Deck = document.querySelector('#player2Deck');
+const cardNumberp1 = document.querySelector('#cardNumberp1');
+const cardNumberp2 = document.querySelector('#cardNumberp2');
+const animatedpoints = document.querySelector('#animatedpoints');
+const waitBackbtn = document.querySelector('#waitBackbtn');
+
+// Primary card containers and comparison bars
+const player1Card = document.querySelector('#player1Card');
+const player2Card = document.querySelector('#player2Card');
+const compbar1 = document.querySelector('#compbar1');
+const compbar2 = document.querySelector('#compbar2');
+
+// Animated comparison cards
+const animatedCardp1 = document.querySelector('#animatedCard1');
+const animatedCardp2 = document.querySelector('#animatedCard2');
+
+// Endgame popup
+const endgameouter = document.querySelector('#endgameouter');
+const whoWins = document.querySelector('#whoWins');
+const endgamebacktn = document.querySelector('#endgamebacktn');
+const newGame = document.querySelector('#newGame');
+
+// Player/opponent name labels
+const player2Name = document.querySelector('#player2Name');
+
+// Auth/name popups
+const nameOuter2 = document.querySelector('#nameOuter2');
+const signInOuter2 = document.querySelector('#signInOuter2');
+const nameForm = document.querySelector('#nameForm');
+const nameBackbtn = document.querySelector('#nameBackbtn');
+
 const animationCard1 = document.querySelector('.animationCard1')
 const animationCard2 = document.querySelector('.animationCard2')
 

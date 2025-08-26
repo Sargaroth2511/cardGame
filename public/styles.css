@@ -2,6 +2,7 @@ html {
     overflow: hidden;
 }
 
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -38,6 +39,7 @@ h1 {
     text-transform: uppercase;
     background: linear-gradient(#262626, #eaeaea, #262626);
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
     -webkit-text-stroke-width: 0.5px;
     -webkit-text-stroke-color: black;
@@ -128,7 +130,7 @@ h1 {
 }
 
 .player1Deck{
-    bottom: -18%;
+    bottom: 2%;
     display: none;
 }
 
@@ -336,7 +338,7 @@ h1 {
     object-fit: cover; 
     justify-self: center;
     width: 95%;
-    height: 40%;
+    height: 34%;
     background-color: cadetblue;
     margin-top: 5px;
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); */
@@ -354,18 +356,24 @@ h1 {
     width: 94%;
     text-align: left;
     padding-left: 4px;
+    padding-right: 6px;
+    line-height: 1.2;
+    white-space: normal;        /* allow wrapping */
+    word-break: break-word;     /* break long words */
+    bottom: 44%;                /* reserve vertical space before form */
+    overflow-y: auto;           /* scroll if extremely long */
+    z-index: 4;                 /* above image and values */
 }
 
 .card form {
     width: 95%;
-    height: 57%;
+    height: 40%;              /* reduce to avoid overflowing card bottom */
     position: absolute;
     justify-self: center;
-    top: 43%;
+    top: 58%;                 /* start lower to respect name block */
     display: grid;
     grid-template-rows: 33.33% 33.33% 33.33%;
     grid-template-columns: 50% 50%;
-   
 }
 
 button {
@@ -409,9 +417,13 @@ button:active {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(4) ;   
-    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.6);   /* smaller to fit neatly */
+    opacity: 0.8;
+    color: rgba(255,255,255,0.7);                 /* clear but unobtrusive */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    z-index: 2;
     cursor: initial;
+    pointer-events: none;
 } 
 
 .property {
@@ -421,18 +433,20 @@ button:active {
     bottom: 3%;
     overflow: hidden;
     white-space: nowrap;
+    pointer-events: none; /* allow button hover when mouse is over text */
+    z-index: 3;           /* above icon */
 }
 
 
 
 .value {
     position: absolute;
-    font-size: 2.5rem;
-    top: 15%;
+    font-size: 1.35rem;         /* previous size to avoid regressions */
+    top: 18%;                   /* balanced positioning within button */
     left: 50%;
     transform: translateX(-50%);
-    
-    
+    pointer-events: none; /* allow button hover when mouse is over numbers */
+    z-index: 3;           /* above icon */
 }
 
 
@@ -443,10 +457,16 @@ button:active {
 }
 
 #style-toggle {
-    top: 3%;
-    left: 3%;
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
     right: auto;
     bottom: auto;
+    z-index: 1000;
+    width: auto;
+    height: 2.5rem;
+    font-size: 1rem;
+    padding: 0 0.75rem;
 }
 
 
@@ -463,25 +483,45 @@ button:active {
     align-content: center; 
 }
 
+/* Hyphenated variant used by wait shuffle overlay */
+.popup-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(85, 88, 88, 0.35);
+    z-index: 30;            /* keep overlays above rest */
+    display: none;          /* shown via JS as grid */
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
 #popupouter {
     z-index: 15;
 }
 
 #waitshufflePopouter{
-    z-index: 15;
+    z-index: 40;
     display: none;
     
 }
 
 #waitshuffle {
-    position: absolute;
-    align-self: center;
+    position: static;        /* participate in overlay grid */
     z-index: 20;
     display: grid;
+    place-items: center;     /* center text */
     font-size: 2.5rem;
     text-align: center;
-    padding: 2.5rem;
+    padding: 2rem;           /* comfortable padding */
     color: white;
+    width: 90%;
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 10rem;       /* ensure blue box tall enough */
 }
 
 #waitBackbtn {
@@ -503,7 +543,9 @@ button:active {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
     z-index: 10;
     background-color: rgba(13, 55, 80, 0.897);
-    transform: translateY(-25%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 5px;
     display: grid;
     justify-content: center;
@@ -511,6 +553,40 @@ button:active {
 
      
 }
+
+/* Ensure consistent sizing for waitshuffle */
+#waitshuffle {
+    position: static;
+    width: 90%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Place the back button directly under the popup, centered within overlay */
+.popup-outer #waitBackbtn {
+    position: static;          /* override .backbtn absolute */
+    /* neutralize absolute offsets from .backbtn */
+    top: auto; left: auto; right: auto; bottom: auto;
+    /* align in grid column */
+    align-self: center;
+    justify-self: end;
+    margin: 0;
+}
+
+/* Shuffle overlay: place popup and back button side-by-side */
+#waitshufflePopouter {
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-auto-flow: column;
+    column-gap: 12px;
+    grid-template-columns: auto auto;
+}
+
+/* Place back button left, popup right */
+#waitshufflePopouter #waitBackbtn { grid-column: 1; }
+#waitshufflePopouter #waitshuffle { grid-column: 2; justify-self: start; }
 
 .comp_popupinner h3 {
     color: rgb(221, 179, 223);
@@ -527,6 +603,7 @@ button:active {
     height: 15%;
     border-radius: 7px;
     left: 5%;
+    overflow: hidden;
 }
 
 .innerbar {
@@ -550,7 +627,7 @@ button:active {
     height: 15%;
     border-radius: 7px;
     left: 5%;
-    overflow-x: visible;
+    overflow: hidden;
 
 }
 
@@ -582,13 +659,18 @@ button:active {
     text-align: center;
     padding-top: 2%;
     font-size: 1.3rem;
+    z-index: 18;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .coin{
     left: 50%;
     bottom: 50%;
     transform: translateX(-50%) translateY(50%) scale(2.5);
-    opacity: 0.3;
+    opacity: 0.9;
+    color: #ffcc33; /* brighter amber */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .rank {
@@ -600,6 +682,9 @@ button:active {
     text-align: center;
     padding-top: 2%;
     font-size: 1.3rem;
+    z-index: 18;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 #rankp2{
@@ -610,7 +695,9 @@ button:active {
     left: 50%;
     bottom: 50%;
     transform: translateX(-50%) translateY(50%) scale(2.5);
-    opacity: 0.3;
+    opacity: 0.9;
+    color: #ffb020; /* brighter orange */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
 .player2Name{
@@ -1031,16 +1118,17 @@ button[type='submit'] {
 }
 .popup-outer {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(85, 88, 88, 0.226);
-    z-index: 15;
-    top:0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(85, 88, 88, 0.35);
+    z-index: 30;
     display: none;
     justify-content: center;
     align-content: center;
-    grid-template-columns: 30rem;
-    /* padding-top: 15rem; */
+    justify-items: center;
+    align-items: center;
 }
 
 .choose-form {
@@ -1288,24 +1376,70 @@ button[type='submit'] {
 }
 
 .shakeElement{
-    /* z-index: auto; */
-    animation: shake;
-    animation-delay: 0.2s;
-    animation-duration: 1s;
-    animation-iteration-count: 2;
+/* z-index: auto; */
+animation: shake;
+animation-delay: 0.2s;
+animation-duration: 1s;
+animation-iteration-count: 2;
+}
+
+/* Desktop narrow layout: ensure override on wide screens */
+@media (min-width: 1024px) {
+  .playground {
+    width: 430px;      /* approximate smartphone width */
+    max-width: 430px;
+    background: #0f1f26; /* abgesetzter Container-Hintergrund */
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    padding: 8px;
+  }
+
+  /* Popups und Form-Container an das schmale Layout anpassen */
+  .comp_popupinner,
+  .endgame,
+  .choose-form,
+  .CPUorMulti form,
+  .choosedeck {
+    width: 95%;
+    max-width: 430px;
+    justify-self: center;
+  }
+
+  /* Vergleichsbalken innerhalb des schmalen Containers halten */
+  .compbar1,
+  .compbar2 {
+    width: 90%;
+    left: 5%;
+  }
+
+  /* Popups an die Breite der Playground koppeln statt an die Viewport-Breite */
+  .popupouter,
+  .popup-outer {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @media (max-width: 1126px) {
 
-    html {
-        font-size: 11px;
-    }
+html {
+font-size: 11px;
+}
 
-    #arrowleft, #arrowright {
-        margin: 0;
+#arrowleft, #arrowright {
+margin: 0;
         
-    }
+}
 
+.compbar1 {
+position: absolute;
+top: 60%;
+background-color: thistle;
+width: 90%;
+height: 15%;
+border-radius: 7px;
+left: 5%;
+}
     
     #my-card-form button {
         line-height: 9px;
