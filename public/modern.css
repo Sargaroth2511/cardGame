@@ -1,16 +1,7 @@
 body.modern {
-  --bg: #0b1220;
-  --surface: #0f172a;
-  --surface-2: #111827;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --primary: #3b82f6;
-  --primary-600: #2563eb;
-  --card-bg: #1e293b;
-  --card-border: #334155;
   font-family: 'Roboto', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: #121212;
+  color: #f0f0f0;
 }
 
 body.modern .playground {
@@ -83,10 +74,10 @@ body.modern .card button:hover {
 }
 
 body.modern .card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: #1e293b;
+  border: 1px solid #374151;
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  color: var(--text);
+  color: #f0f0f0;
 }
 
 body.modern .card .property,
@@ -96,10 +87,10 @@ body.modern .card .name {
 }
 
 body.modern .card button {
-  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-600) 100%);
+  background: #3b82f6;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 body.modern .rank,
