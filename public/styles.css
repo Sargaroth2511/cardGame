@@ -437,12 +437,10 @@ button:active {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(1.6);   /* smaller to fit neatly */
-    opacity: 0.8;
-    color: rgba(255,255,255,0.7);                 /* clear but unobtrusive */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: initial;
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0.15;
+    color: #0a0a0a;
+    z-index: 1;
     pointer-events: none;
 } 
 
@@ -450,23 +448,31 @@ button:active {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 3%;
+    bottom: 8%;
+    max-width: 90%;
     overflow: hidden;
     white-space: nowrap;
-    pointer-events: none; /* allow button hover when mouse is over text */
-    z-index: 3;           /* above icon */
+    text-overflow: ellipsis;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    color: #e2e8f0;
+    pointer-events: none;
+    z-index: 2;
+    text-align: center;
 }
-
-
 
 .value {
     position: absolute;
-    font-size: 1.35rem;         /* previous size to avoid regressions */
-    top: 18%;                   /* balanced positioning within button */
+    top: 22%;
     left: 50%;
     transform: translateX(-50%);
-    pointer-events: none; /* allow button hover when mouse is over numbers */
-    z-index: 3;           /* above icon */
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+    pointer-events: none;
+    z-index: 3;
+    text-align: center;
 }
 
 
