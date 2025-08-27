@@ -104,10 +104,6 @@ const rpmBtn = document.querySelector ('#rpmbtn1');
 const vMaxBtn2 = document.querySelector ('#vmaxbtn2');
 const disBtn2 = document.querySelector ('#disbtn2');
 const weiBtn2 = document.querySelector ('#weibtn2');
-// Fix typo in selector for player 2 cylinder button
-// Previously queried "#cylcbtn2" which does not exist in the DOM,
-// leaving cylBtn2 null and causing event listener registration to fail.
-// Corrected to "#cylbtn2" to match the ID defined in HTML.
 const cylBtn2 = document.querySelector ('#cylbtn2');
 const powBtn2 = document.querySelector ('#powbtn2');
 const rpmBtn2 = document.querySelector ('#rpmbtn2');
