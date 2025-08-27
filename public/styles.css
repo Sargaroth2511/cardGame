@@ -1,3 +1,23 @@
+:root {
+  --bg: #f4f6f8;
+  --surface: #f9fafb;
+  --surface-2: #eef2f7;
+  --text: #0f172a;
+  --muted: #475569;
+  --primary: #2563eb;
+  --primary-600: #1d4ed8;
+  --accent: #22c55e;
+  --danger: #ef4444;
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,0.1);
+  --elev-1: 0 1px 2px rgba(0,0,0,0.06);
+  --elev-2: 0 4px 12px rgba(0,0,0,0.12);
+  --elev-3: 0 8px 24px rgba(0,0,0,0.16);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+
 html {
     overflow: hidden;
 }
@@ -1477,4 +1497,183 @@ left: 5%;
     
 
 
+}
+/* Modern UI overrides appended to ensure no functional changes */
+.card {
+  box-shadow: var(--elev-2);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+}
+.card-image {
+  background-color: #0b0f14;
+  border-radius: 8px;
+}
+.name {
+  color: #f8fafc;
+  background-color: rgba(15, 23, 42, 0.85);
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.card button {
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+  color: #ffffff;
+  box-shadow: var(--elev-1);
+  transition: transform 0.08s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+@media (hover: hover) {
+  .card button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--elev-2);
+    filter: brightness(1.02);
+  }
+}
+.card button:disabled {
+  opacity: 0.75;
+  filter: grayscale(0.1);
+  cursor: not-allowed;
+}
+.cardIcon {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0.2;
+  color: #0a0a0a;
+  z-index: 1;
+}
+.property {
+  bottom: 6%;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  color: #e2e8f0;
+}
+.value {
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+/* Overlays and popups */
+.popup-outer {
+  inset: 0;
+  background-color: rgba(85, 88, 88, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+.comp_popupinner {
+  max-width: 520px;
+  min-height: 220px;
+  box-shadow: var(--elev-3);
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 10px;
+  grid-auto-rows: min-content;
+  gap: 12px;
+  padding: 16px;
+}
+.comp_popupinner h3 {
+  margin: 4px 0 6px;
+  color: #93c5fd;
+  font-size: 1.25rem;
+  text-align: center;
+}
+.compbar1, .compbar2 {
+  position: relative;
+  background: #1f2937;
+  width: 90%;
+  height: 16%;
+  border-radius: 8px;
+  margin: 6px auto;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.innerbar {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+#closebtn {
+  margin: 8px auto 0;
+  padding: 8px 12px;
+  background: #334155;
+  color: #f8fafc;
+  border-radius: 8px;
+  width: 120px;
+  text-align: center;
+}
+/* Global action buttons */
+#startgame, .backbtn, #style-toggle {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  height: 2.5rem;
+  padding: 0 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--elev-2);
+}
+#style-toggle { left: 0.75rem; right: auto; }
+/* Landing page start form and chooser */
+#startform {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 1rem;
+  width: min(600px, 92vw);
+  margin: 6rem auto 2rem;
+}
+#startform input[type="button"] {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+  box-shadow: var(--elev-1);
+}
+#startform input[type="button"]:hover {
+  filter: brightness(1.03);
+  box-shadow: var(--elev-2);
+}
+.choosedeck {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: var(--elev-2);
+  padding: 1rem;
+  width: min(720px, 94vw);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.choose-deck-img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--elev-1);
+}
+.choose-deck-name {
+  margin-top: 6px;
+  color: var(--text);
+  text-align: center;
+  font-weight: 600;
+}
+.choose-deck-backbtn {
+  background: #64748b;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  box-shadow: var(--elev-1);
+}
+@media (max-width: 420px) {
+  .card { max-width: 200px; max-height: 300px; }
+  .value { font-size: 1.05rem; }
+  .property { font-size: 0.8rem; }
+  .cardIcon { transform: translate(-50%, -50%) scale(1.2); }
 }
