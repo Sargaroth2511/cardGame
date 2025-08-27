@@ -529,3 +529,19 @@ const getUsers = async (nextStartGame, unsubListener) => {
       this.sound.pause();
     }
   }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    sortID,
+    searchID,
+    sorteDecks,
+    getStatus,
+    parse,
+    LuxuryCar,
+    AutosalonCar,
+    CardProperties,
+    updateCardsWithChildren,
+    createCardDiv,
+    Sound
+  };
+}
