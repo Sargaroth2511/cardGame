@@ -84,13 +84,33 @@ describe('Deck Management Functions', () => {
   });
 
   describe('getStatus', () => {
+    let playsOnline;
+    let originalLocalStorage;
+    
     beforeEach(() => {
       jest.clearAllMocks();
+      playsOnline = false;
+      originalLocalStorage = global.localStorage;
+    });
+
+    afterEach(() => {
+      global.localStorage = originalLocalStorage;
     });
 
     test('should set playsOnline to true when localStorage has Online', () => {
-      global.localStorage.getItem = jest.fn().mockReturnValue('Online');
-      let playsOnline = false;
+      const mockGetItem = jest.fn().mockReturnValue('Online');
+      const mockLocalStorage = {
+        getItem: mockGetItem,
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        clear: jest.fn()
+      };
+      
+      global.localStorage = mockLocalStorage;
+      Object.defineProperty(window, 'localStorage', {
+        value: mockLocalStorage,
+        writable: true
+      });
       
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
@@ -98,17 +118,28 @@ describe('Deck Management Functions', () => {
         } else if (localStorage.getItem('online?') === 'CPU') {
           playsOnline = false;
         }
-        return playsOnline;
       };
       
-      const result = getStatus();
-      expect(result).toBe(true);
-      expect(global.localStorage.getItem).toHaveBeenCalledWith('online?');
+      getStatus();
+      expect(playsOnline).toBe(true);
+      expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
     
     test('should set playsOnline to false when localStorage has CPU', () => {
-      global.localStorage.getItem = jest.fn().mockReturnValue('CPU');
-      let playsOnline = true;
+      playsOnline = true;
+      const mockGetItem = jest.fn().mockReturnValue('CPU');
+      const mockLocalStorage = {
+        getItem: mockGetItem,
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        clear: jest.fn()
+      };
+      
+      global.localStorage = mockLocalStorage;
+      Object.defineProperty(window, 'localStorage', {
+        value: mockLocalStorage,
+        writable: true
+      });
       
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
@@ -116,16 +147,28 @@ describe('Deck Management Functions', () => {
         } else if (localStorage.getItem('online?') === 'CPU') {
           playsOnline = false;
         }
-        return playsOnline;
       };
       
-      const result = getStatus();
-      expect(result).toBe(false);
+      getStatus();
+      expect(playsOnline).toBe(false);
+      expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
 
     test('should handle null localStorage value', () => {
-      global.localStorage.getItem = jest.fn().mockReturnValue(null);
-      let playsOnline = true;
+      playsOnline = true;
+      const mockGetItem = jest.fn().mockReturnValue(null);
+      const mockLocalStorage = {
+        getItem: mockGetItem,
+        setItem: jest.fn(),
+        removeItem: jest.fn(),
+        clear: jest.fn()
+      };
+      
+      global.localStorage = mockLocalStorage;
+      Object.defineProperty(window, 'localStorage', {
+        value: mockLocalStorage,
+        writable: true
+      });
       
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
@@ -133,11 +176,11 @@ describe('Deck Management Functions', () => {
         } else if (localStorage.getItem('online?') === 'CPU') {
           playsOnline = false;
         }
-        return playsOnline;
       };
       
-      const result = getStatus();
-      expect(result).toBe(true);
+      getStatus();
+      expect(playsOnline).toBe(true);
+      expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
   });
 
