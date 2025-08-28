@@ -122,8 +122,9 @@ h1 {
 .playerDeck{
     z-index: 15;
     position: absolute;
-    top: initial;
+    top: auto;                 /* ensure bottom positioning takes effect */
     transform:  scale(0.3);
+    pointer-events: auto;      /* allow clicking the deck container */
     
     
     
@@ -392,6 +393,7 @@ button {
     height: 93%;
     width: 98%;
     text-align: center;
+    overflow: hidden;              /* prevent content spill/overlap */
     
     
 }
@@ -417,36 +419,41 @@ button:active {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(1.6);   /* smaller to fit neatly */
-    opacity: 0.8;
-    color: rgba(255,255,255,0.7);                 /* clear but unobtrusive */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: initial;
+    transform: translate(-50%, -50%) scale(2.1);   /* larger, as watermark */
+    opacity: 0.12;                                  /* push to background */
+    color: rgba(0,0,0,0.35);
+    text-shadow: none;
+    z-index: 1;                                     /* behind texts */
+    cursor: default;
     pointer-events: none;
-} 
+}
 
 .property {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 3%;
+    bottom: 8%;
     overflow: hidden;
+    text-overflow: ellipsis;  /* cut long labels cleanly */
     white-space: nowrap;
     pointer-events: none; /* allow button hover when mouse is over text */
     z-index: 3;           /* above icon */
+    font-size: 0.72rem;   /* small label */
+    line-height: 1;
 }
 
 
 
 .value {
     position: absolute;
-    font-size: 1.35rem;         /* previous size to avoid regressions */
-    top: 18%;                   /* balanced positioning within button */
+    font-size: 1rem;            /* largest among texts but not overflowing */
+    font-weight: 700;
+    top: 24%;                   /* centered visually above label */
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none; /* allow button hover when mouse is over numbers */
     z-index: 3;           /* above icon */
+    line-height: 1;
 }
 
 
@@ -511,6 +518,8 @@ button:active {
     z-index: 20;
     display: grid;
     place-items: center;     /* center text */
+    grid-auto-rows: min-content;
+    row-gap: 0.5rem;
     font-size: 2.5rem;
     text-align: center;
     padding: 2rem;           /* comfortable padding */
@@ -518,7 +527,7 @@ button:active {
     width: 90%;
     max-width: 420px;
     margin: 0 auto;          /* center within overlay */
-    min-height: 10rem;       /* ensure blue box tall enough */
+    height: 14rem;           /* fix height to prevent vertical jumping */
 }
 
 #waitBackbtn {
@@ -591,12 +600,31 @@ button:active {
 
 /* keep animations on #waitshuffle intact; centering handled by container grid */
 
+/* Hide animated comparison cards by default to avoid double text layers */
+#animatedCard1, #animatedCard2 {
+    display: none;
+}
+
+/* Show animated cards only when animation classes are active */
+#animatedCard1.animationCard1,
+#animatedCard1.animationDrawCard1,
+#animatedCard2.animationCard2,
+#animatedCard2.animationDrawCard2 {
+    display: grid;
+    z-index: 20;
+}
+
 .comp_popupinner h3 {
     color: rgb(221, 179, 223);
     font-size: 1.5rem;
     text-align: center;
     margin: 10px;
 }
+
+/* Stabilize content areas to prevent width/height jumps during dot animation and starter text */
+#waiting { display: block; }
+#animatedpoints { display: inline-block; min-width: 3ch; min-height: 1em; font-size: 2rem; line-height: 1; }
+#whostarts { display: block; min-height: 2.25rem; font-size: 1.4rem; }
 
 .compbar1 {
     position: absolute;
@@ -914,7 +942,8 @@ button[disabled]:hover{
     height: 35rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
     background-color: rgba(85, 88, 88, 0.699);
-    transform: translateX(-7%);
+    transform: none;            /* center within popup grid */
+    margin: 0 auto;             /* fallback centering */
 }
 
 .choosedeck form {
@@ -1022,7 +1051,8 @@ label:hover {
     display: grid;
     justify-content: center;
     align-content: center;
-    row-gap: 15%;
+    row-gap: 1.25rem;          /* tighter vertical spacing */
+    padding: 5.5rem 2rem 4rem;  /* reserve space for title at top */
 }
 
 
@@ -1036,6 +1066,22 @@ button[type='submit'] {
     font-size: 2rem;
     border-radius: 20rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Tighter, non-overlapping buttons inside CPU/Online chooser */
+.CPUorMulti form button[type='submit'] {
+    width: 18rem;
+    height: 3.25rem;
+    font-size: 1.25rem;
+    border-radius: 12px;
+    transition: box-shadow .15s ease, filter .15s ease, background-color .15s ease;
+}
+
+/* Disable global hover scale within this popup to prevent title overlap */
+.CPUorMulti form button[type='submit']:hover {
+    transform: none; /* keep size stable */
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.8);
+    filter: brightness(1.06);
 }
 
 
@@ -1135,8 +1181,8 @@ button[type='submit'] {
     display: grid;
     justify-content: center;
     grid-template-rows: 15% 15% 15%;
-    row-gap: 3rem;
-    padding-top: 7rem;
+    row-gap: 1.25rem;           /* tighter vertical spacing */
+    padding: 5.5rem 2rem 4rem;  /* reserve space for title at top */
 }
 
 .choose-form div {
@@ -1144,7 +1190,7 @@ button[type='submit'] {
     top: 4%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
+    font-size: 1.5rem;           /* slightly smaller to reduce clashes */
     background-color: #ddd;
     padding: 3px;
     border: 2px solid #444;
@@ -1152,6 +1198,23 @@ button[type='submit'] {
     color: white;
     text-shadow: 0px 0px 5px black;
     text-align: center;
+    z-index: 2;                  /* keep above buttons visually */
+}
+
+/* Tighter, non-overlapping buttons inside difficulty chooser */
+.choose-form button[type='submit'] {
+    width: 18rem;
+    height: 3.25rem;
+    font-size: 1.25rem;
+    border-radius: 12px;
+    transition: box-shadow .15s ease, filter .15s ease, background-color .15s ease;
+}
+
+/* Disable global hover grow inside difficulty chooser to avoid title overlap */
+.choose-form button[type='submit']:hover {
+    transform: none; /* keep size stable */
+    box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.8);
+    filter: brightness(1.06);
 }
 
 .CPUorMulti div {
@@ -1159,7 +1222,7 @@ button[type='submit'] {
     top: 4%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 2rem;
+    font-size: 1.5rem;          /* slightly smaller title to reduce clashes */
     background-color: #ddd;
     padding: 3px;
     border: 2px solid #444;
@@ -1167,6 +1230,7 @@ button[type='submit'] {
     color: white;
     text-shadow: 0px 0px 5px black;
     text-align: center;
+    z-index: 2;                 /* keep above buttons visually */
 }
 
 
@@ -1477,4 +1541,82 @@ left: 5%;
     
 
 
+}
+
+/* --- UI polish overrides (board, controls, icons) --- */
+/* Improve contrast on board */
+.playground { color: #ffffff; }
+
+/* Place smaller control buttons to the left of the board */
+#style-toggle {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: auto;
+  bottom: auto;
+  z-index: 1000;
+  width: auto;
+  height: 2rem;
+  font-size: 0.9rem;
+  padding: 0 0.6rem;
+}
+
+#backbtn {
+  position: absolute;
+  top: 4.1rem; /* just below style-toggle */
+  left: 0.75rem;
+  width: auto;
+  height: 2rem;
+  font-size: 0.9rem;
+  padding: 0 0.6rem;
+  z-index: 1000;
+}
+
+/* Prevent coin/trophy icons from overlapping their numbers */
+#score,
+.rank {
+  min-height: 2rem;
+  min-width: 5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+}
+
+.coin,
+.trophy {
+  position: static;
+  transform: none;
+  font-size: 1.4em; /* slightly bigger */
+}
+
+/* Remove shadows behind score/rank numbers for cleaner look */
+#score,
+#score > div,
+.rank {
+  text-shadow: none;
+  box-shadow: none;
+}
+
+/* On wide screens, place control buttons to the left of the board, outside */
+@media (min-width: 1024px) {
+  #style-toggle {
+    position: fixed;
+    top: 0.75rem;
+    /* 430px board width -> 215px half. Extra 52px gap for button width/spacing */
+    left: calc(50% - 215px - 52px);
+    height: 1.8rem;
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
+
+  #backbtn {
+    position: fixed;
+    bottom: 0.75rem;
+    left: calc(50% - 215px - 52px);
+    height: 1.8rem;
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+  }
 }

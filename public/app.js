@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let startButton = document.querySelector('#startgame'),
-        player1Deck = document.querySelector('#Deck1'),
-        player2Deck = document.querySelector('#Deck2'),
+        // Use correct IDs from luxCarGame.html
+        player1Deck = document.querySelector('#player1Deck'),
+        player2Deck = document.querySelector('#player2Deck'),
         playerDecks = [player1Deck, player2Deck].filter(deck => deck !== null),
         active = false,
         zoomed = false,

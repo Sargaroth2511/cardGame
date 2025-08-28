@@ -152,10 +152,20 @@ const startGame = () => {
     };
 
     function setCardPropertyNames (){
+        const cleanLabel = (s) => {
+            return String(s || '')
+                .replace(/!$/, '')            // drop trailing exclamation
+                .replace(/\s*\/min$/i, '')   // shorten units in labels
+                .replace(/\u000f/g, 'ä')      // fix mojibake in Länge
+        };
+
         allCardButtons.forEach(e => {
             for (let i = 0; i < allDeckProperties[chosenDeck].length; i++){
-                const label = allDeckProperties[chosenDeck][i].fullName.replace(/!$/, '');
-                e[i].children[0].textContent = label;
+                const raw = allDeckProperties[chosenDeck][i].fullName;
+                const label = cleanLabel(raw);
+                if (e[i] && e[i].children && e[i].children[0]) {
+                    e[i].children[0].textContent = label;
+                }
             };
         });
     };

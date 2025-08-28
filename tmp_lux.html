@@ -1,0 +1,303 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/88df1645ec.js" crossorigin="anonymous"></script>
+    <title>Play Quartet</title>
+</head>
+<body>
+  
+    <div class="playground"> 
+
+    
+
+<!-- UI Elements -->
+        <div class="rank" ><i class="fas fa-trophy trophy"></i>0
+        </div>
+
+        <div class="rank" id = "rankp2" ><i class="fas fa-trophy trophy"></i>0
+        </div>
+
+        <div id="score"><i class="fas fa-coins coin"></i>
+            <div>0</div>
+        </div>
+
+        <a href="index.html"><button class="backbtn" id="backbtn" >ZurÃ¼ck</button>
+        </a>
+
+        <button id="style-toggle" class="backbtn">Modernes Design</button>
+        <button id="startgame" class="backbtn"> START</button>
+
+        <div class="player2Name" id = "player2Name">Spieler2</div>
+
+        <div class="cardNumber" id="cardNumberp1">16</div>
+        
+        <div class="cardNumber" id="cardNumberp2">16</div>
+
+
+        <div class="popupouter" id="loadouter">
+            <div id="loadingwheel">
+                <img src="Images/loadinggear.png" alt="Loading">
+            </div>
+        </div>
+
+        <div class="popup-outer" id = "waitshufflePopouter" >
+            <div class="comp_popupinner" id ="waitshuffle"><span id='waiting'> Karten werden gemischt</span> 
+                <div id="animatedpoints"></div>
+                <div id="whostarts"></div>
+            </div>
+            <button class="backbtn" id="waitBackbtn"> ZurÃ¼ck</button>
+        </div>
+        
+        <div id="popupouter" class="popupouter">
+            <div class = "comp_popupinner" id="comp_popupinner">
+                <h3>Check your Speed!</h3>
+                <div class= "compbar1" id="compbar1" >
+                    <div class = "innerbar" id="innerbar1"></div>
+                </div>
+                <div class="compbar2" id = "compbar2">
+                    <div class = "innerbar" id="innerbar2"></div>
+                </div>
+            <div id="closebtn">Close</div>
+        </div>
+        </div>    
+
+        <div class="popupouter" id="endgameouter">
+             <div class="endgame" >
+                 <div id="whoWins">Player 1 wins!</div>
+                 <button class="backbtn" id="endgamebacktn">ZurÃ¼ck</button>
+                 <button class="backbtn" id="newGame"  >Neues Spiel</button>
+             </div>
+        </div>
+
+        <div id="nameOuter2" class="popup-outer">
+            <div id="sayName" class ="choose">
+                <form action="submit" id="nameForm" class='choose-form'>
+                    <div>Wie willst du heiÃŸen?</div>
+                    <input type="text" id = 'nameField' >
+                    <button type="submit" class="GoOn">Weiter</button>
+                    <button id="nameBackbtn" class= "backbtn">ZurÃ¼ck</button>
+                 </form>
+            </div>
+           </div>  
+
+           <div class = "popup-outer" id="signInOuter2">
+            <div id="SignIn" class="CPUorMulti">
+              <form action="submit" id="signInForm">
+                    <input type="radio" name ="SignIn" id="Google" value="Google" checked>
+                   <label for="Google">Mit Google einloggen</label>
+                   <input type="radio" name ="SignIn" id="Anonym" value="Anonym">
+                   <label for="Anonym">Anonym einloggen</label>
+                   <button type="submit">Weiter</button>
+                    <button id="SignIn-backtn">ZurÃ¼ck</button>
+             </form>
+            </div>
+          </div>
+
+          <div class="popupouter" id="wait_for_other_player"></div>
+
+
+       
+        
+          <div class="card c1" id="animatedCard1">
+            <img src="Images/Corvette.jpg" alt="Corvette" class="card-image img1">
+            <div class = "name n1">Name</div>
+            <form action="click" id="form1a">
+                
+                <button id="vmaxbtn1a" disabled ><div class="property" >Vmax</div><div class="value vMax1">Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button id="disbtn1a" disabled ><div class="property">Hubraum</div><div class="value dis1">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button id="weibtn1a" disabled ><div class="property">Gewicht</div><div class="value wei1">Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button id="cylbtn1a" disabled ><div class="property">Zylinder</div><div class="value cyl1">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button id="powbtn1a" disabled ><div class="property">Leistung</div><div class="value pow1">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button id="rpmbtn1a" disabled ><div class="property">U/min</div><div class="value rpm1">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+          </div>
+
+
+          <div class="card c2" id="animatedCard2">
+            <img src="Images/Corvette.jpg" alt="Corvette" class="card-image img2">
+            <div class = "name n2">Name</div>
+            <form action="click" id="form1b">
+                
+                <button id="vmaxbtn1b" disabled><div class="property" >Vmax</div><div class="value vMax2">Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button id="disbtn1b" disabled ><div class="property">Hubraum</div><div class="value dis2">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button id="weibtn1b" disabled ><div class="property">Gewicht</div><div class="value wei2">Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button id="cylbtn1b" disabled ><div class="property">Zylinder</div><div class="value cyl2">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button id="powbtn1b" disabled ><div class="property">Leistung</div><div class="value pow2">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button id="rpmbtn1b" disabled ><div class="property">U/min</div><div class="value rpm2">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+          </div>
+          
+          
+      
+       <div class="card c1" id="player1Card" >
+           <img src="Images/Corvette.jpg" alt="Corvette" class="card-image img1">
+            <div class="cover" id="player1Cover">
+                <div class="cardback"></div>
+            </div>  
+            <div class = "name n1">Name</div>
+        
+     
+        <form action="click" id="form1">
+            
+            <button id="vmaxbtn1"><div class="property">  Vmax</div><div class="value vMax1"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+            <button id="disbtn1"><div class="property">Hubraum</div><div class="value dis1">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+            <button id="weibtn1"><div class="property">Gewicht</div><div class="value wei1"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+            <button id="cylbtn1"><div class="property">Zylinder</div><div class="value cyl1">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+            <button id="powbtn1"><div class="property">Leistung</div><div class="value pow1">Wert</div><i class="fas fa-random cardIcon"></i></button>
+            <button id="rpmbtn1"><div class="property">U/min</div><div class="value rpm1">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+        </form>
+        
+        </div>
+
+<!-- Player One Deck -->
+
+        <div class="card c1 playerDeck player1Deck"  id='player1Deck'>
+            <img src="Images/Corvette.jpg" alt="Corvette" class="card-image imgd1">
+            <div class= "transparentCover"></div>  
+            
+            <div class = "name nd1">Name</div>
+            <form action="click" id="form1Deck">
+                <button><div class="property">  Vmax</div><div class="value vMaxd1"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button><div class="property">Hubraum</div><div class="value disd1">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button><div class="property">Gewicht</div><div class="value weid1"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button><div class="property">Zylinder</div><div class="value cyld1">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button><div class="property">Leistung</div><div class="value powd1">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button><div class="property">U/min</div><div class="value rpmd1">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+        </div>
+
+
+        <div class="card c1 playerDeck player2Deck" id='player2Deck' ><img src="Images/Corvette.jpg" alt="Corvette" class="card-image imgd2">
+            <div class= "transparentCover"></div>  
+
+            <div class = "name nd2">Name</div>
+            <form action="click" id="form2Deck">
+                <button><div class="property">  Vmax</div><div class="value vMaxd2"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button><div class="property">Hubraum</div><div class="value disd2">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button><div class="property">Gewicht</div><div class="value weid2"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button><div class="property">Zylinder</div><div class="value cyld2">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button><div class="property">Leistung</div><div class="value powd2">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button><div class="property">U/min</div><div class="value rpmd2">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+        </div>
+
+
+
+<!-- Draw Cards  -->
+
+        <div class="card c1 playerDeck drawCardsStack" id="drawCardsStack1" ><img src="Images/MercedesSL300.jpg" alt="Mercedes" class="card-image imgDraw">
+           
+            <div class = "name ndraw">Name</div>
+            <form action="click" id="formdrawDeck1">
+                <button disabled><div class="property">  Vmax</div><div class="value vMaxdraw"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button disabled><div class="property">Hubraum</div><div class="value disdraw">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button disabled><div class="property">Gewicht</div><div class="value weidraw"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button disabled><div class="property">Zylinder</div><div class="value cyldraw">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button disabled><div class="property">Leistung</div><div class="value powdraw">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button disabled><div class="property">U/min</div><div class="value rpmdraw">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+        <i id = "arrleft" class="fas fa-chevron-left arrow"></i>
+
+        </div>
+
+        <div class="card c1 playerDeck drawCardsStack" id="drawCardsStack2" ><img src="Images/MercedesSL300.jpg" alt="Mercedes" class="card-image imgDraw2">
+           
+            <div class = "name ndraw2">Name</div>
+            <form action="click" id="formdrawDeck2">
+                <button disabled><div class="property">  Vmax</div><div class="value vMaxdraw2"> Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button disabled><div class="property">Hubraum</div><div class="value disdraw2">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button disabled><div class="property">Gewicht</div><div class="value weidraw2"> Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button disabled><div class="property">Zylinder</div><div class="value cyldraw2">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button disabled><div class="property">Leistung</div><div class="value powdraw2">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button disabled><div class="property">U/min</div><div class="value rpmdraw2">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+            <i id = "arrright" class="fas fa-chevron-right arrow"></i>
+        </div>
+
+        
+
+
+
+        <div class="card c2" id= "player2Card" ><img src="Images/MercedesSL300.jpg" alt="MercedesSL300" class="card-image img2">
+            <div class="cover" id="player2Cover">
+                <div class="cardback"></div>
+            </div>    
+            <div class = "name n2">Name</div>
+            
+        
+            
+            <form action="click" id="form2">
+                
+                <button id="vmaxbtn2"><div class="property" >Vmax</div><div class="value vMax2">Wert</div><i class="fas fa-tachometer-alt cardIcon"></i></button>
+                <button id="disbtn2"><div class="property">Hubraum</div><div class="value dis2">Wert</div><i class="fas fa-gavel cardIcon"></i></button>
+                <button id="weibtn2"><div class="property">Gewicht</div><div class="value wei2">Wert</div><i class="fas fa-weight-hanging cardIcon"></i></button>
+                <button id="cylbtn2"><div class="property">Zylinder</div><div class="value cyl2">Wert</div><i class="fas fa-concierge-bell cardIcon"></i></button>
+                <button id="powbtn2"><div class="property">Leistung</div><div class="value pow2">Wert</div><i class="fas fa-random cardIcon"></i></button>
+                <button id="rpmbtn2"><div class="property">U/min</div><div class="value rpm2">Wert</div><i class="far fa-life-ring cardIcon"></i></button>
+            </form>
+
+
+         </div>
+    
+     
+
+        
+    </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+<!-- <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDBBByoJ792ClLYWAJGycLaPzZy33v3Dz4",
+    authDomain: "supertrump-25fe1.firebaseapp.com",
+    databaseURL: "https://supertrump-25fe1-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "supertrump-25fe1",
+    storageBucket: "supertrump-25fe1.appspot.com",
+    messagingSenderId: "189782937751",
+    appId: "1:189782937751:web:eecab656a83c8658fad9d2",
+    measurementId: "G-Y5PZJE9YTF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  firebase.auth();
+  const db = firebase.firestore();
+
+  
+  
+</script>
+    
+    <script src="decks.js"></script>
+    <script src="declarations.js"></script>
+    <script src="turn.js"></script>
+    <script src="comparison.js"></script>
+    <script src="ai.js"></script>
+    <script src="firebaseListeners.js"></script>
+    <script src="startGame.js"></script>
+    <script src="app.js"></script>
+    <script>
+      const styleToggleBtn = document.getElementById('style-toggle');
+      styleToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('modern');
+        styleToggleBtn.textContent = document.body.classList.contains('modern') ? 'Klassisches Design' : 'Modernes Design';
+      });
+    </script>
+</body>
+</html>
