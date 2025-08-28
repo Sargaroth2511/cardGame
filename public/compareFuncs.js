@@ -70,7 +70,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
                         resolve();
                     } else {
                         isComparisonInProgress = false;
-                        if (playsOnline){
+                                                if (isPlayingOnline){
                             db.collection(ourGameName).doc(uniqueOnlineName).update({wantsToCheck: ''});
                         }; 
                     };
@@ -135,12 +135,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
             };  
 
             function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
-                if (drawCards.length > 0){
+                if (drawDeck.length > 0){
                     arrright.style.display = 'none';
                     arrleft.style.display = 'none';
                     drawCardsStack1.classList.add(drawCardAnimation1);
                     drawCardsStack2.classList.add(drawCardAnimation2);
-                    drawCards.length = 0;
+                    drawDeck.length = 0;
                 };
             };        
         };
@@ -148,7 +148,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 };
 
 const playAI = () => {
-    if (!playsOnline){
+    if (isPlayingOnline){
         let difficulty = localStorage.getItem('difficulty');
         if (difficulty === 'easy'){
             aiPickRandom();
@@ -226,7 +226,7 @@ const checkForWinner = async () =>{
         factor,
         expr = localStorage.getItem('difficulty');
 
-    if (!playsOnline){    
+    if (isPlayingOnline){
         switch (expr){
             case 'medium':
                 factor = 2;
@@ -245,7 +245,7 @@ const checkForWinner = async () =>{
 
     if (play1Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, factor) : calcPoints(play2Deck, factor);
-        playsOnline ? winner = secondPlayer : winner = 'Computer';
+        isPlayingOnline ? winner = secondPlayer : winner = 'Computer';
         endgameouter.style.display = 'grid'
         whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
@@ -282,7 +282,7 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
 
 const finishTurnAndResetUI = async () => {
     let promise = new Promise((resolve, reject) => {
-        if(playsOnline){
+    if (isPlayingOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({ nextTurn: 'ok'})
             .then(() => {
                 resolve();
@@ -295,7 +295,7 @@ const finishTurnAndResetUI = async () => {
     
 
     (function resetUI(){
-        if (!playsOnline){
+    if (isPlayingOnline){
             preventDocBeeingClicked.style.display = 'none';
         };   
         compPopupOuter.style.display = 'none';
@@ -358,7 +358,7 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         addDrawCardsToPlayerDeck(play2Deck))
     } else if (play1Deck[0][prop] === play2Deck[0][prop]) {
         switchWhosNext();
-        addPlayerCardsToDrawCards();
+    addPlayerCardsToDrawDeck();
     };
    
     function playerWins(deck1, deck2, turn, drawfunction){
@@ -374,8 +374,8 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         drawfunction;
     };
     function addDrawCardsToPlayerDeck(playerDeck){
-        if (drawCards.length > 0) {
-            Array.prototype.push.apply(playerDeck, drawCards);
+        if (drawDeck.length > 0) {
+            Array.prototype.push.apply(playerDeck, drawDeck);
         };
     };    
     function switchWhosNext(){
@@ -385,8 +385,8 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
             setCardButtonsEnabledForTurn('', false, true);
         };
     };
-    function addPlayerCardsToDrawCards(){
-        drawCards.unshift(play1Deck[0], play2Deck[0]);
+    function addPlayerCardsToDrawDeck(){
+        drawDeck.unshift(play1Deck[0], play2Deck[0]);
         play1Deck.splice(0,1);
         play2Deck.splice(0,1);
     };        
@@ -407,7 +407,7 @@ const startGame = () => {
     async function determineStarterAndSync(nextPrepareUI){
         let num = Math.random();
 
-        if(playsOnline){
+        if(isPlayingOnline){
             let docRef = await db.collection(ourGameName).doc(uniqueOnlineName);
             await docRef.update({isRdy: ''});
         
@@ -423,7 +423,7 @@ const startGame = () => {
     const prepareUIForGameUI = (HTMLElementCardNumber, num, startGamevsCPU) => {
         setCardPropertyNames();
         clearInterval(dotinterval);
-        playsOnline ? player2Name.textContent = otherDatabaseDoc.name:
+        isPlayingOnline ? player2Name.textContent = otherDatabaseDoc.name:
                       player2Name.textContent = 'Computer';
 
         if (num <= 0.5){

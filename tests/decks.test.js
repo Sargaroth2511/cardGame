@@ -84,12 +84,12 @@ describe('Deck Management Functions', () => {
   });
 
   describe('getStatus', () => {
-    let playsOnline;
+  let isPlayingOnline;
     let originalLocalStorage;
     
     beforeEach(() => {
       jest.clearAllMocks();
-      playsOnline = false;
+      isPlayingOnline = false;
       originalLocalStorage = global.localStorage;
     });
 
@@ -97,7 +97,7 @@ describe('Deck Management Functions', () => {
       global.localStorage = originalLocalStorage;
     });
 
-    test('should set playsOnline to true when localStorage has Online', () => {
+  test('should set isPlayingOnline to true when localStorage has Online', () => {
       const mockGetItem = jest.fn().mockReturnValue('Online');
       const mockLocalStorage = {
         getItem: mockGetItem,
@@ -114,19 +114,19 @@ describe('Deck Management Functions', () => {
       
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
-          playsOnline = true;
+        isPlayingOnline = true;
         } else if (localStorage.getItem('online?') === 'CPU') {
-          playsOnline = false;
+        isPlayingOnline = false;
         }
       };
       
       getStatus();
-      expect(playsOnline).toBe(true);
+      expect(isPlayingOnline).toBe(true);
       expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
     
-    test('should set playsOnline to false when localStorage has CPU', () => {
-      playsOnline = true;
+    test('should set isPlayingOnline to false when localStorage has CPU', () => {
+      isPlayingOnline = true;
       const mockGetItem = jest.fn().mockReturnValue('CPU');
       const mockLocalStorage = {
         getItem: mockGetItem,
@@ -143,19 +143,19 @@ describe('Deck Management Functions', () => {
       
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
-          playsOnline = true;
+        isPlayingOnline = true;
         } else if (localStorage.getItem('online?') === 'CPU') {
-          playsOnline = false;
+        isPlayingOnline = false;
         }
       };
       
       getStatus();
-      expect(playsOnline).toBe(false);
+      expect(isPlayingOnline).toBe(false);
       expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
 
     test('should handle null localStorage value', () => {
-      playsOnline = true;
+      isPlayingOnline = true;
       const mockGetItem = jest.fn().mockReturnValue(null);
       const mockLocalStorage = {
         getItem: mockGetItem,
@@ -163,23 +163,22 @@ describe('Deck Management Functions', () => {
         removeItem: jest.fn(),
         clear: jest.fn()
       };
-      
       global.localStorage = mockLocalStorage;
       Object.defineProperty(window, 'localStorage', {
         value: mockLocalStorage,
         writable: true
       });
-      
       const getStatus = () => {
         if (localStorage.getItem('online?') === 'Online') {
-          playsOnline = true;
+          isPlayingOnline = true;
         } else if (localStorage.getItem('online?') === 'CPU') {
-          playsOnline = false;
+          isPlayingOnline = false;
+        } else {
+          isPlayingOnline = false;
         }
       };
-      
       getStatus();
-      expect(playsOnline).toBe(true);
+      expect(isPlayingOnline).toBe(false);
       expect(mockGetItem).toHaveBeenCalledWith('online?');
     });
   });
@@ -211,9 +210,9 @@ describe('Deck Management Functions', () => {
     });
   });
 
-  describe('AutosalonCar class', () => {
-    test('should create autosalon car with all properties', () => {
-      class AutosalonCar {
+  describe('ShowroomCar class', () => {
+    test('should create showroom car with all properties', () => {
+      class ShowroomCar {
         constructor(id, name, vMax, displacement, weight, cylinders, power, rpm) {
           this.id = id;
           this.name = name;
@@ -226,7 +225,7 @@ describe('Deck Management Functions', () => {
         }
       }
 
-      const car = new AutosalonCar('ACa1', 'Toyota', 180, 2000, 1200, 4, 150, 5500);
+      const car = new ShowroomCar('ACa1', 'Toyota', 180, 2000, 1200, 4, 150, 5500);
       expect(car.id).toBe('ACa1');
       expect(car.name).toBe('Toyota');
       expect(car.vMax).toBe(180);

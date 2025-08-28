@@ -72,11 +72,11 @@ const loginAnonymously = () => {
 selDecksBackbtn.addEventListener ('click', e => {
     e.preventDefault();
     getStatus();
-    console.log(`user wants to play playsOnline ${playsOnline}`);
-    if (playsOnline){
+    console.log(`user wants to play online: ${isPlayingOnline}`);
+    if (isPlayingOnline){
         chooseDeckPopout.style.display = 'none';
         chooseMode.style.display ='grid';
-    } else if (!playsOnline) {
+    } else if (!isPlayingOnline) {
         chooseDeckPopout.style.display = 'none';
         difPopout.style.display = 'grid';
     }    
@@ -360,17 +360,17 @@ deckForm.addEventListener ('submit', e => {
         
     } else {   
         getStatus(); 
-        if(playsOnline){
+        if(isPlayingOnline){
             localStorage.setItem('chosenDeck', deckForm.Deck.value);
             createNewGame();
-        } else if (!playsOnline) {
+        } else if (!isPlayingOnline) {
             if(!onlineName){
                  nameOuter.style.display = 'grid';
 
             } else {
                 localStorage.setItem('chosenDeck', deckForm.Deck.value);
                 window.location.replace(`luxCarGame.html`)
-                console.log(playsOnline)
+                console.log(isPlayingOnline)
             }    
 
         }    

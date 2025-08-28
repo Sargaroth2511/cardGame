@@ -70,7 +70,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
                         resolve();
                     } else {
                         isComparisonInProgress = false;
-                        if (playsOnline){
+                            if (isPlayingOnline){
                             db.collection(ourGameName).doc(uniqueOnlineName).update({wantsToCheck: ''});
                         }; 
                     };
@@ -135,12 +135,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
             };  
 
             function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
-                if (drawCards.length > 0){
+                if (drawDeck.length > 0){
                     arrright.style.display = 'none';
                     arrleft.style.display = 'none';
                     drawCardsStack1.classList.add(drawCardAnimation1);
                     drawCardsStack2.classList.add(drawCardAnimation2);
-                    drawCards.length = 0;
+                    drawDeck.length = 0;
                 };
             };        
         };

@@ -6,7 +6,7 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
 
 const finishTurnAndResetUI = async () => {
     let promise = new Promise((resolve, reject) => {
-        if(playsOnline){
+    if(isPlayingOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({ nextTurn: 'ok'})
             .then(() => {
                 resolve();
@@ -19,7 +19,7 @@ const finishTurnAndResetUI = async () => {
     
 
     (function resetUI(){
-        if (!playsOnline){
+    if (!isPlayingOnline){
             preventDocBeeingClicked.style.display = 'none';
         };   
         compPopupOuter.style.display = 'none';
@@ -90,8 +90,8 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         drawfunction;
     };
     function addDrawCardsToPlayerDeck(playerDeck){
-        if (drawCards.length > 0) {
-            Array.prototype.push.apply(playerDeck, drawCards);
+        if (drawDeck.length > 0) {
+            Array.prototype.push.apply(playerDeck, drawDeck);
         };
     };    
     function switchWhosNext(){
@@ -102,7 +102,7 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         };
     };
     function addPlayerCardsToDrawCards(){
-        drawCards.unshift(play1Deck[0], play2Deck[0]);
+        drawDeck.unshift(play1Deck[0], play2Deck[0]);
         play1Deck.splice(0,1);
         play2Deck.splice(0,1);
     };        
@@ -115,7 +115,7 @@ const checkForWinner = async () =>{
         factor,
         expr = localStorage.getItem('difficulty');
 
-    if (!playsOnline){    
+    if (!isPlayingOnline){    
         switch (expr){
             case 'medium':
                 factor = 2;
@@ -134,7 +134,7 @@ const checkForWinner = async () =>{
 
     if (play1Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, factor) : calcPoints(play2Deck, factor);
-        playsOnline ? winner = secondPlayer : winner = 'Computer';
+    isPlayingOnline ? winner = secondPlayer : winner = 'Computer';
         endgameouter.style.display = 'grid'
         whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];

@@ -1,19 +1,83 @@
 // Game start orchestration and deck synchronization
 
+function shuffleDeckAndDealCards(sendToFirebase) {
+    chosenDeck = localStorage.getItem('chosenDeck');
+    deckShuffled = allDecks[chosenDeck];
+
+    for (let i = deckShuffled.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = deckShuffled[i];
+        deckShuffled[i] = deckShuffled[j];
+        deckShuffled[j] = temp;
+    }
+    play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
+    play2Deck = deckShuffled.slice(deckShuffled.length / 2);
+
+    if (typeof window.updateUIElements === 'function') {
+        window.updateUIElements();
+    }
+
+    if (isPlayingOnline && typeof sendToFirebase === 'function') {
+        sendToFirebase(attachFirebaseGameListeners);
+    }
+}
+
+function prepareUIForGameUI(HTMLElementCardNumber, num, startGamevsCPU) {
+    if (typeof setCardPropertyNames === 'function') {
+        setCardPropertyNames();
+    }
+    if (typeof dotinterval !== 'undefined') {
+        clearInterval(dotinterval);
+    }
+    if (player2Name) {
+        player2Name.textContent = isPlayingOnline && otherDatabaseDoc ? otherDatabaseDoc.name : 'Computer';
+    }
+    if (whostarts) {
+        if (num <= 0.5) {
+            whostarts.textContent = `${onlineName || 'Player 1'} fängt an!`;
+            setCardButtonsEnabledForTurn('', false, true);
+        } else {
+            setCardButtonsEnabledForTurn('', true, false);
+            whostarts.textContent = isPlayingOnline ? `${otherPlayer} fängt an!` : 'Der Computer fängt an!';
+        }
+    }
+    setTimeout(() => {
+        if (waitshufflePopouter) waitshufflePopouter.style.display = 'none';
+        if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
+        if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
+        if (player1Cover) player1Cover.style.display = 'none';
+        if (whostarts) whostarts.textContent = '';
+        if (startgame) startgame.style.display = 'none';
+        if (player1Deck) player1Deck.style.display = 'grid';
+        if (player2Deck) player2Deck.style.display = 'none';
+        if (HTMLElementCardNumber) HTMLElementCardNumber.style.display = 'block';
+
+        if (!isPlayingOnline) {
+            if (typeof sorteDecks === 'function') {
+                sorteDecks();
+            }
+            if (typeof startGamevsCPU === 'function') {
+                startGamevsCPU();
+            }
+        }
+    }, 3000);
+}
+
 const startGame = () => {
+    if (typeof toggleWaitingPopup === 'function') {
+        toggleWaitingPopup('Karten werden gemischt', 'grid', startDotinterval);
+    }
 
-    toggleWaitingPopup('Karten werden gemischt', 'grid', startDotinterval);
+    setTimeout(() => {
+        isPlayerOne ? determineStarterAndSync(prepareUIForGameUI) : updateUIForOtherStarter();
+    }, 4000);
 
-    setTimeout (() => {
-        isPlayerOne ? determineStarterAndSync(prepareUIForGameUI): updateUIForOtherStarter();
-    },4000); 
-   
     shuffleDeckAndDealCards(syncDecksBetweenPlayers);
 
     async function determineStarterAndSync(nextPrepareUI){
         let num = Math.random();
 
-        if(playsOnline){
+    if(isPlayingOnline){
             let docRef = await db.collection(ourGameName).doc(uniqueOnlineName);
             await docRef.update({isRdy: ''});
         
@@ -29,21 +93,21 @@ const startGame = () => {
     const prepareUIForGameUI = (HTMLElementCardNumber, num, startGamevsCPU) => {
         setCardPropertyNames();
         clearInterval(dotinterval);
-        playsOnline ? player2Name.textContent = otherDatabaseDoc.name:
-                      player2Name.textContent = 'Computer';
+    isPlayingOnline ? player2Name.textContent = otherDatabaseDoc.name:
+              player2Name.textContent = 'Computer';
 
         if (num <= 0.5){
             whostarts.textContent = `${onlineName} fängt an!`
             setCardButtonsEnabledForTurn('', false, true);
         } else {
             setCardButtonsEnabledForTurn('', true, false);
-            playsOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
+            isPlayingOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
                           whostarts.textContent = `Der Computer fängt an!`;
         };  
 
         setTimeout(() => {
             waitshufflePopouter.style.display = 'none';
-            if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+            if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
             player1Cover.style.display = 'none';
             whostarts.textContent = '';
@@ -52,7 +116,7 @@ const startGame = () => {
             player2Deck.style.display = 'none';
             HTMLElementCardNumber.style.display = 'block';
 
-            if (!playsOnline){
+            if (!isPlayingOnline){
                 sorteDecks();
                 startGamevsCPU();
             };
@@ -76,7 +140,7 @@ const startGame = () => {
 
         setTimeout (() => {
             waitshufflePopouter.style.display = 'none';
-            if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+            if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
             player2Cover.style.display = 'none'
             whostarts.textContent = '';
@@ -112,7 +176,7 @@ const startGame = () => {
 
         updateUIElements();
 
-        if (playsOnline){
+        if (isPlayingOnline){
             sendToFirebase(attachFirebaseGameListeners);
         };
       };

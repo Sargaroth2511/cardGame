@@ -1,13 +1,13 @@
 // Card 1 Selectors
 
-const imgCardPlayer1 = [...document.querySelectorAll ('.img1')];
-const nameCardPlayer1 = [...document.querySelectorAll ('.n1')];
-const prop1CardPlayer1 = [...document.querySelectorAll ('.vMax1')];
-const prop2CardPlayer1 = [...document.querySelectorAll ('.dis1')];
-const prop3CardPlayer1 = [...document.querySelectorAll ('.wei1')];
-const prop4CardPlayer1 = [...document.querySelectorAll ('.cyl1')];
-const prop5CardPlayer1 = [...document.querySelectorAll ('.pow1')];
-const prop6CardPlayer1 = [...document.querySelectorAll ('.rpm1')];
+const imgCardPlayer1 = [...document.querySelectorAll('.img1')];
+const nameCardPlayer1 = [...document.querySelectorAll('.n1')];
+const prop1CardPlayer1 = [...document.querySelectorAll('.vMax1')];
+const prop2CardPlayer1 = [...document.querySelectorAll('.dis1')];
+const prop3CardPlayer1 = [...document.querySelectorAll('.wei1')];
+const prop4CardPlayer1 = [...document.querySelectorAll('.cyl1')];
+const prop5CardPlayer1 = [...document.querySelectorAll('.pow1')];
+const prop6CardPlayer1 = [...document.querySelectorAll('.rpm1')];
 
 const deck1Cards = document.querySelector ('#play1Cards');
 
@@ -50,8 +50,8 @@ const prop4DrawCard2 = document.querySelector ('.cyldraw2');
 const prop5DrawCard2 = document.querySelector ('.powdraw2');
 const prop6DrawCard2 = document.querySelector ('.rpmdraw2');
 
-const arrleft = document.querySelector('#arrleft')
-const arrright = document.querySelector('#arrright')
+const arrleft = document.querySelector('#arrleft');
+const arrright = document.querySelector('#arrright');
 
 
 // Deck Selectors
@@ -109,16 +109,16 @@ const powBtn2 = document.querySelector ('#powbtn2');
 const rpmBtn2 = document.querySelector ('#rpmbtn2');
 
 
-const drawfield = document.querySelector ('#drawcardcnt');
-const scoreHTML = document.querySelector ('#score')
-const form1 = document.querySelector("#form1");
-const form2 = document.querySelector("#form2");
+const drawfield = document.querySelector('#drawcardcnt');
+const scoreHTML = document.querySelector('#score');
+const form1 = document.querySelector('#form1');
+const form2 = document.querySelector('#form2');
 
 
 const innerBar1 = document.querySelector('#innerbar1');
 const innerBar2 = document.querySelector('#innerbar2');
 const innerBars = document.querySelectorAll('.innerbar');  
-const compPopupOuter = document.querySelector('#popupouter')
+const compPopupOuter = document.querySelector('#popupouter');
 const compPopup = document.querySelector('#comp_popupinner');
 const closeBtn = document.querySelector('#closebtn');
 const popupHeader = document.querySelector('h3');
@@ -177,106 +177,130 @@ const updateUICardElements = (deckSubstring, deckArray, deckposition) => {
         cardSelectors = [];
     chosenDeck = localStorage.getItem('chosenDeck');
 
-    pushElementsInCardSelectors(deckSubstring);
-
-    if (Array.isArray(cardSelectors[0])){
-        cardSelectors[0].forEach(e => e.src = 'Images/' + chosenDeck +'/'+ cardValues[0] +'.jpg');
-        for(let i = 1; i < cardSelectors.length; i ++){
-            cardSelectors[i].forEach(e => e.textContent = cardValues[i]);
-        };
-    } else {
-        cardSelectors[0].src = 'Images/' + chosenDeck +'/'+ cardValues[0] + '.jpg';
-        for(let i = 1; i < cardSelectors.length; i ++){
-            cardSelectors[i].textContent = cardValues[i];
-        };
-    };
-
-    function pushElementsInCardSelectors (deckSubstring){
+    function pushElementsInCardSelectors(deckSubstring) {
         let selectorSubstrings = ['img', 'name', 'prop1', 'prop2', 'prop3', 'prop4', 
                                  'prop5', 'prop6'];
-        for (let i = 0; i < selectorSubstrings.length; i++){
+        for (let i = 0; i < selectorSubstrings.length; i++) {
             let cardSelector = parse(selectorSubstrings[i] + deckSubstring);
             cardSelectors.push(cardSelector);
-        };
+        }
+    }
 
-    };
+    pushElementsInCardSelectors(deckSubstring);
+
+    if (Array.isArray(cardSelectors[0])) {
+        cardSelectors[0].forEach(e => e.src = 'Images/' + chosenDeck +'/'+ cardValues[0] +'.jpg');
+        for(let i = 1; i < cardSelectors.length; i++) {
+            cardSelectors[i].forEach(e => e.textContent = cardValues[i]);
+        }
+    } else {
+        cardSelectors[0].src = 'Images/' + chosenDeck +'/'+ cardValues[0] + '.jpg';
+        for(let i = 1; i < cardSelectors.length; i++) {
+            cardSelectors[i].textContent = cardValues[i];
+        }
+    }
 };    
 
 
 
 
-(function (){
+document.addEventListener('DOMContentLoaded', function() {
     let counter = 0;
-
-    arrright.addEventListener('click', () => {
-        if (counter < drawCards.length-2){
-            counter += 2;
-            updateUICardElements('DrawCard1', drawCards, counter);
-            updateUICardElements('DrawCard2', drawCards, counter+1);
-        }; 
-        if (counter === drawCards.length-2){
-            arrright.style.display = 'none';
-        };
-        if (counter >= 2){
-            arrleft.style.display = 'block';
-        };        
-    });   
+    const arrright = document.querySelector('#arrowright');
+    const arrleft = document.querySelector('#arrleft');
+    const drawCards = window.drawDeck || [];
     
-    arrleft.addEventListener('click', () => {
-        counter -= 2;
-        updateUICardElements('DrawCard1', drawCards, counter);
-        updateUICardElements('DrawCard2', drawCards, counter+1);
+    if (arrright) {
+        arrright.addEventListener('click', () => {
+            if (counter < drawCards.length - 2) {
+                counter += 2;
+                updateUICardElements('DrawCard1', drawCards, counter);
+                updateUICardElements('DrawCard2', drawCards, counter + 1);
+            }
+            
+            if (counter === drawCards.length - 2) {
+                arrright.style.display = 'none';
+            }
+            
+            if (counter >= 2 && arrleft) {
+                arrleft.style.display = 'block';
+            }
+        });
+    }
+
+    if (arrleft) {
+        arrleft.addEventListener('click', () => {
+            counter -= 2;
+            updateUICardElements('DrawCard1', drawCards, counter);
+            updateUICardElements('DrawCard2', drawCards, counter + 1);
+            
+            if (counter < drawCards.length - 2 && arrright) {
+                arrright.style.display = 'block';
+            }
+            
+            if (counter >= 2) {
+                arrleft.style.display = 'block';
+            } else if (counter === 0) {
+                arrleft.style.display = 'none';
+            }
+        });
+    }
+});
+
+function updateUIElements() {
+    function updateDecks(deckArray, deckSubstring, HTMLElement, cardCount) {
+        if (deckArray.length > 1) {
+            if (cardCount) {
+                cardCount.style.display = 'grid';
+                cardCount.textContent = deckArray.length;
+            }
+            if (HTMLElement) {
+                HTMLElement.style.display = 'grid';
+            }
+            updateUICardElements(deckSubstring, deckArray, 1);
+        } else {
+            if (cardCount) {
+                cardCount.style.display = 'none';
+            }
+            if (HTMLElement) {
+                HTMLElement.style.display = 'none';
+            }
+        }
+    }
+
+    function updateDrawCards() { 
+        const deck = window.drawDeck || [];
+        const arrright = document.querySelector('#arrowright');
+        const arrleft = document.querySelector('#arrleft');
+        const drawCardsStack1 = document.querySelector('#drawCardsStack1');
+        const drawCardsStack2 = document.querySelector('#drawCardsStack2');
         
-        if (counter < drawCards.length-2){
-            arrright.style.display = 'block';
-        };
-        if (counter >= 2){
-            arrleft.style.display = 'block';
-        } else if (counter === 0){
-            arrleft.style.display = 'none';
-        };      
-    });   
-})();
-
-
-const updateUIElements = () => {
+        if (deck.length > 0) {
+            updateUICardElements('DrawCard1', deck, 0);
+            updateUICardElements('DrawCard2', deck, 1);
+        }
+        
+        if (deck.length > 0 && deck.length <= 2) {
+            if (arrright) arrright.style.display = 'none';
+            if (arrleft) arrleft.style.display = 'none';
+            if (drawCardsStack1) drawCardsStack1.style.display = 'grid';
+            if (drawCardsStack2) drawCardsStack2.style.display = 'grid';
+        } else if (deck.length > 2) {
+            if (arrright) arrright.style.display = 'block';
+        } else if (deck.length === 0) {
+            if (drawCardsStack1) drawCardsStack1.style.display = 'none';
+            if (drawCardsStack2) drawCardsStack2.style.display = 'none';
+        }
+    }
  
     updateUICardElements('CardPlayer1', play1Deck, 0);
     updateUICardElements('CardPlayer2', play2Deck, 0);    
 
-    isPlayerOne ? updateDecks (play1Deck, 'Deck1', player1Deck, cardNumberp1):
-                  updateDecks (play2Deck, 'Deck2', player2Deck, cardNumberp2);
+    if (isPlayerOne) {
+        updateDecks(play1Deck, 'Deck1', player1Deck, cardNumberp1);
+    } else {
+        updateDecks(play2Deck, 'Deck2', player2Deck, cardNumberp2);
+    }
 
-    updateDrawCards();              
-
-    function updateDecks (deckArray, deckSubstring, HTMLElement, cardCount){
-        if (deckArray.length > 1){
-            cardCount.style.display = 'grid';
-            cardCount.textContent = deckArray.length;
-            HTMLElement.style.display = 'grid';
-            updateUICardElements(deckSubstring, deckArray, 1)
-        } else {
-            cardCount.style.display = 'none';
-            HTMLElement.style.display = 'none';
-        };
-    };    
-
-    function updateDrawCards (){ 
-        if (drawCards.length > 0){
-            updateUICardElements('DrawCard1', drawCards, 0);
-            updateUICardElements('DrawCard2', drawCards, 1);
-        };
-        if (drawCards.length > 0 && drawCards.length <= 2){
-            arrright.style.display = 'none';
-            arrleft.style.display = 'none';
-            drawCardsStack1.style.display = 'grid';
-            drawCardsStack2.style.display = 'grid';
-        } else if (drawCards.length > 2){
-            arrright.style.display = 'block';
-        } else if (drawCards.length === 0) {
-            drawCardsStack1.style.display = 'none';
-            drawCardsStack2.style.display = 'none';
-        };   
-    }; 
-};
-
+    updateDrawCards();
+}

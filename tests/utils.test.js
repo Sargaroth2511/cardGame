@@ -161,14 +161,15 @@ describe('Utility Functions', () => {
         ]
       };
       
-      const allCards = [
-        {
+  const allCards = [
+    {
           id: 'LCa1',
           name: 'Test Car',
           vMax: 300,
           displacement: 4000
         }
       ];
+      const allDeckCards = allCards;
       
       const deckShortCuts = { 'LC': 'luxusCars' };
       const allDeckProperties = {
@@ -179,7 +180,7 @@ describe('Utility Functions', () => {
       };
       
       const updateCardsWithChildren = (element, shortCut, arrayPosition) => {
-        let cardValues = Object.values(allCards[arrayPosition]);
+    let cardValues = Object.values(allDeckCards[arrayPosition]);
         let chosenDeck = deckShortCuts[shortCut];
         let buttons = element.children[3];
         

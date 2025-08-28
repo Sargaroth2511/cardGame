@@ -4,14 +4,14 @@ describe('Turn Management Functions', () => {
     test('should assign cards to winner when player 1 wins', () => {
       const play1Deck = [{ id: 'LCa1', vMax: 300 }];
       const play2Deck = [{ id: 'LCb1', vMax: 250 }];
-      const drawCards = [];
+  const drawDeck = [];
       
       const comparePropertyAndAssignCards = (prop, unitString) => {
         if (play1Deck[0][prop] > play2Deck[0][prop]) {
           play1Deck.push(play1Deck[0], play2Deck[0]);
-          if (drawCards.length > 0) {
-            play1Deck.push(...drawCards);
-            drawCards.length = 0;
+          if (drawDeck.length > 0) {
+            play1Deck.push(...drawDeck);
+            drawDeck.length = 0;
           }
           play1Deck.splice(0, 1);
           play2Deck.splice(0, 1);
@@ -26,14 +26,14 @@ describe('Turn Management Functions', () => {
     test('should assign cards to winner when player 2 wins', () => {
       const play1Deck = [{ id: 'LCa1', vMax: 250 }];
       const play2Deck = [{ id: 'LCb1', vMax: 300 }];
-      const drawCards = [];
+      const drawDeck = [];
       
       const comparePropertyAndAssignCards = (prop, unitString) => {
         if (play1Deck[0][prop] < play2Deck[0][prop]) {
           play2Deck.push(play1Deck[0], play2Deck[0]);
-          if (drawCards.length > 0) {
-            play2Deck.push(...drawCards);
-            drawCards.length = 0;
+          if (drawDeck.length > 0) {
+            play2Deck.push(...drawDeck);
+            drawDeck.length = 0;
           }
           play1Deck.splice(0, 1);
           play2Deck.splice(0, 1);
@@ -48,18 +48,18 @@ describe('Turn Management Functions', () => {
     test('should handle draw scenario correctly', () => {
       const play1Deck = [{ id: 'LCa1', vMax: 300 }];
       const play2Deck = [{ id: 'LCb1', vMax: 300 }];
-      const drawCards = [];
+  const drawDeck = [];
       
       const comparePropertyAndAssignCards = (prop, unitString) => {
         if (play1Deck[0][prop] === play2Deck[0][prop]) {
-          drawCards.unshift(play1Deck[0], play2Deck[0]);
+          drawDeck.unshift(play1Deck[0], play2Deck[0]);
           play1Deck.splice(0, 1);
           play2Deck.splice(0, 1);
         }
       };
       
       comparePropertyAndAssignCards('vMax', 'km/h');
-      expect(drawCards).toHaveLength(2);
+  expect(drawDeck).toHaveLength(2);
       expect(play1Deck).toHaveLength(0);
       expect(play2Deck).toHaveLength(0);
     });
@@ -67,14 +67,14 @@ describe('Turn Management Functions', () => {
     test('should handle draw cards being assigned to winner', () => {
       const play1Deck = [{ id: 'LCa1', vMax: 350 }];
       const play2Deck = [{ id: 'LCb1', vMax: 250 }];
-      const drawCards = [{ id: 'LCc1' }, { id: 'LCd1' }];
+  const drawDeck = [{ id: 'LCc1' }, { id: 'LCd1' }];
       
       const comparePropertyAndAssignCards = (prop, unitString) => {
         if (play1Deck[0][prop] > play2Deck[0][prop]) {
           play1Deck.push(play1Deck[0], play2Deck[0]);
-          if (drawCards.length > 0) {
-            play1Deck.push(...drawCards);
-            drawCards.length = 0;
+          if (drawDeck.length > 0) {
+            play1Deck.push(...drawDeck);
+            drawDeck.length = 0;
           }
           play1Deck.splice(0, 1);
           play2Deck.splice(0, 1);
@@ -84,7 +84,7 @@ describe('Turn Management Functions', () => {
       comparePropertyAndAssignCards('vMax', 'km/h');
       expect(play1Deck).toHaveLength(4);
       expect(play2Deck).toHaveLength(0);
-      expect(drawCards).toHaveLength(0);
+  expect(drawDeck).toHaveLength(0);
     });
   });
 

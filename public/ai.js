@@ -1,6 +1,6 @@
 // AI decision logic for CPU play
 const playAI = () => {
-    if (!playsOnline){
+    if (!isPlayingOnline){
         let difficulty = localStorage.getItem('difficulty');
         if (difficulty === 'easy'){
             aiPickRandom();

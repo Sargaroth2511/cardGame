@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    let playerDecks = [player1Deck, player2Deck],
+    let playgroundElement = document.querySelector('.playground');
+    if (!playgroundElement) {
+        console.error('Playground element not found');
+        return;
+    }
+
+    let startButton = document.querySelector('#startgame'),
+        player1Deck = document.querySelector('#Deck1'),
+        player2Deck = document.querySelector('#Deck2'),
+        playerDecks = [player1Deck, player2Deck].filter(deck => deck !== null),
         active = false,
         zoomed = false,
         zoomedDeckCards = [],
@@ -49,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newCard.id = `card${i}`;
             newCard.style.zIndex = 16+deckArray.length-i;
             newCard.childNodes[7].id = `form1Deck${i}`
-            playground.appendChild(newCard);
+            playgroundElement.appendChild(newCard);
             updateUICardElements(deckSubstring, deckArray,i);
             zoomedDeckCards.push(newCard.id);
         };
@@ -173,30 +182,39 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    startBtn.addEventListener('click', checkIfBothPlayersAreRdy);
+    if (startButton && typeof checkIfBothPlayersAreRdy === 'function') {
+        startButton.addEventListener('click', checkIfBothPlayersAreRdy);
+    }
 
-    playerDecks.forEach(e => {
-        e.addEventListener('click', handleDeckClick);
-    });
+    if (playerDecks.length > 0) {
+        playerDecks.forEach(e => {
+            if (e) {
+                e.addEventListener('click', handleDeckClick);
+            }
+        });
+    }
     
-    playground.addEventListener("touchstart", dragStart, false);
-    playground.addEventListener("touchend", dragEnd, false);
-    playground.addEventListener("touchmove", drag, false);
+    playgroundElement.addEventListener("touchstart", dragStart, false);
+    playgroundElement.addEventListener("touchend", dragEnd, false);
+    playgroundElement.addEventListener("touchmove", drag, false);
 
-    playground.addEventListener("mousedown", dragStart, false);
-    playground.addEventListener("mouseup", dragEnd, false);
-    playground.addEventListener("mousemove", drag, false);    
+    playgroundElement.addEventListener("mousedown", dragStart, false);
+    playgroundElement.addEventListener("mouseup", dragEnd, false);
+    playgroundElement.addEventListener("mousemove", drag, false);    
   
-    preventDocBeeingClicked.addEventListener('click', () => {
-        alert('Dein Gegner ist noch nicht bereit');
-    });
+    const preventDocBeeingClicked = document.querySelector('#preventDocBeeingClicked');
+    if (preventDocBeeingClicked) {
+        preventDocBeeingClicked.addEventListener('click', () => {
+            alert('Dein Gegner ist noch nicht bereit');
+        });
+    }
 
     const addCardButtonEventlistener = cardButtons => {
         for (let i = 0; i < cardButtons.length; i++) {
             cardButtons[i].addEventListener('click', e => {
                 e.preventDefault();
                 getValuesToCompareCards(i);
-                if (playsOnline){
+                if (isPlayingOnline){
                     db.collection(ourGameName).doc(uniqueOnlineName).update({wantsToCheck: i });
                 }; 
             });    
@@ -216,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         endgameouter.style.display = 'none';
         compPopupOuter.style.display = 'none';
-        if (playsOnline){
+    if (isPlayingOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({myTurn: ''})
             .then(()=>{
                 db.collection(ourGameName).doc(uniqueOnlineName).update({isRdy : 'yes'})
@@ -235,14 +253,14 @@ document.addEventListener('DOMContentLoaded', () => {
     waitBackbtn.addEventListener ('click', e => {
         e.preventDefault();
         waitshufflePopouter.style.display = 'none';
-        if (typeof startBtn !== 'undefined' && startBtn) startBtn.disabled = false;
+    if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
         if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
         if (typeof dotinterval !== 'undefined' && dotinterval) clearInterval(dotinterval);
-        if (playsOnline){
+    if (isPlayingOnline){
             db.collection(ourGameName).doc(uniqueOnlineName).update({isRdy : ''})
             clearInterval(dotinterval);
             unsubUserDocs();
-        } else if (!playsOnline){
+    } else if (!isPlayingOnline){
             window.location.replace(`luxCarGame.html`)
         }
     });
