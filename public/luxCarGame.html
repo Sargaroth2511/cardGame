@@ -293,11 +293,26 @@
     <script src="startGame.js"></script>
     <script src="app.js"></script>
     <script>
-      const styleToggleBtn = document.getElementById('style-toggle');
-      styleToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('modern');
-        styleToggleBtn.textContent = document.body.classList.contains('modern') ? 'Klassisches Design' : 'Modernes Design';
-      });
+      (function() {
+        const styleToggleBtn = document.getElementById('style-toggle');
+        const applySavedDesign = () => {
+          const saved = localStorage.getItem('design');
+          if (saved === 'modern') document.body.classList.add('modern');
+          else document.body.classList.remove('modern');
+        };
+        const setDesignLabel = () => {
+          const isModern = document.body.classList.contains('modern');
+          styleToggleBtn.innerHTML = isModern ? 'Klassisches<br>Design' : 'Modernes<br>Design';
+        };
+        applySavedDesign();
+        setDesignLabel();
+        styleToggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('modern');
+          const current = document.body.classList.contains('modern') ? 'modern' : 'classic';
+          localStorage.setItem('design', current);
+          setDesignLabel();
+        });
+      })();
     </script>
 </body>
 </html>

@@ -73,6 +73,65 @@ body.modern .card button:hover {
   background: #2563eb;
 }
 
+/* Align modern controls around the board like classic, but keep modern look */
+/* Left side: design toggle at board top with 5px gap, two-line label centered */
+body.modern .playground > #style-toggle {
+  position: absolute;
+  top: 0;                 /* align with board top */
+  left: -5px;             /* 5px gap outside left edge */
+  transform: translateX(-100%);
+  height: 2.6rem;  /* taller to fit two-line label */
+  font-size: 0.9rem;
+  display: inline-flex;   /* center content perfectly */
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.9rem;      /* horizontal padding only */
+  text-align: center;
+}
+
+/* Start page: toggle is inside navbar; place it the same relative to board */
+body.modern .playground .navbar > #style-toggle {
+  position: absolute;
+  top: 0;
+  left: -5px;
+  transform: translateX(-100%);
+  height: 2.6rem;  /* taller to fit two-line label */
+  font-size: 0.9rem;
+  display: inline-flex;   /* center content perfectly */
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.9rem;      /* horizontal padding only */
+  text-align: center;
+}
+
+/* Left bottom: back button aligned to board bottom, 5px to the left */
+body.modern #backbtn {
+  position: absolute;
+  bottom: 0;
+  left: -5px;
+  transform: translateX(-100%);
+  width: 5.6rem;         /* match smaller size */
+  height: 1.6rem;
+  font-size: 0.85rem;
+  padding: 0 0.5rem;
+  border-radius: 8px;     /* match modern buttons */
+}
+
+/* Right bottom: start button aligned to board bottom, 5px to the right */
+body.modern .playground > #startgame {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% + 5px);
+  width: 5.6rem;         /* match smaller size */
+  height: 1.6rem;
+  font-size: 0.85rem;
+  padding: 0 0.5rem;
+  border-radius: 8px;     /* match modern buttons */
+}
+
+/* Modern design: ensure deck chooser start button has modern radius */
+body.modern #choose-deck-popout #choosedeck #gameStart { border-radius: 8px; }
+
 body.modern .card {
   background: #1e293b;
   border: 1px solid #374151;

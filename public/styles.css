@@ -458,22 +458,54 @@ button:active {
 
 
 
-#startgame {
-    right: 3%;
-    left: auto;
+/* Game view: place START button to the right, mirroring back button */
+.playground > #startgame {
+    position: absolute;
+    bottom: 0;                    /* align with board bottom border */
+    left: calc(100% + 5px);       /* 5px gap to the right of board */
+    transform: none;              /* no offset; left is explicit */
+    z-index: 1000;
+    width: 5.6rem;                /* smaller to fit comfortably */
+    height: 1.6rem;
+    font-size: 0.85rem;
+    padding: 0 0.5rem;
+    border-radius: 5px;           /* match classic button radius */
 }
 
-#style-toggle {
+/* Game view: place style toggle outside left of the board */
+.playground > #style-toggle {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    right: auto;
-    bottom: auto;
+    top: 0;                   /* align with board top border */
+    left: -5px;               /* 5px gap left of board */
+    transform: translateX(-100%); /* make button's right edge align to gap */
     z-index: 1000;
     width: auto;
-    height: 2.5rem;
-    font-size: 1rem;
-    padding: 0 0.75rem;
+    height: 2.6rem;            /* taller to fit two-line label */
+    font-size: 0.9rem;
+    line-height: 1.1;
+    display: inline-flex;      /* center content perfectly */
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.9rem;         /* horizontal padding only for centering */
+    white-space: normal;       /* allow wrap at spaces */
+    text-align: center;        /* center the two-line label */
+}
+
+/* Start page: toggle sits within navbar; place it relative to board the same way */
+.playground .navbar > #style-toggle {
+    position: absolute;
+    top: 0;                   /* align with board top border */
+    left: -5px;               /* 5px gap left of board */
+    transform: translateX(-100%);
+    z-index: 1000;
+    height: 2.6rem;            /* taller to fit two-line label */
+    font-size: 0.9rem;
+    display: inline-flex;      /* center content perfectly */
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.9rem;         /* horizontal padding only for centering */
+    white-space: normal;
+    text-align: center;
 }
 
 
@@ -920,6 +952,11 @@ button[disabled]:hover{
 
 .startform {
     display: grid;
+    justify-items: center;   /* center buttons horizontally */
+    align-items: center;     /* center buttons vertically in their grid rows */
+    justify-self: center;    /* center the form within playground */
+    align-self: center;      /* center the form within playground */
+    text-align: center;      /* center input text and alignment */
 }
 
 .startform input {
@@ -955,6 +992,7 @@ button[disabled]:hover{
     gap: 2rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    padding-bottom: 3.2rem;     /* make room for bottom action buttons */
     
 }
 
@@ -1006,6 +1044,24 @@ label:hover {
     color: white;
     text-shadow: 0px 0px 5px black;
 }
+
+/* Choose deck actions: compact buttons placed at panel bottom corners */
+#choose-deck-popout #choose-deck-backbtn,
+#choose-deck-popout #choosedeck #gameStart {
+    position: absolute;
+    bottom: 12px;
+    height: 1.8rem;
+    font-size: 0.95rem;
+    padding: 0 0.8rem;
+    width: auto;               /* shrink to fit text */
+    z-index: 12;
+}
+
+/* Classic design: ensure start button radius matches back button */
+#choose-deck-popout #choosedeck #gameStart { border-radius: 5px; }
+
+#choose-deck-popout #choose-deck-backbtn { left: 12px; }
+#choose-deck-popout #choosedeck #gameStart { right: 12px; }
 
 
 /* #choose-deck-backbtn {
@@ -1243,10 +1299,10 @@ button[type='submit'] {
     display: grid;
     bottom: 3%;
     left: 3%;
-    width: 7rem !important;
-    height: 4rem !important;
-    border-radius: 5px !important;
-    font-size: 1.5rem !important;
+    width: 7rem;
+    height: 4rem;
+    border-radius: 5px;
+    font-size: 1.5rem;
     align-content: center;
     justify-content: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
@@ -1548,6 +1604,7 @@ left: 5%;
 .playground { color: #ffffff; }
 
 /* Place smaller control buttons to the left of the board */
+/* Fallback for other pages where the toggle sits inside navbar */
 #style-toggle {
   position: absolute;
   top: 0.75rem;
@@ -1563,12 +1620,15 @@ left: 5%;
 
 #backbtn {
   position: absolute;
-  top: 4.1rem; /* just below style-toggle */
-  left: 0.75rem;
-  width: auto;
-  height: 2rem;
-  font-size: 0.9rem;
-  padding: 0 0.6rem;
+  bottom: 0;                 /* align with board bottom border */
+  top: auto;
+  left: -5px;                /* 5px gap left of board */
+  transform: translateX(-100%);
+  width: 5.6rem;             /* smaller to fit side by side visually */
+  height: 1.6rem;
+  font-size: 0.85rem;
+  padding: 0 0.5rem;
+  border-radius: 5px;        /* match classic button radius */
   z-index: 1000;
 }
 
@@ -1601,22 +1661,7 @@ left: 5%;
 
 /* On wide screens, place control buttons to the left of the board, outside */
 @media (min-width: 1024px) {
-  #style-toggle {
-    position: fixed;
-    top: 0.75rem;
-    /* 430px board width -> 215px half. Extra 52px gap for button width/spacing */
-    left: calc(50% - 215px - 52px);
-    height: 1.8rem;
-    font-size: 0.85rem;
-    padding: 0 0.5rem;
-  }
-
-  #backbtn {
-    position: fixed;
-    bottom: 0.75rem;
-    left: calc(50% - 215px - 52px);
-    height: 1.8rem;
-    font-size: 0.85rem;
-    padding: 0 0.5rem;
-  }
+  /* On wider screens, keep the same relative placement to the board */
+  .playground > #style-toggle { top: 0; left: -5px; transform: translateX(-100%); }
+  #backbtn { bottom: 0; left: -5px; transform: translateX(-100%); }
 }
