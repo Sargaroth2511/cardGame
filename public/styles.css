@@ -1126,12 +1126,20 @@ label:hover {
     position: relative;
     height: 30rem;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
-    background-color: rgba(85, 88, 88, 0.699);
+    background:
+        linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 16px;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
     display: grid;
     justify-content: center;
     align-content: center;
-    row-gap: 1.25rem;          /* tighter vertical spacing */
-    padding: 5.5rem 2rem 4rem;  /* reserve space for title at top */
+    row-gap: 1.25rem;
+    padding: 5.5rem 2rem 4rem;
 }
 
 
@@ -1156,8 +1164,8 @@ button[type='submit'] {
     transition: box-shadow .15s ease, filter .15s ease, background-color .15s ease;
 }
 
-/* Disable global hover scale within this popup to prevent title overlap */
-.CPUorMulti form button[type='submit']:hover {
+/* Disable global hover grow inside difficulty chooser to prevent title overlap */
+.choose-form button[type='submit']:hover {
     transform: none; /* keep size stable */
     box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.8);
     filter: brightness(1.06);
@@ -1256,12 +1264,20 @@ button[type='submit'] {
     position: relative;
     height: 30rem;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
-    background-color: rgba(85, 88, 88, 0.699);
+    background:
+        linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 16px;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
     display: grid;
     justify-content: center;
     grid-template-rows: 15% 15% 15%;
-    row-gap: 1.25rem;           /* tighter vertical spacing */
-    padding: 5.5rem 2rem 4rem;  /* reserve space for title at top */
+    row-gap: 1.25rem;
+    padding: 5.5rem 2rem 4rem;
 }
 
 .choose-form div {
@@ -1269,15 +1285,19 @@ button[type='submit'] {
     top: 4%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.5rem;           /* slightly smaller to reduce clashes */
-    background-color: #ddd;
+    font-size: 1.5rem;
+    background:
+        linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 8px;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
     padding: 3px;
-    border: 2px solid #444;
-    border-radius: 4px;
-    color: white;
     text-shadow: 0px 0px 5px black;
     text-align: center;
-    z-index: 2;                  /* keep above buttons visually */
+    z-index: 2;
 }
 
 /* Tighter, non-overlapping buttons inside difficulty chooser */
@@ -1331,7 +1351,7 @@ button[type='submit'] {
     border-radius: 5px;           /* match classic menu buttons */
 }
 
-/* Disable global hover grow inside difficulty chooser to avoid title overlap */
+/* Disable global hover grow inside difficulty chooser to prevent title overlap */
 .choose-form button[type='submit']:hover {
     transform: none; /* keep size stable */
     box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.8);
@@ -1343,15 +1363,19 @@ button[type='submit'] {
     top: 4%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.5rem;          /* slightly smaller title to reduce clashes */
-    background-color: #ddd;
+    font-size: 1.5rem;
+    background:
+        linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 8px;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
     padding: 3px;
-    border: 2px solid #444;
-    border-radius: 4px;
-    color: white;
     text-shadow: 0px 0px 5px black;
     text-align: center;
-    z-index: 2;                 /* keep above buttons visually */
+    z-index: 2;
 }
 
 
