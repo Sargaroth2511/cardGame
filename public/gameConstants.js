@@ -44,8 +44,18 @@ function showElements(displayValue, ...elements) {
     setElementStyles(elements, 'display', displayValue);
 }
 
-// Make it globally available (consistent with other scripts)
-window.GAME_CONSTANTS = GAME_CONSTANTS;
-window.setElementStyles = setElementStyles;
-window.hideElements = hideElements;
-window.showElements = showElements;
+// Export constants and utilities for testing
+const GAME_UTILS_MODULE = {
+    GAME_CONSTANTS,
+    setElementStyles,
+    hideElements,
+    showElements
+};
+
+// Make available globally for backward compatibility
+window.GAME_UTILS_MODULE = GAME_UTILS_MODULE;
+
+// Export for testing (if using modules)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = GAME_UTILS_MODULE;
+}

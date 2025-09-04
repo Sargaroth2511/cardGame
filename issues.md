@@ -1,11 +1,13 @@
-**Security**
+# Quartett Game Issues & Fixes
+
+## Security
 
 - **Arbitrary code execution risk (HIGH):** ~~`public/decks.js` line ~170 defines `parse(str)` using `Function()` to evaluate arbitrary strings. This enables code injection if any untrusted input reaches it. Replace with explicit mapping or a safe parser; never evaluate dynamic strings.~~ ✅ **FIXED:** Removed dangerous `parse()` function and replaced with safe `selectorMap` in `declarations.js`. Updated tests to reflect security improvements.
 - **Firebase listener robustness (MEDIUM):** ~~`public/firebaseListeners.js` uses `onSnapshot` without storing unsubscribe functions. This can leak memory and keep network activity after navigation. Return and invoke unsubscribers on teardown.~~ ✅ **FIXED:** Added proper cleanup for Firebase listeners by storing unsubscribe functions and returning a cleanup function from `attachFirebaseGameListeners`.
 - **Unsanitized HTML writes (LOW):** ~~`public/decks.js` manipulates `animatedpoints.innerHTML` repeatedly. While current values are dots, prefer `textContent` to avoid accidental HTML injection if content changes.~~ ✅ **FIXED:** Replaced all `innerHTML` usage with `textContent` in `decks.js` for the animated dots functionality. Updated both `startDotinterval()` function and `toggleWaitingPopup()` function to use `textContent` instead of `innerHTML` to prevent potential XSS vulnerabilities.
 - **External scripts without SRI/CSP (LOW):** ~~`public/index.html` loads third‑party scripts (Firebase, Font Awesome) without Subresource Integrity and there's no documented CSP. Consider adding CSP and SRI where feasible.~~ ✅ **FIXED:** Added Content Security Policy (CSP) headers to both `index.html` and `luxCarGame.html` with `unsafe-inline` for necessary inline scripts. Removed incorrect SRI hashes that were blocking resource loading. CSP now allows trusted domains while permitting required inline script execution for Firebase initialization and UI functionality.
 
-**Correctness/Bugs**
+## Correctness/Bugs
 
 - **Invalid boolean initialization (HIGH):** ~~`public/decks.js` sets `let isPlayingOnline = Boolean;` which assigns the Function object, not a boolean. Initialize to `false` and set via `getStatus()`.~~ ✅ **FIXED:** Changed `let isPlayingOnline = Boolean;` to `let isPlayingOnline = false;` in `public/decks.js`.
 - **Duplicate/conflicting implementations (HIGH):** ~~`public/comparison.js` and `public/compareFuncs.js` contain near‑identical logic (`isComparisonInProgress`, `compareTopCardsByIndex`, `runComparisonSequence`, `playAI`). This risks drift and double definitions in the global scope. Consolidate into one module.~~ ✅ **FIXED:** Removed redundant `comparison.js` file and consolidated all duplicate functions from `turn.js` into `compareFuncs.js`. Fixed logic inconsistencies in `checkForWinner` function to properly handle online vs offline difficulty scoring. Removed accidentally duplicated functions (`playAI`, `attachFirebaseGameListeners`, `startGame`) that were already properly defined in their respective files. ✅ **UPDATED:** Added missing `checkForWinner` function to `compareFuncs.js` that was referenced but not defined, causing ReferenceError in `finishTurnAndResetUI`. ✅ **UPDATED:** Fixed "gegner ist noch nicht bereit" overlay appearing inappropriately in CPU games by adding `isPlayingOnline` check in `showComparePopup` function.
@@ -15,15 +17,16 @@
 - **Null handling for Firestore docs (MEDIUM):** ~~`public/firebaseListeners.js` uses `doc.data()` with fallback `|| {}`, but some places lack `doc.exists` check. Add `if (!doc.exists) return;` for consistency.~~ ✅ **FIXED:** Added `if (!doc.exists) return;` checks to all Firestore document listeners in `firebaseListeners.js` for proper null handling.
 - **Encoding issues in literals (LOW):** ~~Multiple files contain mojibake like `ZurA�ck`, `fA�ngt`. Ensure UTF‑8 encoding and fix strings.~~ ✅ **FIXED:** Fixed UTF-8 encoding issues in `tmp_lux.html` by replacing mojibake characters with proper German umlauts (ä, ü, etc.). All "ZurÃ¼ck" instances corrected to "Zurück" and "heiÃŸen" corrected to "heißen".
 
-**Maintainability/Style**
+## Maintainability/Style
 
 - **Hard‑coded magic numbers (MEDIUM):** ~~Animation timings, bar widths, and z‑indexes are scattered (e.g., `15`ms intervals, bar `max` values). Centralize in constants/config.~~ ✅ **FIXED:** Created `gameConstants.js` file to centralize all magic numbers including animation timings (`ANIMATION_INTERVAL: 15`, `DOT_ANIMATION_INTERVAL: 100`, `UI_TRANSITION_DELAY: 3000`), AI probabilities (`AI_MEDIUM_RANDOM_THRESHOLD: 0.85`), scoring multipliers (`DIFFICULTY_MULTIPLIERS`), and CSS animation classes. Updated all files (`compareFuncs.js`, `ai.js`, `decks.js`, `startGame.js`) to import and use these constants instead of hard-coded values.
 - **Inconsistent naming & mixed responsibilities (MEDIUM):** UI, game logic, network, and persistence are intertwined within single files. Consider separating concerns (e.g., `gameLogic.js`, `ui.js`, `firebase.js`).
 - **Lack of modular exports (MEDIUM):** Files expose functions/vars globally rather than via modules, complicating testing and reuse. Adopt ES modules with explicit exports/imports.
+  - ✅ **PARTIALLY FIXED:** Created modular exports for key functions in `AI_MODULE`, `COMPARISON_MODULE`, and `GAME_UTILS_MODULE`. Functions are now available both as global variables (for backward compatibility) and as named exports (for testing and modularity).
 - **Excessive console logging (MEDIUM):** ~~40+ `console.log` statements across files should be removed for production code.~~ ✅ **FIXED:** Removed excessive console.log and debug statements from `startGame.js`, `compareFuncs.js`, and `firebaseListeners.js` while preserving essential error logging.
 - **Commented/unused code and TODOs (LOW):** ~~Legacy comments and placeholders remain in `public/index.html` and elsewhere; prune or ticketize.~~ ✅ **FIXED:** Cleaned up commented-out code in `indexListeners.js` that was no longer needed. Removed debug console.log statements and unused code blocks. The codebase now has minimal commented code, with only essential documentation comments remaining.
 
-**Performance**
+## Performance
 
 - **Duplicate code inflates bundle (MEDIUM):** ~~The duplication between `comparison.js` and `compareFuncs.js` increases size and parse time; consolidate.~~ ✅ **FIXED:** Consolidated duplicate code by removing `comparison.js` and merging all functions from `turn.js` into `compareFuncs.js`, eliminating ~100+ lines of duplicate code. Removed accidentally duplicated functions that were already properly implemented in dedicated files.
 - **Inefficient array operations (LOW):** ~~`public/turn.js` uses `Array.prototype.push.apply(playerDeck, drawDeck)`; prefer `playerDeck.push(...drawDeck)` for readability and potential speed.~~ ✅ **FIXED:** Replaced `Array.prototype.push.apply(playerDeck, drawDeck)` with `playerDeck.push(...drawDeck)` in `compareFuncs.js` for better performance and readability.
@@ -31,14 +34,15 @@
   - ✅ **FIXED:** Added helper functions `setElementStyles`, `hideElements`, and `showElements` in `gameConstants.js` to batch DOM style updates. Updated `compareFuncs.js`, `startGame.js`, and `declarations.js` to use these helpers instead of individual `style.display` assignments, reducing layout thrashing and improving performance.
 - Refer to `EFFICIENCY_REPORT.md` for additional optimization notes already documented by the repo.
 
-**Testing/Tooling**
+## Testing/Tooling
 
 - **Jest targets public files but code isn't modular (MEDIUM):** Without exports, tests must rely on globals, which is fragile. Expose pure logic as importable functions and keep DOM side‑effects thin.
+  - ✅ **PARTIALLY FIXED:** Created modular exports for `AI_MODULE`, `COMPARISON_MODULE`, and `GAME_UTILS_MODULE` with both global and CommonJS exports. Key functions are now exposed for testing while maintaining backward compatibility with existing global access patterns.
 - **Coverage config excludes `public/firebase-config.js` (INFO):** Good to avoid secrets in coverage; ensure the file is actually excluded from the repo or mocked.
 - **All tests passing (INFO):** ~~6 test suites, 48 tests successful as of analysis.~~ ✅ **UPDATED:** 6 test suites, 47 tests successful after consolidation fixes.
 - **No syntax errors (INFO):** Key JavaScript files have no linting errors.
 
-**Recommended Remediations (Prioritized)**
+## Recommended Remediations (Prioritized)
 
 - High: Remove `parse()` dynamic evaluation; fix boolean init; deduplicate `comparison`/`AI` logic; add Firestore null/error handling; add listener cleanup.
 - Medium: Modularize code, reduce globals, centralize constants, guard DOM queries, fix encoding issues, remove console.logs.

@@ -48,14 +48,13 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 
     function showComparePopup(headingString){
         if (isPlayingOnline && window.GameUI?.preventDocBeeingClicked) {
-            window.GameUI.preventDocBeeingClicked.style.display = 'grid';
+            showElements('grid', window.GameUI.preventDocBeeingClicked);
         }
         if (window.GameUI?.popupHeader) window.GameUI.popupHeader.textContent = headingString;
         if (window.GameUI?.compPopup && window.GameUI?.compPopupOuter) {
             showElements('flex', window.GameUI.compPopup, window.GameUI.compPopupOuter);
         } else {
-            if (window.GameUI?.compPopup) window.GameUI.compPopup.style.display = 'flex';
-            if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'flex';
+            showElements('flex', window.GameUI?.compPopup, window.GameUI?.compPopupOuter);
         }
     };
 
@@ -179,14 +178,14 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
     if (play1Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, factor) : calcPoints(play2Deck, factor);
         isPlayingOnline ? winner = secondPlayer : winner = 'Computer';
-        if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid'
+        showElements('grid', window.GameUI?.endgameouter);
         if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
     } else if (play2Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, 1) : calcPoints(play2Deck, 1);
         winner = firstPlayer;
-        if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid'
+        showElements('grid', window.GameUI?.endgameouter);
         if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
@@ -221,12 +220,12 @@ const checkForWinner = () => {
         if (play1Deck.length === 0) {
             // Player 2 wins
             if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = isPlayingOnline ? `${otherPlayer} gewinnt!` : 'Computer gewinnt!';
-            if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid';
+            showElements('grid', window.GameUI?.endgameouter);
             resolve(true);
         } else if (play2Deck.length === 0) {
             // Player 1 wins
             if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = isPlayingOnline ? `${onlineName} gewinnt!` : 'Du gewinnst!';
-            if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid';
+            showElements('grid', window.GameUI?.endgameouter);
             resolve(true);
         } else {
             // No winner yet
@@ -251,15 +250,13 @@ const finishTurnAndResetUI = async () => {
 
     (function resetUI(){
     if (isPlayingOnline && window.GameUI?.preventDocBeeingClicked){
-            window.GameUI.preventDocBeeingClicked.style.display = 'none';
+            hideElements(window.GameUI.preventDocBeeingClicked);
         };   
-        if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'none';
+        hideElements(window.GameUI?.compPopupOuter);
         if (window.GameUI?.innerBars) {
+            setElementStyles(window.GameUI.innerBars, 'width', '0');
             window.GameUI.innerBars.forEach (e => {
-                if (e) {
-                    e.textContent = '0';
-                    e.style.width = '0';
-                }
+                if (e) e.textContent = '0';
             });
         }
         let cssanimationClasses = GAME_CONSTANTS.CSS_ANIMATION_CLASSES;
@@ -350,6 +347,25 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         drawDeck.unshift(play1Deck[0], play2Deck[0]);
         play1Deck.splice(0,1);
         play2Deck.splice(0,1);
-    };        
+    };
 };
+
+// Export key functions for testing and modularity
+const COMPARISON_MODULE = {
+    compareTopCardsByIndex,
+    runComparisonSequence,
+    checkForWinner,
+    finishTurnAndResetUI,
+    setCardButtonsEnabledForTurn,
+    comparePropertyAndAssignCards
+};
+
+// Make available globally for backward compatibility
+window.COMPARISON_MODULE = COMPARISON_MODULE;
+window.setCardButtonsEnabledForTurn = setCardButtonsEnabledForTurn;
+
+// Export for testing (if using modules)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = COMPARISON_MODULE;
+}
 

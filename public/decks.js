@@ -208,7 +208,6 @@ const getStatus = () => {
         isPlayingOnline = false;
     } else {
         isPlayingOnline = false;
-        console.log('cant get Status, isPlayingOnline is', isPlayingOnline);
     }
 };
 
@@ -299,7 +298,6 @@ const checkIfUserExists = async () => {
         querySnapshot.forEach((doc) => {
           let userDoc = doc.data();
           onlineName = userDoc.UserName;
-          console.log(onlineName);
           if (uniqueOnlineName === '') {
             uniqueOnlineName = onlineName + currentUser.uid;
           }
@@ -372,7 +370,6 @@ const setDBdocs = () => {
         // getUserDecks();
         updateUIElements();
         if (ourGameName) {
-          console.log('GameID' ,ourGameName);
           let size = 0;
           await db.collection(ourGameName).get()
           .then(snap => {
@@ -395,7 +392,7 @@ const setDBdocs = () => {
           });   
         } 
       })().catch((err) => {
-      console.log(err, 'some error occured')
+      // Error occurred during initialization
       });
     }else {          
       typeof signInOuter2 !== 'undefined' ? signInOuter2.style.display = 'grid' :
@@ -405,7 +402,6 @@ const setDBdocs = () => {
   });
 
   function updateUIElements(){
-    console.log(uniqueOnlineName)
     db.collection('Users').doc(uniqueOnlineName).get()
     .then(doc => {
         let userDoc = doc.data();
@@ -463,7 +459,6 @@ const getUsers = async (nextStartGame, unsubListener) => {
     .get()
     .then((doc) =>{
       ownDatabaseDoc = doc.data();
-      console.log(`my number ${ownDatabaseDoc.startNumber}`);
 
       return ownDatabaseDoc;
     });
@@ -476,7 +471,6 @@ const getUsers = async (nextStartGame, unsubListener) => {
         otherDatabaseDoc = doc.data();
         otherPlayer = otherDatabaseDoc.name;
         uniqueOtherPlayerName = otherPlayer + otherDatabaseDoc.UserId;
-        console.log(`other number ${otherDatabaseDoc.startNumber}`);
       });
 
     return otherDatabaseDoc;
