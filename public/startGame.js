@@ -1,20 +1,23 @@
 // Game start orchestration and deck synchronization
 
 const startGame = () => {
-    // Attach listeners as early as possible to avoid missing first turns
-    if (isPlayingOnline && typeof attachFirebaseGameListeners === 'function') {
-        attachFirebaseGameListeners();
-    }
-
+    // Show shuffling message immediately
     if (typeof toggleWaitingPopup === 'function') {
         toggleWaitingPopup('Karten werden gemischt', 'grid', startDotinterval);
     }
 
-    setTimeout(() => {
-        isPlayerOne ? determineStarterAndSync(prepareUIForGameUI) : updateUIForOtherStarter();
-    }, 4000);
+    // Shuffle and deal cards immediately, then determine starter after original delay
+    shuffleDeckAndDealCards(() => {
+        // After shuffling is complete, determine starter and update UI (original 4-second delay)
+        setTimeout(() => {
+            isPlayerOne ? determineStarterAndSync(prepareUIForGameUI) : updateUIForOtherStarter();
+        }, 4000); // Restored original 4-second delay
+    });
 
-    shuffleDeckAndDealCards(syncDecksBetweenPlayers);
+    // Attach Firebase listeners if playing online
+    if (isPlayingOnline && typeof attachFirebaseGameListeners === 'function') {
+        attachFirebaseGameListeners();
+    }
 
     async function determineStarterAndSync(nextPrepareUI){
         let num = Math.random();
@@ -29,44 +32,60 @@ const startGame = () => {
                 await docRef.update({myTurn : 'no'})
             };
         };
-        nextPrepareUI(cardNumberp1, num, playAI);
+        nextPrepareUI(window.GameUI?.cardNumberp1, num, playAI);
     };
 
     const prepareUIForGameUI = (HTMLElementCardNumber, num, startGamevsCPU) => {
         setCardPropertyNames();
         clearInterval(dotinterval);
-    if (player2Name) {
-        isPlayingOnline ? player2Name.textContent = otherDatabaseDoc.name:
-              player2Name.textContent = 'Computer';
+    if (window.GameUI?.player2Name) {
+        isPlayingOnline ? window.GameUI.player2Name.textContent = otherDatabaseDoc.name:
+              window.GameUI.player2Name.textContent = 'Computer';
     }
 
         if (num <= 0.5){
-            if (whostarts) whostarts.textContent = `${onlineName} fängt an!`
+            if (window.GameUI?.whostarts) {
+                window.GameUI.whostarts.textContent = `${onlineName} fängt an!`;
+                window.GameUI.whostarts.style.display = 'block';
+            }
             setCardButtonsEnabledForTurn('', false, true);
         } else {
             setCardButtonsEnabledForTurn('', true, false);
-            if (whostarts) {
-                isPlayingOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
-                          whostarts.textContent = `Der Computer fängt an!`;
+            if (window.GameUI?.whostarts) {
+                window.GameUI.whostarts.textContent = isPlayingOnline ? `${otherPlayer} fängt an!` : `Der Computer fängt an!`;
+                window.GameUI.whostarts.style.display = 'block';
             }
-        };  
+        };
+
+        // Clear "who starts" message after 1 second so players can read it
+        setTimeout(() => {
+            if (window.GameUI?.whostarts) {
+                window.GameUI.whostarts.textContent = '';
+                window.GameUI.whostarts.style.display = 'none';
+            }
+        }, 1000);
 
         setTimeout(() => {
-            if (waitshufflePopouter) waitshufflePopouter.style.display = 'none';
+            // Hide shuffling popup
+            if (window.GameUI?.waitshufflePopouter) window.GameUI.waitshufflePopouter.style.display = 'none';
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
-            if (player1Cover) player1Cover.style.display = 'none';
-            if (whostarts) whostarts.textContent = '';
-            if (startgame) startgame.style.display = 'none';
-            if (player1Deck) player1Deck.style.display = 'grid';
-            if (player2Deck) player2Deck.style.display = 'none';
+
+            // Show final game UI
+            if (window.GameUI?.player1Cover) window.GameUI.player1Cover.style.display = 'none';
+            if (window.GameUI?.startgame) window.GameUI.startgame.style.display = 'none';
+            if (window.GameUI?.player1Deck) window.GameUI.player1Deck.style.display = 'grid';
+            if (window.GameUI?.player2Deck) window.GameUI.player2Deck.style.display = 'none';
             if (HTMLElementCardNumber) HTMLElementCardNumber.style.display = 'block';
 
             if (!isPlayingOnline){
-                sorteDecks();
-                startGamevsCPU();
+                // Delay AI start until after "who starts" message disappears (1000ms) + small buffer
+                setTimeout(() => {
+                    sorteDecks();
+                    startGamevsCPU();
+                }, 1100);
             };
-        }, GAME_CONSTANTS.UI_TRANSITION_DELAY);
+        }, 1200); // Reduced from 3000ms to 500ms for faster UI transition
 
 
       
@@ -76,25 +95,36 @@ const startGame = () => {
     function updateUIForOtherStarter(){
         setCardPropertyNames();
         clearInterval(dotinterval);
-        if (player1Card) player1Card.classList.replace('c1', 'c2');
-        if (player2Card) player2Card.classList.replace('c2', 'c1');
-        if (compbar1) compbar1.classList.replace('compbar1', 'compbar2');
-        if (compbar2) compbar2.classList.replace('compbar2', 'compbar1');
-        if (compbar1 && innerBar2) compbar1.appendChild(innerBar2);
-        if (compbar2 && innerBar1) compbar2.appendChild(innerBar1);
-        if (player2Deck) player2Deck.classList.replace('player2Deck', 'player1Deck');
+        if (window.GameUI?.player1Card) window.GameUI.player1Card.classList.replace('c1', 'c2');
+        if (window.GameUI?.player2Card) window.GameUI.player2Card.classList.replace('c2', 'c1');
+        // Use GameUI module instead of global variables
+        if (window.GameUI?.compbar1) window.GameUI.compbar1.classList.replace('compbar1', 'compbar2');
+        if (window.GameUI?.compbar2) window.GameUI.compbar2.classList.replace('compbar2', 'compbar1');
+        if (window.GameUI?.compbar1 && window.GameUI?.innerBar2) window.GameUI.compbar1.appendChild(window.GameUI.innerBar2);
+        if (window.GameUI?.compbar2 && window.GameUI?.innerBar1) window.GameUI.compbar2.appendChild(window.GameUI.innerBar1);
+        if (window.GameUI?.player2Deck) window.GameUI.player2Deck.classList.replace('player2Deck', 'player1Deck');
+
+        // Clear "who starts" message after 1 second so players can read it
+        setTimeout(() => {
+            if (window.GameUI?.whostarts) {
+                window.GameUI.whostarts.textContent = '';
+                window.GameUI.whostarts.style.display = 'none';
+            }
+        }, 1000);
 
         setTimeout (() => {
-            if (waitshufflePopouter) waitshufflePopouter.style.display = 'none';
+            // Hide shuffling popup
+            if (window.GameUI?.waitshufflePopouter) window.GameUI.waitshufflePopouter.style.display = 'none';
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
-            if (player2Cover) player2Cover.style.display = 'none'
-            if (whostarts) whostarts.textContent = '';
-            if (startgame) startgame.style.display = 'none';
-            if (player2Deck) player2Deck.style.display = 'grid'
-            if (player1Deck) player1Deck.style.display = 'none'
-            if (cardNumberp2) cardNumberp2.style.display = 'block'
-        }, GAME_CONSTANTS.UI_TRANSITION_DELAY); 
+
+            // Show final game UI
+            if (window.GameUI?.player2Cover) window.GameUI.player2Cover.style.display = 'none'
+            if (window.GameUI?.startgame) window.GameUI.startgame.style.display = 'none';
+            if (window.GameUI?.player2Deck) window.GameUI.player2Deck.style.display = 'grid'
+            if (window.GameUI?.player1Deck) window.GameUI.player1Deck.style.display = 'none'
+            if (window.GameUI?.cardNumberp2) window.GameUI.cardNumberp2.style.display = 'block'
+        }, 500); // Reduced from 3000ms to 500ms for faster UI transition 
     };
 
     function setCardPropertyNames (){
@@ -105,7 +135,7 @@ const startGame = () => {
                 .replace(/\u000f/g, 'ä')      // fix mojibake in Länge
         };
 
-        allCardButtons.forEach(e => {
+        window.GameUI?.allCardButtons?.forEach(e => {
             for (let i = 0; i < allDeckProperties[chosenDeck].length; i++){
                 const raw = allDeckProperties[chosenDeck][i].fullName;
                 const label = cleanLabel(raw);
@@ -117,7 +147,7 @@ const startGame = () => {
     };
 
 
-    function shuffleDeckAndDealCards(sendToFirebase){
+    function shuffleDeckAndDealCards(callback){
         chosenDeck = localStorage.getItem('chosenDeck');
         deckShuffled = allDecks[chosenDeck];
 
@@ -130,19 +160,28 @@ const startGame = () => {
         play1Deck = deckShuffled.slice(0, deckShuffled.length / 2);
         play2Deck = deckShuffled.slice(deckShuffled.length / 2);
 
+        // Update UI immediately after shuffling
         updateUIElements();
 
         if (isPlayingOnline){
-            sendToFirebase(attachFirebaseGameListeners);
+            syncDecksBetweenPlayers(callback);
+        } else {
+            // For offline play, call callback immediately
+            if (typeof callback === 'function') {
+                callback();
+            }
         };
       };
 
 
-    async function syncDecksBetweenPlayers(nextAddListener){
+    async function syncDecksBetweenPlayers(callback){
 
         isPlayerOne ? await writeDecksToFirebase() : await fetchDecksFromFirebase(fetchStarterAndUpdateUI);
 
-        nextAddListener();
+        // Call the callback after deck synchronization is complete
+        if (typeof callback === 'function') {
+            callback();
+        }
 
 
         async function writeDecksToFirebase(){
@@ -194,16 +233,30 @@ const startGame = () => {
             .then((doc) => {
                 let docu = doc.data();
                 if (docu.myTurn === 'yes'){
-                    if (whostarts) whostarts.textContent = `${otherPlayer} fängt an!`
+                    if (window.GameUI?.whostarts) {
+                        window.GameUI.whostarts.textContent = `${otherPlayer} fängt an!`;
+                        window.GameUI.whostarts.style.display = 'block';
+                    }
                     setCardButtonsEnabledForTurn('', false, true);
                 } else if (docu.myTurn === 'no'){
-                    if (whostarts) whostarts.textContent = `${onlineName} fängt an!`
+                    if (window.GameUI?.whostarts) {
+                        window.GameUI.whostarts.textContent = `${onlineName} fängt an!`;
+                        window.GameUI.whostarts.style.display = 'block';
+                    }
                     setCardButtonsEnabledForTurn('', true, false);
                 }
+
+                // Clear "who starts" message after 1 second so players can read it
+                setTimeout(() => {
+                    if (window.GameUI?.whostarts) {
+                        window.GameUI.whostarts.textContent = '';
+                        window.GameUI.whostarts.style.display = 'none';
+                    }
+                }, 1000);
                 }).catch((err) => {
                     // Error getting documents - silently handle
                 });
-            if (player2Name) player2Name.textContent = otherDatabaseDoc.name;
+            if (window.GameUI?.player2Name) window.GameUI.player2Name.textContent = otherDatabaseDoc.name;
         };
     };
 };

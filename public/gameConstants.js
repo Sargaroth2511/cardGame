@@ -3,7 +3,7 @@ const GAME_CONSTANTS = {
     // Animation timings (in milliseconds)
     ANIMATION_INTERVAL: 15,        // Bar animation update interval
     DOT_ANIMATION_INTERVAL: 100,   // Dot animation update interval
-    UI_TRANSITION_DELAY: 3000,     // Delay for UI state transitions
+    UI_TRANSITION_DELAY: 2500,     // Delay for UI state transitions (closer to original 3000ms)
 
     // Animation values
     BAR_ANIMATION_INCREMENT: 3,    // Percentage increment for bar animations

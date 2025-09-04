@@ -6,10 +6,10 @@ const attachFirebaseGameListeners = () => {
         return;
     }
     window.__gameListenersAttached = true;
-    
+
     // Store unsubscribe functions for cleanup
     const unsubscribers = [];
-    
+
     let pendingRemoteCompareIndex = null;
     let pendingTimer = null;
     let selfNextTurn = '';
@@ -36,11 +36,12 @@ const attachFirebaseGameListeners = () => {
                 const idx = pendingRemoteCompareIndex; pendingRemoteCompareIndex = null;
                 window.debug?.set('queuedIndex', '');
                 try {
-                    compareTopCardsByIndex(idx); 
+                    compareTopCardsByIndex(idx);
                 } catch (err) {
                     console.error('compareTopCardsByIndex failed for index', idx, err);
-                    if (typeof preventDocBeeingClicked !== 'undefined' && preventDocBeeingClicked) {
-                        preventDocBeeingClicked.style.display = 'none';
+                    // Use GameUI module instead of global variable
+                    if (window.GameUI?.preventDocBeeingClicked) {
+                        window.GameUI.preventDocBeeingClicked.style.display = 'none';
                     }
                 }
             }
@@ -49,8 +50,9 @@ const attachFirebaseGameListeners = () => {
 
     function maybeClearBlocker() {
         if (selfNextTurn === 'ok' && otherNextTurn === 'ok') {
-            if (typeof preventDocBeeingClicked !== 'undefined' && preventDocBeeingClicked) {
-                preventDocBeeingClicked.style.display = 'none';
+            // Use GameUI module instead of global variable
+            if (window.GameUI?.preventDocBeeingClicked) {
+                window.GameUI.preventDocBeeingClicked.style.display = 'none';
             }
             // Reset only our own nextTurn flag
             db.collection(ourGameName).doc(uniqueOnlineName).update({ nextTurn: '' });
@@ -88,8 +90,9 @@ const attachFirebaseGameListeners = () => {
                     compareTopCardsByIndex(i);
                 } catch (err) {
                     console.error('compareTopCardsByIndex failed for index', i, err);
-                    if (typeof preventDocBeeingClicked !== 'undefined' && preventDocBeeingClicked) {
-                        preventDocBeeingClicked.style.display = 'none';
+                    // Use GameUI module instead of global variable
+                    if (window.GameUI?.preventDocBeeingClicked) {
+                        window.GameUI.preventDocBeeingClicked.style.display = 'none';
                     }
                 }
             } else {
@@ -138,8 +141,9 @@ const attachFirebaseGameListeners = () => {
                             compareTopCardsByIndex(idx);
                         } catch (err) {
                             console.error('compareTopCardsByIndex failed (meta)', err);
-                            if (typeof preventDocBeeingClicked !== 'undefined' && preventDocBeeingClicked) {
-                                preventDocBeeingClicked.style.display = 'none';
+                            // Use GameUI module instead of global variable
+                            if (window.GameUI?.preventDocBeeingClicked) {
+                                window.GameUI.preventDocBeeingClicked.style.display = 'none';
                             }
                         }
                     } else {

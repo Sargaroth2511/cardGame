@@ -1,3 +1,35 @@
+// Game UI Module - Centralized DOM element management
+// This module provides safe access to all DOM elements used throughout the game
+
+// Safe DOM query helper functions
+function safeQuerySelector(selector) {
+    const element = document.querySelector(selector);
+    if (!element) {
+        console.warn(`DOM element not found: ${selector}`);
+        return null;
+    }
+    return element;
+}
+
+function safeQuerySelectorAll(selector) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements || elements.length === 0) {
+        console.warn(`DOM elements not found: ${selector}`);
+        return [];
+    }
+    return elements;
+}
+
+// Safe replacement for the dangerous parse() function
+function getSelector(selectorName) {
+    if (selectorMap.hasOwnProperty(selectorName)) {
+        return selectorMap[selectorName];
+    } else {
+        console.warn(`Selector '${selectorName}' not found in selectorMap`);
+        return null;
+    }
+}
+
 // REFACTORED: Eliminated selector duplication by initializing directly in selectorMap
 // Only card-related selectors are in the map; UI elements remain as direct variables
 
@@ -64,115 +96,127 @@ const selectorMap = {
     'prop6Deck2': [...document.getElementsByClassName('rpmd2')]
 };
 
-// Safe replacement for the dangerous parse() function
-function getSelector(selectorName) {
-    if (selectorMap.hasOwnProperty(selectorName)) {
-        return selectorMap[selectorName];
-    } else {
-        console.warn(`Selector '${selectorName}' not found in selectorMap`);
-        return null;
-    }
-}
+// GameUI Module - Export all DOM elements and helper functions
+window.GameUI = {
+    // Helper functions
+    safeQuerySelector,
+    safeQuerySelectorAll,
+    getSelector,
 
-// Safe DOM query helper function
-function safeQuerySelector(selector) {
-    const element = document.querySelector(selector);
-    if (!element) {
-        console.warn(`DOM element not found: ${selector}`);
-        return null;
-    }
-    return element;
-}
+    // Button Selectors
+    vMaxBtn: safeQuerySelector('#vmaxbtn1'),
+    disBtn: safeQuerySelector('#disbtn1'),
+    weiBtn: safeQuerySelector('#weibtn1'),
+    cylBtn: safeQuerySelector('#cylbtn1'),
+    powBtn: safeQuerySelector('#powbtn1'),
+    rpmBtn: safeQuerySelector('#rpmbtn1'),
 
-function safeQuerySelectorAll(selector) {
-    const elements = document.querySelectorAll(selector);
-    if (!elements || elements.length === 0) {
-        console.warn(`DOM elements not found: ${selector}`);
-        return [];
-    }
-    return elements;
-}
+    vMaxBtn2: safeQuerySelector('#vmaxbtn2'),
+    disBtn2: safeQuerySelector('#disbtn2'),
+    weiBtn2: safeQuerySelector('#weibtn2'),
+    cylBtn2: safeQuerySelector('#cylbtn2'),
+    powBtn2: safeQuerySelector('#powbtn2'),
+    rpmBtn2: safeQuerySelector('#rpmbtn2'),
 
-// Direct access selectors (not used in dynamic mapping)
-const card1Buttons = safeQuerySelectorAll('#player1Card button'),
-      card2Buttons = safeQuerySelectorAll('#player2Card button'),
-      allCardButtons = [card1Buttons, card2Buttons];
+    // UI Elements
+    scoreHTML: safeQuerySelector('#score'),
+    form1: safeQuerySelector('#form1'),
+    form2: safeQuerySelector('#form2'),
 
-const arrleft = safeQuerySelector('#arrleft');
-const arrright = safeQuerySelector('#arrright');
+    innerBar1: safeQuerySelector('#innerbar1'),
+    innerBar2: safeQuerySelector('#innerbar2'),
+    innerBars: safeQuerySelectorAll('.innerbar'),
+    compPopupOuter: safeQuerySelector('#popupouter'),
+    compPopup: safeQuerySelector('#comp_popupinner'),
+    closeBtn: safeQuerySelector('#closebtn'),
+    popupHeader: safeQuerySelector('h3'),
 
-// Button Selectors
-const vMaxBtn = safeQuerySelector('#vmaxbtn1');
-const disBtn = safeQuerySelector('#disbtn1');
-const weiBtn = safeQuerySelector('#weibtn1');
-const cylBtn = safeQuerySelector('#cylbtn1');
-const powBtn = safeQuerySelector('#powbtn1');
-const rpmBtn = safeQuerySelector('#rpmbtn1');
+    // Waiting/Shuffle overlay and misc UI
+    waitshufflePopouter: safeQuerySelector('#waitshufflePopouter'),
+    waiting: safeQuerySelector('#waiting'),
+    whostarts: safeQuerySelector('#whostarts'),
+    startgame: safeQuerySelector('#startgame'),
+    player1Cover: safeQuerySelector('#player1Cover'),
+    player2Cover: safeQuerySelector('#player2Cover'),
+    player1Deck: safeQuerySelector('#player1Deck'),
+    player2Deck: safeQuerySelector('#player2Deck'),
+    cardNumberp1: safeQuerySelector('#cardNumberp1'),
+    cardNumberp2: safeQuerySelector('#cardNumberp2'),
+    animatedpoints: safeQuerySelector('#animatedpoints'),
+    waitBackbtn: safeQuerySelector('#waitBackbtn'),
 
-const vMaxBtn2 = safeQuerySelector('#vmaxbtn2');
-const disBtn2 = safeQuerySelector('#disbtn2');
-const weiBtn2 = safeQuerySelector('#weibtn2');
-const cylBtn2 = safeQuerySelector('#cylbtn2');
-const powBtn2 = safeQuerySelector('#powbtn2');
-const rpmBtn2 = safeQuerySelector('#rpmbtn2');
+    // Primary card containers and comparison bars
+    player1Card: safeQuerySelector('#player1Card'),
+    player2Card: safeQuerySelector('#player2Card'),
+    compbar1: safeQuerySelector('#compbar1'),
+    compbar2: safeQuerySelector('#compbar2'),
 
-// UI Elements
-const scoreHTML = safeQuerySelector('#score');
-const form1 = safeQuerySelector('#form1');
-const form2 = safeQuerySelector('#form2');
+    // Animated comparison cards
+    animatedCardp1: safeQuerySelector('#animatedCard1'),
+    animatedCardp2: safeQuerySelector('#animatedCard2'),
 
-const innerBar1 = safeQuerySelector('#innerbar1');
-const innerBar2 = safeQuerySelector('#innerbar2');
-const innerBars = safeQuerySelectorAll('.innerbar');
-const compPopupOuter = safeQuerySelector('#popupouter');
-const compPopup = safeQuerySelector('#comp_popupinner');
-const closeBtn = safeQuerySelector('#closebtn');
-const popupHeader = safeQuerySelector('h3');
+    // Endgame popup
+    endgameouter: safeQuerySelector('#endgameouter'),
+    whoWins: safeQuerySelector('#whoWins'),
+    endgamebacktn: safeQuerySelector('#endgamebacktn'),
+    newGame: safeQuerySelector('#newGame'),
 
-// Waiting/Shuffle overlay and misc UI
-const waitshufflePopouter = safeQuerySelector('#waitshufflePopouter');
-const waiting = safeQuerySelector('#waiting');
-const whostarts = safeQuerySelector('#whostarts');
-const startgame = safeQuerySelector('#startgame');
-const player1Cover = safeQuerySelector('#player1Cover');
-const player2Cover = safeQuerySelector('#player2Cover');
-const player1Deck = safeQuerySelector('#player1Deck');
-const player2Deck = safeQuerySelector('#player2Deck');
-const cardNumberp1 = safeQuerySelector('#cardNumberp1');
-const cardNumberp2 = safeQuerySelector('#cardNumberp2');
-const animatedpoints = safeQuerySelector('#animatedpoints');
-const waitBackbtn = safeQuerySelector('#waitBackbtn');
+    // Player/opponent name labels
+    player2Name: safeQuerySelector('#player2Name'),
 
-// Primary card containers and comparison bars
-const player1Card = safeQuerySelector('#player1Card');
-const player2Card = safeQuerySelector('#player2Card');
-const compbar1 = safeQuerySelector('#compbar1');
-const compbar2 = safeQuerySelector('#compbar2');
+    // Auth/name popups
+    nameOuter2: safeQuerySelector('#nameOuter2'),
+    signInOuter2: safeQuerySelector('#signInOuter2'),
+    nameForm: safeQuerySelector('#nameForm'),
+    nameBackbtn: safeQuerySelector('#nameBackbtn'),
 
-// Animated comparison cards
-const animatedCardp1 = safeQuerySelector('#animatedCard1');
-const animatedCardp2 = safeQuerySelector('#animatedCard2');
+    drawCardsStack1: safeQuerySelector('#drawCardsStack1'),
+    drawCardsStack2: safeQuerySelector('#drawCardsStack2'),
+    drawCardsStack: safeQuerySelectorAll('.drawCardsStack'),
 
-// Endgame popup
-const endgameouter = safeQuerySelector('#endgameouter');
-const whoWins = safeQuerySelector('#whoWins');
-const endgamebacktn = safeQuerySelector('#endgamebacktn');
-const newGame = safeQuerySelector('#newGame');
+    preventDocBeeingClicked: safeQuerySelector('#wait_for_other_player'),
 
-// Player/opponent name labels
-const player2Name = safeQuerySelector('#player2Name');
+    // Card buttons
+    card1Buttons: safeQuerySelectorAll('#player1Card button'),
+    card2Buttons: safeQuerySelectorAll('#player2Card button'),
+    allCardButtons: [safeQuerySelectorAll('#player1Card button'), safeQuerySelectorAll('#player2Card button')],
 
-// Auth/name popups
-const nameOuter2 = safeQuerySelector('#nameOuter2');
-const signInOuter2 = safeQuerySelector('#signInOuter2');
-const nameForm = safeQuerySelector('#nameForm');
-const nameBackbtn = safeQuerySelector('#nameBackbtn');
+    // Arrow buttons
+    arrleft: safeQuerySelector('#arrleft'),
+    arrright: safeQuerySelector('#arrright')
+};
 
-const drawCardsStack1 = safeQuerySelector('#drawCardsStack1')
-const drawCardsStack2 = safeQuerySelector('#drawCardsStack2')
-const drawCardsStack = safeQuerySelectorAll('.drawCardsStack')
+// Backward compatibility - expose commonly used variables globally
+// TODO: Gradually migrate away from these global variables
+const {
+    form1,
+    form2,
+    innerBar1,
+    innerBar2,
+    preventDocBeeingClicked,
+    vMaxBtn,
+    disBtn,
+    weiBtn,
+    cylBtn,
+    powBtn,
+    rpmBtn,
+    vMaxBtn2,
+    disBtn2,
+    weiBtn2,
+    cylBtn2,
+    powBtn2,
+    rpmBtn2,
+    card1Buttons,
+    card2Buttons,
+    allCardButtons,
+    arrleft,
+    arrright
+} = window.GameUI;
 
-const preventDocBeeingClicked = safeQuerySelector('#wait_for_other_player')
+// Expose helper functions globally for backward compatibility
+window.safeQuerySelector = safeQuerySelector;
+window.safeQuerySelectorAll = safeQuerySelectorAll;
+window.getSelector = getSelector;
 
 
 const updateUICardElements = (deckSubstring, deckArray, deckposition) => {

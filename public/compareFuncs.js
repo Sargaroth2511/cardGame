@@ -47,12 +47,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
     finishTurnAndResetUI();
 
     function showComparePopup(headingString){
-        if (isPlayingOnline && preventDocBeeingClicked) {
-            preventDocBeeingClicked.style.display = 'grid';
+        if (isPlayingOnline && window.GameUI?.preventDocBeeingClicked) {
+            window.GameUI.preventDocBeeingClicked.style.display = 'grid';
         }
-        if (popupHeader) popupHeader.textContent = headingString;
-        if (compPopup) compPopup.style.display = 'flex';
-        if (compPopupOuter) compPopupOuter.style.display = 'flex';
+        if (window.GameUI?.popupHeader) window.GameUI.popupHeader.textContent = headingString;
+        if (window.GameUI?.compPopup) window.GameUI.compPopup.style.display = 'flex';
+        if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'flex';
     };
 
     async function animateStatBar(barHTMLElement, barLengthPercentage, cardValue,
@@ -67,8 +67,8 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
                     clearInterval(barAnimationInterval);
                     if (barHTMLElement) barHTMLElement.textContent = `${cardValue} ${unit}`;
 
-                    if (barHTMLElement === innerBar1){
-                        animateBarCallback(innerBar2, p2BarPercent, p2Value, animateStatBar) 
+                    if (barHTMLElement === window.GameUI?.innerBar1){
+                        animateBarCallback(window.GameUI?.innerBar2, p2BarPercent, p2Value, animateStatBar)
                         resolve();
                     } else {
                         isComparisonInProgress = false;
@@ -88,7 +88,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
         applyAnimations();
 
         return new Promise(resolve => {
-            let animatedCards = [animatedCardp1, animatedCardp2];
+            let animatedCards = [window.GameUI?.animatedCardp1, window.GameUI?.animatedCardp2];
             const resolvePromise = () => {
                 resolve(animatedCards.forEach(e => {
                     e.removeEventListener('animationend', resolvePromise)
@@ -109,25 +109,25 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 
         function applyAnimations(){
             if (p1CardValue === p2CardValue){
-                addCssAnimation(animatedCardp1, 'animationDrawCard1');
-                addCssAnimation(animatedCardp2, 'animationDrawCard2');
+                addCssAnimation(window.GameUI?.animatedCardp1, 'animationDrawCard1');
+                addCssAnimation(window.GameUI?.animatedCardp2, 'animationDrawCard2');
             }; 
     
             if (isPlayerOne){
                 if (p1CardValue > p2CardValue) {
-                    addCssAnimation(animatedCardp2, 'animationCard2')
+                    addCssAnimation(window.GameUI?.animatedCardp2, 'animationCard2')
                     animateDrawStacks('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
                 } else if (p1CardValue < p2CardValue){
-                    addCssAnimation(animatedCardp1, 'animationCard1')
+                    addCssAnimation(window.GameUI?.animatedCardp1, 'animationCard1')
                     animateDrawStacks('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
                 };   
     
             } else if (!isPlayerOne){
                 if (p1CardValue > p2CardValue) {
-                    addCssAnimation(animatedCardp2, 'animationCard1')
+                    addCssAnimation(window.GameUI?.animatedCardp2, 'animationCard1')
                     animateDrawStacks('drawstackAnimationp2c1', 'drawstackAnimationp2c2');
                 } else if (p1CardValue < p2CardValue){
-                    addCssAnimation(animatedCardp1, 'animationCard2')
+                    addCssAnimation(window.GameUI?.animatedCardp1, 'animationCard2')
                     animateDrawStacks('drawstackAnimationp1c1', 'drawstackAnimationp1c2');
                 };   
             };
@@ -138,10 +138,10 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 
             function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
                 if (drawDeck.length > 0){
-                    if (arrright) arrright.style.display = 'none';
-                    if (arrleft) arrleft.style.display = 'none';
-                    if (drawCardsStack1) drawCardsStack1.classList.add(drawCardAnimation1);
-                    if (drawCardsStack2) drawCardsStack2.classList.add(drawCardAnimation2);
+                    if (window.GameUI?.arrright) window.GameUI.arrright.style.display = 'none';
+                    if (window.GameUI?.arrleft) window.GameUI.arrleft.style.display = 'none';
+                    if (window.GameUI?.drawCardsStack1) window.GameUI.drawCardsStack1.classList.add(drawCardAnimation1);
+                    if (window.GameUI?.drawCardsStack2) window.GameUI.drawCardsStack2.classList.add(drawCardAnimation2);
                     drawDeck.length = 0;
                 };
             };        
@@ -176,15 +176,15 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
     if (play1Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, factor) : calcPoints(play2Deck, factor);
         isPlayingOnline ? winner = secondPlayer : winner = 'Computer';
-        if (endgameouter) endgameouter.style.display = 'grid'
-        if (whoWins) whoWins.textContent = `${winner} hat gewonnen!`;   
+        if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid'
+        if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
     } else if (play2Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, 1) : calcPoints(play2Deck, 1);
         winner = firstPlayer;
-        if (endgameouter) endgameouter.style.display = 'grid'
-        if (whoWins) whoWins.textContent = `${winner} hat gewonnen!`;   
+        if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid'
+        if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
     } else {
@@ -198,11 +198,11 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
            docRef = db.collection('Users').doc(uniqueOnlineName);
        docRef.get().then(doc => {
             let userDoc = doc.data();
-            if (scoreHTML && scoreHTML.children && scoreHTML.children[1]) {
+            if (window.GameUI?.scoreHTML && window.GameUI.scoreHTML.children && window.GameUI.scoreHTML.children[1]) {
                 userDoc.Score !== undefined ? (docRef.update({'Score' : score+userDoc.Score}),
-                                          scoreHTML.children[1].textContent = score+userDoc.Score):
+                                          window.GameUI.scoreHTML.children[1].textContent = score+userDoc.Score):
                                           (docRef.update({'Score': score}),
-                                          scoreHTML.children[1].textContent = score);
+                                          window.GameUI.scoreHTML.children[1].textContent = score);
             }
        });
     };
@@ -217,13 +217,13 @@ const checkForWinner = () => {
         // Check if either player has no cards left
         if (play1Deck.length === 0) {
             // Player 2 wins
-            if (whoWins) whoWins.textContent = isPlayingOnline ? `${otherPlayer} gewinnt!` : 'Computer gewinnt!';
-            if (endgameouter) endgameouter.style.display = 'grid';
+            if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = isPlayingOnline ? `${otherPlayer} gewinnt!` : 'Computer gewinnt!';
+            if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid';
             resolve(true);
         } else if (play2Deck.length === 0) {
             // Player 1 wins
-            if (whoWins) whoWins.textContent = isPlayingOnline ? `${onlineName} gewinnt!` : 'Du gewinnst!';
-            if (endgameouter) endgameouter.style.display = 'grid';
+            if (window.GameUI?.whoWins) window.GameUI.whoWins.textContent = isPlayingOnline ? `${onlineName} gewinnt!` : 'Du gewinnst!';
+            if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'grid';
             resolve(true);
         } else {
             // No winner yet
@@ -247,12 +247,12 @@ const finishTurnAndResetUI = async () => {
     
 
     (function resetUI(){
-    if (isPlayingOnline && preventDocBeeingClicked){
-            preventDocBeeingClicked.style.display = 'none';
+    if (isPlayingOnline && window.GameUI?.preventDocBeeingClicked){
+            window.GameUI.preventDocBeeingClicked.style.display = 'none';
         };   
-        if (compPopupOuter) compPopupOuter.style.display = 'none';
-        if (innerBars) {
-            innerBars.forEach (e => {
+        if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'none';
+        if (window.GameUI?.innerBars) {
+            window.GameUI.innerBars.forEach (e => {
                 if (e) {
                     e.textContent = '0';
                     e.style.width = '0';
@@ -260,7 +260,7 @@ const finishTurnAndResetUI = async () => {
             });
         }
         let cssanimationClasses = GAME_CONSTANTS.CSS_ANIMATION_CLASSES;
-        let cssAnimatedElements = [drawCardsStack1, drawCardsStack2, animatedCardp1, animatedCardp2]
+        let cssAnimatedElements = [window.GameUI?.drawCardsStack1, window.GameUI?.drawCardsStack2, window.GameUI?.animatedCardp1, window.GameUI?.animatedCardp2]
         cssAnimatedElements.forEach (e => {
             if (e) removeCssAnimationClasses(e, ...cssanimationClasses)
         });
@@ -279,12 +279,10 @@ const finishTurnAndResetUI = async () => {
 
 
 const setCardButtonsEnabledForTurn = (unitString, disableCard1Buttons, disableCard2Buttons) => {
-    if (!form1 || !form2) return;
-    
-    let elements1 = form1.elements,
-        elements2 = form2.elements;
+    if (!window.GameUI?.form1 || !window.GameUI?.form2) return;
 
-    allDeckProperties[chosenDeck].forEach(e => {
+    let elements1 = window.GameUI.form1.elements,
+        elements2 = window.GameUI.form2.elements;    allDeckProperties[chosenDeck].forEach(e => {
         if (e.unit === unitString && e.lowerIsBetter === true){
             [disableCard1Buttons, disableCard2Buttons] = [disableCard2Buttons, disableCard1Buttons];
         };    
@@ -329,9 +327,9 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         };
     };    
     function switchWhosNext(){
-        if(vMaxBtn2 && vMaxBtn2.disabled) {
+        if(window.GameUI?.vMaxBtn2 && window.GameUI.vMaxBtn2.disabled) {
             setCardButtonsEnabledForTurn('', true, false);
-        } else if (vMaxBtn && vMaxBtn.disabled) {
+        } else if (window.GameUI?.vMaxBtn && window.GameUI.vMaxBtn.disabled) {
             setCardButtonsEnabledForTurn('', false, true);
         };
     };

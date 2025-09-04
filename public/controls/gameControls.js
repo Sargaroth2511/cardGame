@@ -12,8 +12,8 @@
     }
 
     // Add click listeners to all card property buttons
-    if (Array.isArray(allCardButtons)) {
-      allCardButtons.forEach(cardButtons => {
+    if (Array.isArray(window.GameUI?.allCardButtons)) {
+      window.GameUI.allCardButtons.forEach(cardButtons => {
         for (let i = 0; i < cardButtons.length; i++) {
           cardButtons[i].addEventListener('click', async e => {
             e.preventDefault();
@@ -50,18 +50,18 @@
       });
     }
 
-    if (typeof endgamebacktn !== 'undefined' && endgamebacktn) {
-      endgamebacktn.addEventListener('click', e => {
+    if (window.GameUI?.endgamebacktn) {
+      window.GameUI.endgamebacktn.addEventListener('click', e => {
         e.preventDefault();
         window.location.replace('index.html');
       });
     }
 
-    if (typeof newGame !== 'undefined' && newGame) {
-      newGame.addEventListener('click', e => {
+    if (window.GameUI?.newGame) {
+      window.GameUI.newGame.addEventListener('click', e => {
         e.preventDefault();
-        if (typeof endgameouter !== 'undefined' && endgameouter) endgameouter.style.display = 'none';
-        if (typeof compPopupOuter !== 'undefined' && compPopupOuter) compPopupOuter.style.display = 'none';
+        if (window.GameUI?.endgameouter) window.GameUI.endgameouter.style.display = 'none';
+        if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'none';
         if (isPlayingOnline && db && ourGameName && uniqueOnlineName) {
           db.collection(ourGameName).doc(uniqueOnlineName).update({ myTurn: '' })
             .then(() => db.collection(ourGameName).doc(uniqueOnlineName).update({ isRdy: 'yes' }))
@@ -73,10 +73,10 @@
       });
     }
 
-    if (typeof waitBackbtn !== 'undefined' && waitBackbtn) {
-      waitBackbtn.addEventListener('click', e => {
+    if (window.GameUI?.waitBackbtn) {
+      window.GameUI.waitBackbtn.addEventListener('click', e => {
         e.preventDefault();
-        if (typeof waitshufflePopouter !== 'undefined' && waitshufflePopouter) waitshufflePopouter.style.display = 'none';
+        if (window.GameUI?.waitshufflePopouter) window.GameUI.waitshufflePopouter.style.display = 'none';
         if (startBtn) startBtn.disabled = false;
         if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
         if (typeof dotinterval !== 'undefined' && dotinterval) clearInterval(dotinterval);
@@ -91,8 +91,8 @@
     }
 
     // Alert when clicking the blocker overlay
-    if (typeof preventDocBeeingClicked !== 'undefined' && preventDocBeeingClicked) {
-      preventDocBeeingClicked.addEventListener('click', () => {
+    if (window.GameUI?.preventDocBeeingClicked) {
+      window.GameUI.preventDocBeeingClicked.addEventListener('click', () => {
         alert('Dein Gegner ist noch nicht bereit');
       });
     }
