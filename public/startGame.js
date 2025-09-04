@@ -3,7 +3,6 @@
 const startGame = () => {
     // Attach listeners as early as possible to avoid missing first turns
     if (isPlayingOnline && typeof attachFirebaseGameListeners === 'function') {
-        try { window.debug?.log('Early attach of Firebase listeners'); } catch(e){}
         attachFirebaseGameListeners();
     }
 
@@ -25,10 +24,8 @@ const startGame = () => {
             await docRef.update({isRdy: ''});
         
             if(num <= 0.5){
-                try { window.debug?.log('Set myTurn yes (self)'); } catch(e){}
                 await docRef.update({myTurn : 'yes'});
             } else if (num > 0.5) {
-                try { window.debug?.log('Set myTurn no (self)'); } catch(e){}
                 await docRef.update({myTurn : 'no'})
             };
         };
@@ -156,7 +153,6 @@ const startGame = () => {
                 player1Deck: play1DeckID,
                 player2Deck: play2DeckID
             });
-            console.log('decks written')
         };
 
 
@@ -194,16 +190,14 @@ const startGame = () => {
             .then((doc) => {
                 let docu = doc.data();
                 if (docu.myTurn === 'yes'){
-                    try { window.debug?.log('Other myTurn yes'); } catch(e){}
                     whostarts.textContent = `${otherPlayer} fängt an!`
                     setCardButtonsEnabledForTurn('', false, true);
                 } else if (docu.myTurn === 'no'){
-                    try { window.debug?.log('Other myTurn no'); } catch(e){}
                     whostarts.textContent = `${onlineName} fängt an!`
                     setCardButtonsEnabledForTurn('', true, false);
-                } else console.log('canst get myTurn', docu.myTurn)  
+                }
                 }).catch((err) => {
-                    console.log ('error getting documents', err)
+                    // Error getting documents - silently handle
                 });
             player2Name.textContent = otherDatabaseDoc.name;
         };

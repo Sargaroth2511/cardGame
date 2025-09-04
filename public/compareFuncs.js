@@ -238,7 +238,7 @@ const finishTurnAndResetUI = async () => {
                 resolve();
             })
             .catch((err) => {
-                reject(console.log(err, 'error updating document'));
+                reject(err);
             });
         } else resolve();
     });

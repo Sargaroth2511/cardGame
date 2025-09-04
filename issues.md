@@ -1,7 +1,7 @@
 **Security**
 
 - **Arbitrary code execution risk (HIGH):** ~~`public/decks.js` line ~170 defines `parse(str)` using `Function()` to evaluate arbitrary strings. This enables code injection if any untrusted input reaches it. Replace with explicit mapping or a safe parser; never evaluate dynamic strings.~~ ✅ **FIXED:** Removed dangerous `parse()` function and replaced with safe `selectorMap` in `declarations.js`. Updated tests to reflect security improvements.
-- **Firebase listener robustness (MEDIUM):** `public/firebaseListeners.js` uses `onSnapshot` without storing unsubscribe functions. This can leak memory and keep network activity after navigation. Return and invoke unsubscribers on teardown.
+- **Firebase listener robustness (MEDIUM):** ~~`public/firebaseListeners.js` uses `onSnapshot` without storing unsubscribe functions. This can leak memory and keep network activity after navigation. Return and invoke unsubscribers on teardown.~~ ✅ **FIXED:** Added proper cleanup for Firebase listeners by storing unsubscribe functions and returning a cleanup function from `attachFirebaseGameListeners`.
 - **Unsanitized HTML writes (LOW):** `public/decks.js` manipulates `animatedpoints.innerHTML` repeatedly. While current values are dots, prefer `textContent` to avoid accidental HTML injection if content changes.
 - **External scripts without SRI/CSP (LOW):** `public/index.html` loads third‑party scripts (Firebase, Font Awesome) without Subresource Integrity and there's no documented CSP. Consider adding CSP and SRI where feasible.
 
@@ -12,7 +12,7 @@
 - **Multiple AI implementations (MEDIUM):** `public/ai.js` and duplicated AI in `compareFuncs.js` overlap. Keep a single source of truth.
 - **Global reliance on missing DOM nodes (MEDIUM):** Many scripts query elements at load time (`document.querySelector(...)`) and immediately use them without null checks. In pages where elements are absent, this causes errors. Add guards or initialize on DOMContentLoaded within scoped modules.
 - **Potential race on globals (MEDIUM):** Cross‑file global variables (e.g., `preventDocBeeingClicked`, `innerBar1/2`, `form1/2`) assume load order and pollute global scope, leading to brittle coupling. Use modules or a single app namespace and explicit imports.
-- **Null handling for Firestore docs (MEDIUM):** `public/firebaseListeners.js` uses `doc.data()` with fallback `|| {}`, but some places lack `doc.exists` check. Add `if (!doc.exists) return;` for consistency.
+- **Null handling for Firestore docs (MEDIUM):** ~~`public/firebaseListeners.js` uses `doc.data()` with fallback `|| {}`, but some places lack `doc.exists` check. Add `if (!doc.exists) return;` for consistency.~~ ✅ **FIXED:** Added `if (!doc.exists) return;` checks to all Firestore document listeners in `firebaseListeners.js` for proper null handling.
 - **Encoding issues in literals (LOW):** Multiple files contain mojibake like `ZurA�ck`, `fA�ngt`. Ensure UTF‑8 encoding and fix strings.
 
 **Maintainability/Style**
@@ -20,7 +20,7 @@
 - **Hard‑coded magic numbers (MEDIUM):** Animation timings, bar widths, and z‑indexes are scattered (e.g., `15`ms intervals, bar `max` values). Centralize in constants/config.
 - **Inconsistent naming & mixed responsibilities (MEDIUM):** UI, game logic, network, and persistence are intertwined within single files. Consider separating concerns (e.g., `gameLogic.js`, `ui.js`, `firebase.js`).
 - **Lack of modular exports (MEDIUM):** Files expose functions/vars globally rather than via modules, complicating testing and reuse. Adopt ES modules with explicit exports/imports.
-- **Excessive console logging (MEDIUM):** 40+ `console.log` statements across files should be removed for production code.
+- **Excessive console logging (MEDIUM):** ~~40+ `console.log` statements across files should be removed for production code.~~ ✅ **FIXED:** Removed excessive console.log and debug statements from `startGame.js`, `compareFuncs.js`, and `firebaseListeners.js` while preserving essential error logging.
 - **Commented/unused code and TODOs (LOW):** Legacy comments and placeholders remain in `public/index.html` and elsewhere; prune or ticketize.
 
 **Performance**

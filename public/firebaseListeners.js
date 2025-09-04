@@ -6,6 +6,10 @@ const attachFirebaseGameListeners = () => {
         return;
     }
     window.__gameListenersAttached = true;
+    
+    // Store unsubscribe functions for cleanup
+    const unsubscribers = [];
+    
     let pendingRemoteCompareIndex = null;
     let pendingTimer = null;
     let selfNextTurn = '';
@@ -20,7 +24,6 @@ const attachFirebaseGameListeners = () => {
         window.debug?.set('other', uniqueOtherPlayerName);
         window.debug?.set('isPlayerOne', isPlayerOne);
         window.debug?.set('isPlayingOnline', isPlayingOnline);
-        window.debug?.log('attachFirebaseGameListeners');
     } catch(e){}
 
     function ensureRunCompareWhenReady(index) {
@@ -33,7 +36,6 @@ const attachFirebaseGameListeners = () => {
                 const idx = pendingRemoteCompareIndex; pendingRemoteCompareIndex = null;
                 window.debug?.set('queuedIndex', '');
                 try {
-                    window.debug?.log('Run deferred compare', { idx });
                     compareTopCardsByIndex(idx); 
                 } catch (err) {
                     console.error('compareTopCardsByIndex failed for index', idx, err);
@@ -58,7 +60,6 @@ const attachFirebaseGameListeners = () => {
     function shouldProcessIndex(i) {
         const now = Date.now();
         if (i === lastHandledIndex && (now - lastHandledAt) < 1500) {
-            try { window.debug?.log('Skip duplicate index', { i }); } catch(e){}
             return false;
         }
         lastHandledIndex = i;
@@ -67,7 +68,8 @@ const attachFirebaseGameListeners = () => {
     }
 
     // Listen to opponent doc: track their nextTurn (ignore wantsToCheck when Meta is active)
-    db.collection(ourGameName).doc(uniqueOtherPlayerName).onSnapshot((doc) => {
+    const unsubscribeOpponent = db.collection(ourGameName).doc(uniqueOtherPlayerName).onSnapshot((doc) => {
+        if (!doc.exists) return;
         const otherUser = doc.data() || {};
         // Normalize index: accept numeric strings or numbers
         const raw = otherUser.wantsToCheck;
@@ -77,14 +79,12 @@ const attachFirebaseGameListeners = () => {
         otherNextTurn = otherUser.nextTurn || '';
         window.debug?.set('nextTurn_other', otherNextTurn);
         window.debug?.set('wantsToCheck_other', (i ?? '').toString());
-        window.debug?.log('Other snapshot', { i, nextTurn: otherNextTurn });
         maybeClearBlocker();
 
         // Fallback path is now always allowed (with dedupe) to avoid missing turns
         if (Number.isInteger(i) && i >= 0 && i <= 5 && shouldProcessIndex(i)) {
             if (!isComparisonInProgress) {
                 try {
-                    window.debug?.log('Run remote compare (fallback)', { i });
                     compareTopCardsByIndex(i);
                 } catch (err) {
                     console.error('compareTopCardsByIndex failed for index', i, err);
@@ -94,20 +94,21 @@ const attachFirebaseGameListeners = () => {
                 }
             } else {
                 window.debug?.set('queuedIndex', i);
-                window.debug?.log('Queue remote compare (busy, fallback)', { i });
                 ensureRunCompareWhenReady(i);
             }
         }
     });
+    unsubscribers.push(unsubscribeOpponent);
 
     // Listen to our own doc: track our nextTurn state independently
-    db.collection(ourGameName).doc(uniqueOnlineName).onSnapshot((doc) => {
+    const unsubscribeSelf = db.collection(ourGameName).doc(uniqueOnlineName).onSnapshot((doc) => {
+        if (!doc.exists) return;
         const oneSelf = doc.data() || {};
         selfNextTurn = oneSelf.nextTurn || '';
         window.debug?.set('nextTurn_self', selfNextTurn);
-        window.debug?.log('Self snapshot', { nextTurn: selfNextTurn });
         maybeClearBlocker();
     });
+    unsubscribers.push(unsubscribeSelf);
 
     // Centralized turn sequence listener (Meta doc)
     const metaRef = db.collection(ourGameName).doc('Meta');
@@ -117,14 +118,14 @@ const attachFirebaseGameListeners = () => {
             return metaRef.set({ turnSeq: 0 }, { merge: true });
         }
     }).finally(() => {
-        metaRef.onSnapshot((doc) => {
+        const unsubscribeMeta = metaRef.onSnapshot((doc) => {
+            if (!doc.exists) return;
             const meta = doc.data() || {};
             const seq = Number(meta.turnSeq || 0);
             const lastTurn = meta.lastTurn || {};
             metaActive = true;
             window.debug?.set('turnSeq', seq);
             window.debug?.set('lastProcessedSeq', lastProcessedTurnSeq);
-            window.debug?.log('Meta snapshot', { seq, lastTurn });
             if (seq > lastProcessedTurnSeq) {
                 const idxRaw = lastTurn.index;
                 const idx = (typeof idxRaw === 'string') ? parseInt(idxRaw, 10) : idxRaw;
@@ -134,7 +135,6 @@ const attachFirebaseGameListeners = () => {
                             lastProcessedTurnSeq = seq;
                             // Mark as handled to dedupe against fallback
                             lastHandledIndex = idx; lastHandledAt = Date.now();
-                            window.debug?.log('Run meta compare', { idx, seq });
                             compareTopCardsByIndex(idx);
                         } catch (err) {
                             console.error('compareTopCardsByIndex failed (meta)', err);
@@ -144,12 +144,22 @@ const attachFirebaseGameListeners = () => {
                         }
                     } else {
                         window.debug?.set('queuedIndex', idx);
-                        window.debug?.log('Queue meta compare (busy)', { idx, seq });
                         ensureRunCompareWhenReady(idx);
                         lastProcessedTurnSeq = seq; // mark as acknowledged
                     }
                 }
             }
         });
+        unsubscribers.push(unsubscribeMeta);
     });
+    
+    // Return cleanup function
+    return () => {
+        unsubscribers.forEach(unsubscribe => {
+            if (typeof unsubscribe === 'function') {
+                unsubscribe();
+            }
+        });
+        window.__gameListenersAttached = false;
+    };
 };
