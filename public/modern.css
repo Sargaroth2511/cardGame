@@ -1,160 +1,1172 @@
+/* ===========================================
+   INDUSTRIAL MODERN DESIGN - ENHANCED VERSION
+   =========================================== */
+
 body.modern {
-  font-family: 'Roboto', sans-serif;
-  background: #121212;
-  color: #f0f0f0;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(75, 85, 99, 0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  color: #f1f5f9;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+body.modern::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(75, 85, 99, 0.03) 2px,
+      rgba(75, 85, 99, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: -1;
 }
 
 body.modern .playground {
-  background: #111827;
-  min-height: 100vh;
+  position: relative;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  height: 95vh;
+  width: 100vw;
+  background:
+    linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+    radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 body.modern .navbar {
-  background: #1e1e1e;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  position: absolute;
+  background:
+    linear-gradient(135deg, #1e293b 0%, #334155 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.4);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
+  backdrop-filter: blur(20px);
+}
+
+body.modern .navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
 }
 
 body.modern .navbar h1 {
-  color: #3b82f6;
+  color: #60a5fa;
+  text-shadow:
+    0 0 20px rgba(59, 130, 246, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+body.modern .navbar h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+  border-radius: 1px;
 }
 
 body.modern .navbar h2 {
-  color: #9ca3af;
+  color: #cbd5e1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  opacity: 0.9;
 }
 
 body.modern #style-toggle {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  right: auto;
-  background: #3b82f6;
-  color: #fff;
+  top: 1rem;
+  left: 1rem;
+  background:
+    linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
+  color: #fef2f2;
   border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
+  box-shadow:
+    0 4px 12px rgba(220, 38, 38, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 body.modern #style-toggle:hover {
-  background: #2563eb;
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 50%, #b91c1c 100%);
+  box-shadow:
+    0 6px 20px rgba(220, 38, 38, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
+body.modern #style-toggle:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 8px rgba(220, 38, 38, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Button Styles */
 body.modern .startform input[type="button"],
-body.modern .startform button {
-  background: #3b82f6;
-  color: #fff;
+body.modern .startform button,
+body.modern .backbtn,
+body.modern #startgame {
+  background:
+    linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
+  color: #ffffff;
   border: none;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem;
-  font-size: 1rem;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 6px 20px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+body.modern .startform input[type="button"]::before,
+body.modern .startform button::before,
+body.modern .backbtn::before,
+body.modern #startgame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+body.modern .startform input[type="button"]:hover::before,
+body.modern .startform button:hover::before,
+body.modern .backbtn:hover::before,
+body.modern #startgame:hover::before {
+  left: 100%;
 }
 
 body.modern .startform input[type="button"]:hover,
-body.modern .startform button:hover {
-  background: #2563eb;
-}
-
-body.modern .backbtn,
-body.modern #startgame,
-body.modern #style-toggle {
-  background: #3b82f6;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-
+body.modern .startform button:hover,
 body.modern .backbtn:hover,
-body.modern #startgame:hover,
-body.modern .card button:hover {
-  background: #2563eb;
+body.modern #startgame:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #1d4ed8 100%);
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Align modern controls around the board like classic, but keep modern look */
-/* Left side: design toggle at board top with 5px gap, two-line label centered */
+body.modern .startform input[type="button"]:active,
+body.modern .startform button:active,
+body.modern .backbtn:active,
+body.modern #startgame:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 15px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Card Design - PRESERVE ORIGINAL POSITIONING */
+body.modern .card {
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 5, 5, 0.4);
+  text-align: center;
+  height: 55%;
+  width: 70%;
+  max-width: 217px;
+  max-height: 315px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  line-height: 1.2rem;
+  background:
+    linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+    radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+body.modern .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+}
+
+body.modern .card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+}
+
+/* PRESERVE ORIGINAL CARD POSITIONING CLASSES */
+body.modern .c1 {
+    position: absolute;
+    top: 25%;
+}
+
+body.modern .c2 {
+    position: absolute;
+    display: none;
+}
+
+body.modern .playercards {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(50, 145, 145, 0.267);
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.3rem;
+}
+
+body.modern .cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 14;
+    align-content: center;
+    justify-content: center;
+    display: none;
+    box-shadow: 0 4px 8px 0 rgb(0 5 5 / 40%);
+    border-radius: 10px;
+    display: flex;
+}
+
+body.modern .cardback {
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    height: 95%;
+    width: 92%;
+    background-image: url(Images/loadinggear.png);
+    background-size: 17px;
+    background-position: center;
+    border-radius: 10px;
+    background:
+        linear-gradient(145deg, #0f172a 0%, #1e293b 30%, #334155 70%, #0f172a 100%),
+        radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 75% 75%, rgba(234, 88, 12, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 80%);
+    border: 2px solid rgba(75, 85, 99, 0.8);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        inset 0 3px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 30px rgba(59, 130, 246, 0.2),
+        0 0 15px rgba(234, 88, 12, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+body.modern .transparentCover {
+    position: absolute;
+    z-index: 17;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}body.modern .card .property,
+body.modern .card .value,
+body.modern .card .name {
+  color: #f1f5f9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+body.modern .card button {
+  background:
+    linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
+  color: #f1f5f9;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+body.modern .card button:hover {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 50%, #4b5563 100%);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* PRESERVE ORIGINAL CARD FORM POSITIONING */
+body.modern .card form {
+  width: 95%;
+  height: 40%;
+  position: absolute;
+  justify-self: center;
+  top: 58%;
+  display: grid;
+  grid-template-rows: 33.33% 33.33% 33.33%;
+  grid-template-columns: 50% 50%;
+}
+
+body.modern .card button {
+  height: 17%;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  justify-self: center;
+  border-width: 1px;
+  border-color: rgba(19, 1, 1, 0.637);
+  border-radius: 5px;
+  height: 93%;
+  width: 98%;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* PRESERVE ORIGINAL CARD ELEMENTS POSITIONING */
+body.modern .card-image {
+  position: absolute;
+  object-fit: cover;
+  justify-self: center;
+  width: 95%;
+  height: 34%;
+  background-color: cadetblue;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
+body.modern .name {
+  position: absolute;
+  justify-self: center;
+  top: 35%;
+  margin-left: 1px;
+  color: lightcyan;
+  background-color: hsla(175, 83%, 9%, 0.644);
+  width: 94%;
+  text-align: left;
+  padding-left: 4px;
+  padding-right: 6px;
+  line-height: 1.2;
+  white-space: normal;
+  word-break: break-word;
+  bottom: 44%;
+  overflow-y: auto;
+  z-index: 4;
+}
+
+body.modern .property {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 3;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+body.modern .value {
+  position: absolute;
+  font-size: 1rem;
+  font-weight: 700;
+  top: 24%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+  line-height: 1;
+}
+
+body.modern .cardIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(2.1);
+  opacity: 0.12;
+  color: rgba(0,0,0,0.35);
+  text-shadow: none;
+  z-index: 1;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* PRESERVE ORIGINAL DECK POSITIONING */
+body.modern .playerDeck {
+  z-index: 15;
+  position: absolute;
+  top: auto;
+  transform: scale(0.3);
+  pointer-events: auto;
+}
+
+body.modern .player1Deck {
+  bottom: 2%;
+  display: none;
+}
+
+body.modern .player1Deck > * {
+  pointer-events: none;
+}
+
+body.modern .player2Deck {
+  top: -12%;
+  display: none;
+}
+
+/* PRESERVE ORIGINAL SCORE AND RANK POSITIONING */
+body.modern #score {
+  position: absolute;
+  bottom: 8%;
+  left: 10%;
+  height: 5%;
+  width: 8%;
+  text-align: center;
+  padding-top: 2%;
+  font-size: 1.3rem;
+  z-index: 18;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  background:
+    linear-gradient(135deg, #1e293b 0%, #334155 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  border: 1px solid rgba(75, 85, 99, 0.4);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+body.modern .rank {
+  position: absolute;
+  bottom: 2%;
+  left: 10%;
+  height: 5%;
+  width: 8%;
+  text-align: center;
+  padding-top: 2%;
+  font-size: 1.3rem;
+  z-index: 18;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  background:
+    linear-gradient(135deg, #1e293b 0%, #334155 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  border: 1px solid rgba(75, 85, 99, 0.4);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+body.modern #rankp2 {
+  top: 2%;
+}
+
+body.modern .coin {
+  position: static;
+  transform: none;
+  font-size: 1.4em;
+  opacity: 0.9;
+  color: #ffcc33;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+body.modern .trophy {
+  position: static;
+  transform: none;
+  font-size: 1.4em;
+  opacity: 0.9;
+  color: #ffb020;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* PRESERVE ORIGINAL PLAYER NAME POSITIONING */
+body.modern .player2Name {
+  position: absolute;
+  top: 1%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  height: 2rem;
+  left: 50%;
+  padding-top: 2px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 35%;
+}
+
+/* PRESERVE ORIGINAL CARD NUMBER POSITIONING */
+body.modern .cardNumber {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  font-size: 1.3rem;
+  text-shadow: rgb(32, 32, 32);
+  justify-self: center;
+  align-self: flex-end;
+  transform: translateX(4.5rem) translateY(-550%);
+}
+
+/* PRESERVE ORIGINAL BACK BUTTON POSITIONING */
+body.modern .backbtn {
+  position: absolute;
+  display: grid;
+  bottom: 3%;
+  left: 3%;
+  width: 7rem;
+  height: 4rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  align-content: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* PRESERVE ORIGINAL START GAME BUTTON POSITIONING */
+body.modern .playground > #startgame {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% + 5px);
+  transform: none;
+  z-index: 1000;
+  width: 5.6rem;
+  height: 1.6rem;
+  font-size: 0.85rem;
+  padding: 0 0.5rem;
+  border-radius: 5px;
+}
+
+/* PRESERVE ORIGINAL STYLE TOGGLE POSITIONING */
 body.modern .playground > #style-toggle {
   position: absolute;
-  top: 0;                 /* align with board top */
-  left: -5px;             /* 5px gap outside left edge */
+  top: 0;
+  left: -5px;
   transform: translateX(-100%);
-  height: 2.6rem;  /* taller to fit two-line label */
+  z-index: 1000;
+  width: auto;
+  height: 2.6rem;
   font-size: 0.9rem;
-  display: inline-flex;   /* center content perfectly */
+  line-height: 1.1;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.9rem;      /* horizontal padding only */
+  padding: 0 0.9rem;
+  white-space: normal;
   text-align: center;
 }
 
-/* Start page: toggle is inside navbar; place it the same relative to board */
 body.modern .playground .navbar > #style-toggle {
   position: absolute;
   top: 0;
   left: -5px;
   transform: translateX(-100%);
-  height: 2.6rem;  /* taller to fit two-line label */
+  z-index: 1000;
+  height: 2.6rem;
   font-size: 0.9rem;
-  display: inline-flex;   /* center content perfectly */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.9rem;      /* horizontal padding only */
+  padding: 0 0.9rem;
+  white-space: normal;
   text-align: center;
 }
 
-/* Left bottom: back button aligned to board bottom, 5px to the left */
+/* PRESERVE ORIGINAL BACK BUTTON POSITIONING FOR GAME VIEW */
 body.modern #backbtn {
   position: absolute;
   bottom: 0;
+  top: auto;
   left: -5px;
   transform: translateX(-100%);
-  width: 5.6rem;         /* match smaller size */
+  width: 5.6rem;
   height: 1.6rem;
   font-size: 0.85rem;
   padding: 0 0.5rem;
-  border-radius: 8px;     /* match modern buttons */
+  border-radius: 5px;
+  z-index: 1000;
 }
 
-/* Right bottom: start button aligned to board bottom, 5px to the right */
-body.modern .playground > #startgame {
-  position: absolute;
-  bottom: 0;
-  left: calc(100% + 5px);
-  width: 5.6rem;         /* match smaller size */
-  height: 1.6rem;
-  font-size: 0.85rem;
-  padding: 0 0.5rem;
-  border-radius: 8px;     /* match modern buttons */
-}
-
-/* Modern design: ensure deck chooser start button has modern radius */
-body.modern #choose-deck-popout #choosedeck #gameStart { border-radius: 8px; }
-
-body.modern .card {
-  background: #1e293b;
-  border: 1px solid #374151;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  color: #f0f0f0;
-}
-
-body.modern .card .property,
-body.modern .card .value,
-body.modern .card .name {
-  color: #f0f0f0;
-}
-
-body.modern .card button {
-  background: #3b82f6;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-}
-
+/* Enhanced UI Panels */
 body.modern .rank,
 body.modern #score {
-  background: #1e1e1e;
-  color: #f0f0f0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  background:
+    linear-gradient(135deg, #1e293b 0%, #334155 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  color: #f1f5f9;
+  border: 1px solid rgba(75, 85, 99, 0.4);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
 }
+
+body.modern .rank::before,
+body.modern #score::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+}
+
+/* Prevent coin/trophy icons from overlapping their numbers */
+body.modern #score,
+body.modern .rank {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* Enhanced Popup Design */
+body.modern .comp_popupinner {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  width: 85%;
+  height: 35%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  display: grid;
+  justify-content: center;
+  display: none;
+  background:
+    linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 16px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(59, 130, 246, 0.2);
+  backdrop-filter: blur(20px);
+}
+
+/* Ensure waitshuffle popup stays centered in modern theme */
+body.modern #waitshufflePopouter .comp_popupinner {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 420px;
+  height: 14rem;
+  display: grid;
+  place-items: center;
+  grid-auto-rows: min-content;
+  row-gap: 0.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 2rem;
+  color: white;
+}
+
+body.modern .comp_popupinner h3 {
+  color: #60a5fa;
+  text-shadow:
+    0 0 15px rgba(59, 130, 246, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+}
+
+/* Enhanced Progress Bars */
+body.modern .compbar1,
+body.modern .compbar2 {
+  position: absolute;
+  background:
+    linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+body.modern .compbar1 {
+  top: 30%;
+  width: 90%;
+  height: 15%;
+  left: 5%;
+}
+
+body.modern .compbar2 {
+  top: 60%;
+  width: 90%;
+  height: 15%;
+  left: 5%;
+}
+
+body.modern .compbar1::before,
+body.modern .compbar2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+}
+
+body.modern .innerbar {
+  padding-top: 7px;
+  width: 0px;
+  height: 100%;
+  background-color: orangered;
+  font-size: 1.5rem;
+  color: rgb(19, 1, 1);
+  text-indent: 7px;
+  overflow: visible;
+  white-space: nowrap;
+  background:
+    linear-gradient(135deg, #ea580c 0%, #f97316 50%, #ea580c 100%);
+  box-shadow:
+    0 0 10px rgba(234, 88, 12, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Text Effects */
+body.modern #whoWins {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  text-shadow:
+    0 0 20px rgba(59, 130, 246, 0.7),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+}
+
+/* Industrial Loading Animation */
+body.modern #loadingwheel {
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+}
+
+/* Enhanced Deck Selection */
+body.modern .choosedeck {
+  position: relative;
+  width: 35rem;
+  height: 35rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+  background-color: rgba(85, 88, 88, 0.699);
+  transform: none;
+  margin: 0 auto;
+  background:
+    linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 16px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+body.modern .choosedeck form {
+  display: grid;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  row-gap: 2rem;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding-bottom: 3.2rem;
+}
+
+body.modern label {
+  position: relative;
+  background-color: #ddd;
+  padding: 3px;
+  border: 2px solid #444;
+  border-radius: 4px;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  text-align: center;
+  background:
+    linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+body.modern label:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+body.modern input[type="radio"]:checked + label {
+  border-color: #60a5fa;
+  box-shadow:
+    0 6px 20px rgba(59, 130, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+body.modern .choose-deck-img {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  object-fit: cover;
+}
+
+body.modern .choose-deck-name {
+  position: absolute;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+}
+
+/* Enhanced Form Elements */
+body.modern .CPUorMulti form,
+body.modern .choose-form {
+  position: relative;
+  height: 30rem;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+  background-color: rgba(85, 88, 88, 0.699);
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  row-gap: 1.25rem;
+  padding: 5.5rem 2rem 4rem;
+  background:
+    linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 16px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+}
+
+body.modern .CPUorMulti div,
+body.modern .choose-form div {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  background-color: #ddd;
+  padding: 3px;
+  border: 2px solid #444;
+  border-radius: 4px;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  text-align: center;
+  z-index: 2;
+  background:
+    linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 8px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+/* Enhanced Button Hover Effects */
+body.modern .CPUorMulti form button[type='submit']:hover,
+body.modern .choose-form button[type='submit']:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #1d4ed8 100%);
+  box-shadow:
+    0 8px 25px rgba(59, 130, 246, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* PRESERVE ORIGINAL CLOSE BUTTON POSITIONING */
+body.modern #closebtn {
+  position: absolute;
+  top: 82%;
+  left: 80%;
+  width: 15%;
+  height: 12%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+  background-color: thistle;
+  display: none; /* Removed close button from comparison popup */
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+body.modern #closebtn:hover {
+  transform: scale(1.04);
+}
+
+/* PRESERVE ORIGINAL ENDGAME POSITIONING */
+body.modern .endgame {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  display: grid;
+  width: 85%;
+  height: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+  background-color: rgba(4, 43, 54, 0.637);
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+body.modern #endgameouter {
+  align-content: center;
+  display: none;
+}
+
+/* PRESERVE ORIGINAL PACK POSITIONING */
+body.modern .cardPack {
+  position: absolute;
+  justify-self: center;
+  justify-content: center;
+  align-content: center;
+  top: 26%;
+  z-index: auto;
+  display: none;
+}
+
+body.modern #packPrice {
+  display: grid;
+  position: absolute;
+  bottom: 0%;
+  right: 12%;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  background-color: rgb(247, 178, 89);
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.8);
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
+  z-index: 17;
+}
+
+/* PRESERVE ORIGINAL FLIP CONTAINER POSITIONING */
+body.modern .flip-container {
+  position: absolute;
+  width: 55%;
+  height: 80%;
+  z-index: 13;
+  top: 10%;
+  display: none;
+  background-color: transparent;
+}
+
+/* Industrial Glow Effects */
+body.modern .playground::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Enhanced Focus States */
+body.modern button:focus,
+body.modern input:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.5),
+    0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive Industrial Design */
+@media (max-width: 768px) {
+  body.modern .navbar h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+
+  body.modern .startform input[type="button"],
+  body.modern .startform button {
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  body.modern .comp_popupinner {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+
+/* Fix comparison bars positioning on smaller screens */
+@media (max-width: 1126px) {
+  body.modern .compbar1 {
+    position: absolute;
+    top: 60%;
+    background:
+      linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 8px;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    height: 15%;
+    left: 5%;
+    overflow: hidden;
+  }
+  
+  body.modern .compbar2 {
+    position: absolute;
+    top: 30%;
+    background:
+      linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 8px;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    height: 15%;
+    left: 5%;
+    overflow: hidden;
+  }
+}
+
+/* Fix comparison bars positioning on wider screens to match small screen layout */
+@media (min-width: 1127px) {
+  body.modern .compbar1 {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    width: 90%;
+    height: 15%;
+    background:
+      linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 8px;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  body.modern .compbar2 {
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    width: 90%;
+    height: 15%;
+    background:
+      linear-gradient(135deg, #374151 0%, #4b5563 100%);
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    border-radius: 8px;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+}
+
+/* ===========================================
+   END OF INDUSTRIAL MODERN DESIGN
+   =========================================== */

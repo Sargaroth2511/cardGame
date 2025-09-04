@@ -67,16 +67,14 @@ const startGame = () => {
 
         setTimeout(() => {
             // Hide shuffling popup
-            if (window.GameUI?.waitshufflePopouter) window.GameUI.waitshufflePopouter.style.display = 'none';
+            hideElements(window.GameUI?.waitshufflePopouter, window.GameUI?.player1Cover, window.GameUI?.startgame, window.GameUI?.player2Deck);
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
 
             // Show final game UI
-            if (window.GameUI?.player1Cover) window.GameUI.player1Cover.style.display = 'none';
-            if (window.GameUI?.startgame) window.GameUI.startgame.style.display = 'none';
-            if (window.GameUI?.player1Deck) window.GameUI.player1Deck.style.display = 'grid';
+            showElements('grid', window.GameUI?.player1Deck);
+            showElements('block', HTMLElementCardNumber);
             if (window.GameUI?.player2Deck) window.GameUI.player2Deck.style.display = 'none';
-            if (HTMLElementCardNumber) HTMLElementCardNumber.style.display = 'block';
 
             if (!isPlayingOnline){
                 // Delay AI start until after "who starts" message disappears (1000ms) + small buffer
@@ -114,16 +112,13 @@ const startGame = () => {
 
         setTimeout (() => {
             // Hide shuffling popup
-            if (window.GameUI?.waitshufflePopouter) window.GameUI.waitshufflePopouter.style.display = 'none';
+            hideElements(window.GameUI?.waitshufflePopouter, window.GameUI?.player2Cover, window.GameUI?.startgame, window.GameUI?.player1Deck);
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
 
             // Show final game UI
-            if (window.GameUI?.player2Cover) window.GameUI.player2Cover.style.display = 'none'
-            if (window.GameUI?.startgame) window.GameUI.startgame.style.display = 'none';
-            if (window.GameUI?.player2Deck) window.GameUI.player2Deck.style.display = 'grid'
-            if (window.GameUI?.player1Deck) window.GameUI.player1Deck.style.display = 'none'
-            if (window.GameUI?.cardNumberp2) window.GameUI.cardNumberp2.style.display = 'block'
+            showElements('grid', window.GameUI?.player2Deck);
+            showElements('block', window.GameUI?.cardNumberp2);
         }, 500); // Reduced from 3000ms to 500ms for faster UI transition 
     };
 

@@ -317,8 +317,16 @@ h1 {
     background-size: 17px;
     background-position: center;
     border-radius: 10px;
-    
-
+    background:
+        linear-gradient(145deg, #1e293b 0%, #334155 50%, #1e293b 100%),
+        radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(234, 88, 12, 0.1) 0%, transparent 50%);
+    border: 2px solid rgba(75, 85, 99, 0.6);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(59, 130, 246, 0.1);
 }
 .transparentCover{
     position: absolute;
@@ -517,7 +525,7 @@ button:active {
     z-index: 15;
     top:0;
     display: grid;
-    display: none;
+    display: grid; /* Made visible for testing */
     justify-content: center;   
     align-content: center; 
 }
@@ -587,7 +595,7 @@ button:active {
     border-radius: 5px;
     display: grid;
     justify-content: center;
-    display: none;
+    display: grid; /* Made visible for testing */
 
      
 }
@@ -718,7 +726,7 @@ button:active {
     height: 12%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
     background-color: thistle;
-    display: flex;
+    display: none; /* Removed close button from comparison popup */
     justify-content: center;
     padding: 8px;
     cursor: pointer;
@@ -1721,4 +1729,29 @@ left: 5%;
   /* On wider screens, keep the same relative placement to the board */
   .playground > #style-toggle { top: 0; left: -5px; transform: translateX(-100%); }
   #backbtn { bottom: 0; left: -5px; transform: translateX(-100%); }
+}
+
+/* Fix comparison bars positioning on wider screens to match small screen layout */
+@media (min-width: 1127px) {
+  .compbar1 {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    width: 90%;
+    height: 15%;
+    background-color: thistle;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+
+  .compbar2 {
+    position: absolute;
+    top: 60%;
+    left: 5%;
+    width: 90%;
+    height: 15%;
+    background-color: thistle;
+    border-radius: 7px;
+    overflow: hidden;
+  }
 }

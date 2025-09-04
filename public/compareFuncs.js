@@ -51,8 +51,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
             window.GameUI.preventDocBeeingClicked.style.display = 'grid';
         }
         if (window.GameUI?.popupHeader) window.GameUI.popupHeader.textContent = headingString;
-        if (window.GameUI?.compPopup) window.GameUI.compPopup.style.display = 'flex';
-        if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'flex';
+        if (window.GameUI?.compPopup && window.GameUI?.compPopupOuter) {
+            showElements('flex', window.GameUI.compPopup, window.GameUI.compPopupOuter);
+        } else {
+            if (window.GameUI?.compPopup) window.GameUI.compPopup.style.display = 'flex';
+            if (window.GameUI?.compPopupOuter) window.GameUI.compPopupOuter.style.display = 'flex';
+        }
     };
 
     async function animateStatBar(barHTMLElement, barLengthPercentage, cardValue,
@@ -138,8 +142,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 
             function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
                 if (drawDeck.length > 0){
-                    if (window.GameUI?.arrright) window.GameUI.arrright.style.display = 'none';
-                    if (window.GameUI?.arrleft) window.GameUI.arrleft.style.display = 'none';
+                    hideElements(window.GameUI?.arrright, window.GameUI?.arrleft);
                     if (window.GameUI?.drawCardsStack1) window.GameUI.drawCardsStack1.classList.add(drawCardAnimation1);
                     if (window.GameUI?.drawCardsStack2) window.GameUI.drawCardsStack2.classList.add(drawCardAnimation2);
                     drawDeck.length = 0;

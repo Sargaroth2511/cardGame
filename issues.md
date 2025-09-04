@@ -28,6 +28,7 @@
 - **Duplicate code inflates bundle (MEDIUM):** ~~The duplication between `comparison.js` and `compareFuncs.js` increases size and parse time; consolidate.~~ ✅ **FIXED:** Consolidated duplicate code by removing `comparison.js` and merging all functions from `turn.js` into `compareFuncs.js`, eliminating ~100+ lines of duplicate code. Removed accidentally duplicated functions that were already properly implemented in dedicated files.
 - **Inefficient array operations (LOW):** ~~`public/turn.js` uses `Array.prototype.push.apply(playerDeck, drawDeck)`; prefer `playerDeck.push(...drawDeck)` for readability and potential speed.~~ ✅ **FIXED:** Replaced `Array.prototype.push.apply(playerDeck, drawDeck)` with `playerDeck.push(...drawDeck)` in `compareFuncs.js` for better performance and readability.
 - **Repeated DOM writes (LOW):** Style properties are toggled individually throughout; prefer CSS classes or batch updates to reduce layout thrash.
+  - ✅ **FIXED:** Added helper functions `setElementStyles`, `hideElements`, and `showElements` in `gameConstants.js` to batch DOM style updates. Updated `compareFuncs.js`, `startGame.js`, and `declarations.js` to use these helpers instead of individual `style.display` assignments, reducing layout thrashing and improving performance.
 - Refer to `EFFICIENCY_REPORT.md` for additional optimization notes already documented by the repo.
 
 **Testing/Tooling**

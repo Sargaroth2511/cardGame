@@ -344,15 +344,12 @@ function updateUIElements() {
         }
         
         if (deck.length > 0 && deck.length <= 2) {
-            if (arrright) arrright.style.display = 'none';
-            if (arrleft) arrleft.style.display = 'none';
-            if (drawCardsStack1) drawCardsStack1.style.display = 'grid';
-            if (drawCardsStack2) drawCardsStack2.style.display = 'grid';
+            hideElements(arrright, arrleft);
+            showElements('grid', drawCardsStack1, drawCardsStack2);
         } else if (deck.length > 2) {
             if (arrright) arrright.style.display = 'block';
         } else if (deck.length === 0) {
-            if (drawCardsStack1) drawCardsStack1.style.display = 'none';
-            if (drawCardsStack2) drawCardsStack2.style.display = 'none';
+            hideElements(drawCardsStack1, drawCardsStack2);
         }
     }
  

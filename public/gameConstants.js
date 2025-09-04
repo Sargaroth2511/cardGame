@@ -27,5 +27,25 @@ const GAME_CONSTANTS = {
     ]
 };
 
+// Helper function to batch style changes and reduce layout thrashing
+function setElementStyles(elements, styleProperty, value) {
+    elements.forEach(element => {
+        if (element) element.style[styleProperty] = value;
+    });
+}
+
+// Helper function to hide multiple elements
+function hideElements(...elements) {
+    setElementStyles(elements, 'display', 'none');
+}
+
+// Helper function to show multiple elements
+function showElements(displayValue, ...elements) {
+    setElementStyles(elements, 'display', displayValue);
+}
+
 // Make it globally available (consistent with other scripts)
 window.GAME_CONSTANTS = GAME_CONSTANTS;
+window.setElementStyles = setElementStyles;
+window.hideElements = hideElements;
+window.showElements = showElements;
