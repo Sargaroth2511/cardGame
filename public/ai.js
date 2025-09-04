@@ -21,7 +21,7 @@ const playAI = () => {
     
     function aiMedium(){
         let num = Math.random();
-        if (num >= 0.85) {
+        if (num >= GAME_CONSTANTS.AI_MEDIUM_RANDOM_THRESHOLD) {
             aiPickRandom();
         } else {
             aiSmart();

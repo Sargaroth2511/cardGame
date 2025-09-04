@@ -61,17 +61,7 @@ const selectorMap = {
     'prop3Deck2': [...document.getElementsByClassName('weid2')],
     'prop4Deck2': [...document.getElementsByClassName('cyld2')],
     'prop5Deck2': [...document.getElementsByClassName('powd2')],
-    'prop6Deck2': [...document.getElementsByClassName('rpmd2')],
-
-    // Moving Card selectors
-    'imgMovingCard': document.querySelectorAll('.imgm1'),
-    'nameMovingCard': document.querySelectorAll('.nm1'),
-    'prop1MovingCard': document.querySelectorAll('.vMaxm1'),
-    'prop2MovingCard': document.querySelectorAll('.dism1'),
-    'prop3MovingCard': document.querySelectorAll('.weim1'),
-    'prop4MovingCard': document.querySelectorAll('.cylm1'),
-    'prop5MovingCard': document.querySelectorAll('.powm1'),
-    'prop6MovingCard': document.querySelectorAll('.rpmm1')
+    'prop6Deck2': [...document.getElementsByClassName('rpmd2')]
 };
 
 // Safe replacement for the dangerous parse() function
@@ -84,103 +74,105 @@ function getSelector(selectorName) {
     }
 }
 
-// Direct access selectors (not used in dynamic mapping)
-const deck1Cards = document.querySelector('#play1Cards');
-const deck2Cards = document.querySelector('#play2Cards');
+// Safe DOM query helper function
+function safeQuerySelector(selector) {
+    const element = document.querySelector(selector);
+    if (!element) {
+        console.warn(`DOM element not found: ${selector}`);
+        return null;
+    }
+    return element;
+}
 
-const card1Buttons = document.querySelectorAll('#player1Card button'),
-      card2Buttons = document.querySelectorAll('#player2Card button'),
+function safeQuerySelectorAll(selector) {
+    const elements = document.querySelectorAll(selector);
+    if (!elements || elements.length === 0) {
+        console.warn(`DOM elements not found: ${selector}`);
+        return [];
+    }
+    return elements;
+}
+
+// Direct access selectors (not used in dynamic mapping)
+const card1Buttons = safeQuerySelectorAll('#player1Card button'),
+      card2Buttons = safeQuerySelectorAll('#player2Card button'),
       allCardButtons = [card1Buttons, card2Buttons];
 
-const arrleft = document.querySelector('#arrleft');
-const arrright = document.querySelector('#arrright');
-
-// Moving Card containers
-const imgMovingCardContainer = document.querySelector('.imgmc');
-const nameMovingCardContainer = document.querySelector('.nmc');
-const prop1MovingCardContainer = document.querySelector('.vMaxmc');
-const prop2MovingCardContainer = document.querySelector('.dismc');
-const prop3MovingCardContainer = document.querySelector('.weimc');
-const prop4MovingCardContainer = document.querySelector('.cylmc');
-const prop5MovingCardContainer = document.querySelector('.powmc');
-const prop6MovingCardContainer = document.querySelector('.rpmmc');
+const arrleft = safeQuerySelector('#arrleft');
+const arrright = safeQuerySelector('#arrright');
 
 // Button Selectors
-const vMaxBtn = document.querySelector('#vmaxbtn1');
-const disBtn = document.querySelector('#disbtn1');
-const weiBtn = document.querySelector('#weibtn1');
-const cylBtn = document.querySelector('#cylbtn1');
-const powBtn = document.querySelector('#powbtn1');
-const rpmBtn = document.querySelector('#rpmbtn1');
+const vMaxBtn = safeQuerySelector('#vmaxbtn1');
+const disBtn = safeQuerySelector('#disbtn1');
+const weiBtn = safeQuerySelector('#weibtn1');
+const cylBtn = safeQuerySelector('#cylbtn1');
+const powBtn = safeQuerySelector('#powbtn1');
+const rpmBtn = safeQuerySelector('#rpmbtn1');
 
-const vMaxBtn2 = document.querySelector('#vmaxbtn2');
-const disBtn2 = document.querySelector('#disbtn2');
-const weiBtn2 = document.querySelector('#weibtn2');
-const cylBtn2 = document.querySelector('#cylbtn2');
-const powBtn2 = document.querySelector('#powbtn2');
-const rpmBtn2 = document.querySelector('#rpmbtn2');
+const vMaxBtn2 = safeQuerySelector('#vmaxbtn2');
+const disBtn2 = safeQuerySelector('#disbtn2');
+const weiBtn2 = safeQuerySelector('#weibtn2');
+const cylBtn2 = safeQuerySelector('#cylbtn2');
+const powBtn2 = safeQuerySelector('#powbtn2');
+const rpmBtn2 = safeQuerySelector('#rpmbtn2');
 
 // UI Elements
-const drawfield = document.querySelector('#drawcardcnt');
-const scoreHTML = document.querySelector('#score');
-const form1 = document.querySelector('#form1');
-const form2 = document.querySelector('#form2');
+const scoreHTML = safeQuerySelector('#score');
+const form1 = safeQuerySelector('#form1');
+const form2 = safeQuerySelector('#form2');
 
-const innerBar1 = document.querySelector('#innerbar1');
-const innerBar2 = document.querySelector('#innerbar2');
-const innerBars = document.querySelectorAll('.innerbar');
-const compPopupOuter = document.querySelector('#popupouter');
-const compPopup = document.querySelector('#comp_popupinner');
-const closeBtn = document.querySelector('#closebtn');
-const popupHeader = document.querySelector('h3');
+const innerBar1 = safeQuerySelector('#innerbar1');
+const innerBar2 = safeQuerySelector('#innerbar2');
+const innerBars = safeQuerySelectorAll('.innerbar');
+const compPopupOuter = safeQuerySelector('#popupouter');
+const compPopup = safeQuerySelector('#comp_popupinner');
+const closeBtn = safeQuerySelector('#closebtn');
+const popupHeader = safeQuerySelector('h3');
 
 // Waiting/Shuffle overlay and misc UI
-const waitshufflePopouter = document.querySelector('#waitshufflePopouter');
-const waiting = document.querySelector('#waiting');
-const whostarts = document.querySelector('#whostarts');
-const startgame = document.querySelector('#startgame');
-const player1Cover = document.querySelector('#player1Cover');
-const player2Cover = document.querySelector('#player2Cover');
-const player1Deck = document.querySelector('#player1Deck');
-const player2Deck = document.querySelector('#player2Deck');
-const cardNumberp1 = document.querySelector('#cardNumberp1');
-const cardNumberp2 = document.querySelector('#cardNumberp2');
-const animatedpoints = document.querySelector('#animatedpoints');
-const waitBackbtn = document.querySelector('#waitBackbtn');
+const waitshufflePopouter = safeQuerySelector('#waitshufflePopouter');
+const waiting = safeQuerySelector('#waiting');
+const whostarts = safeQuerySelector('#whostarts');
+const startgame = safeQuerySelector('#startgame');
+const player1Cover = safeQuerySelector('#player1Cover');
+const player2Cover = safeQuerySelector('#player2Cover');
+const player1Deck = safeQuerySelector('#player1Deck');
+const player2Deck = safeQuerySelector('#player2Deck');
+const cardNumberp1 = safeQuerySelector('#cardNumberp1');
+const cardNumberp2 = safeQuerySelector('#cardNumberp2');
+const animatedpoints = safeQuerySelector('#animatedpoints');
+const waitBackbtn = safeQuerySelector('#waitBackbtn');
 
 // Primary card containers and comparison bars
-const player1Card = document.querySelector('#player1Card');
-const player2Card = document.querySelector('#player2Card');
-const compbar1 = document.querySelector('#compbar1');
-const compbar2 = document.querySelector('#compbar2');
+const player1Card = safeQuerySelector('#player1Card');
+const player2Card = safeQuerySelector('#player2Card');
+const compbar1 = safeQuerySelector('#compbar1');
+const compbar2 = safeQuerySelector('#compbar2');
 
 // Animated comparison cards
-const animatedCardp1 = document.querySelector('#animatedCard1');
-const animatedCardp2 = document.querySelector('#animatedCard2');
+const animatedCardp1 = safeQuerySelector('#animatedCard1');
+const animatedCardp2 = safeQuerySelector('#animatedCard2');
 
 // Endgame popup
-const endgameouter = document.querySelector('#endgameouter');
-const whoWins = document.querySelector('#whoWins');
-const endgamebacktn = document.querySelector('#endgamebacktn');
-const newGame = document.querySelector('#newGame');
+const endgameouter = safeQuerySelector('#endgameouter');
+const whoWins = safeQuerySelector('#whoWins');
+const endgamebacktn = safeQuerySelector('#endgamebacktn');
+const newGame = safeQuerySelector('#newGame');
 
 // Player/opponent name labels
-const player2Name = document.querySelector('#player2Name');
+const player2Name = safeQuerySelector('#player2Name');
 
 // Auth/name popups
-const nameOuter2 = document.querySelector('#nameOuter2');
-const signInOuter2 = document.querySelector('#signInOuter2');
-const nameForm = document.querySelector('#nameForm');
-const nameBackbtn = document.querySelector('#nameBackbtn');
+const nameOuter2 = safeQuerySelector('#nameOuter2');
+const signInOuter2 = safeQuerySelector('#signInOuter2');
+const nameForm = safeQuerySelector('#nameForm');
+const nameBackbtn = safeQuerySelector('#nameBackbtn');
 
-const animationCard1 = document.querySelector('.animationCard1')
-const animationCard2 = document.querySelector('.animationCard2')
+const drawCardsStack1 = safeQuerySelector('#drawCardsStack1')
+const drawCardsStack2 = safeQuerySelector('#drawCardsStack2')
+const drawCardsStack = safeQuerySelectorAll('.drawCardsStack')
 
-const drawCardsStack1 = document.querySelector('#drawCardsStack1')
-const drawCardsStack2 = document.querySelector('#drawCardsStack2')
-const drawCardsStack = document.querySelectorAll('.drawCardsStack')
-
-const preventDocBeeingClicked = document.querySelector('#wait_for_other_player')
+const preventDocBeeingClicked = safeQuerySelector('#wait_for_other_player')
 
 
 const updateUICardElements = (deckSubstring, deckArray, deckposition) => {
@@ -200,14 +192,30 @@ const updateUICardElements = (deckSubstring, deckArray, deckposition) => {
     pushElementsInCardSelectors(deckSubstring);
 
     if (Array.isArray(cardSelectors[0])) {
-        cardSelectors[0].forEach(e => e.src = 'Images/' + chosenDeck +'/'+ cardValues[0] +'.jpg');
+        if (cardSelectors[0] && cardSelectors[0].length > 0) {
+            cardSelectors[0].forEach(e => {
+                if (e && cardValues[0]) {
+                    e.src = 'Images/' + chosenDeck +'/'+ cardValues[0] +'.jpg';
+                }
+            });
+        }
         for(let i = 1; i < cardSelectors.length; i++) {
-            cardSelectors[i].forEach(e => e.textContent = cardValues[i]);
+            if (cardSelectors[i] && cardSelectors[i].length > 0) {
+                cardSelectors[i].forEach(e => {
+                    if (e && cardValues[i] !== undefined) {
+                        e.textContent = cardValues[i];
+                    }
+                });
+            }
         }
     } else {
-        cardSelectors[0].src = 'Images/' + chosenDeck +'/'+ cardValues[0] + '.jpg';
+        if (cardSelectors[0] && cardValues[0]) {
+            cardSelectors[0].src = 'Images/' + chosenDeck +'/'+ cardValues[0] + '.jpg';
+        }
         for(let i = 1; i < cardSelectors.length; i++) {
-            cardSelectors[i].textContent = cardValues[i];
+            if (cardSelectors[i] && cardValues[i] !== undefined) {
+                cardSelectors[i].textContent = cardValues[i];
+            }
         }
     }
 };    
@@ -217,8 +225,8 @@ const updateUICardElements = (deckSubstring, deckArray, deckposition) => {
 
 document.addEventListener('DOMContentLoaded', function() {
     let counter = 0;
-    const arrright = document.querySelector('#arrowright');
-    const arrleft = document.querySelector('#arrleft');
+    const arrright = safeQuerySelector('#arrright');
+    const arrleft = safeQuerySelector('#arrleft');
     const drawCards = window.drawDeck || [];
     
     if (arrright) {
@@ -230,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             if (counter === drawCards.length - 2) {
-                arrright.style.display = 'none';
+                if (arrright) arrright.style.display = 'none';
             }
             
             if (counter >= 2 && arrleft) {
@@ -281,10 +289,10 @@ function updateUIElements() {
 
     function updateDrawCards() { 
         const deck = window.drawDeck || [];
-        const arrright = document.querySelector('#arrowright');
-        const arrleft = document.querySelector('#arrleft');
-        const drawCardsStack1 = document.querySelector('#drawCardsStack1');
-        const drawCardsStack2 = document.querySelector('#drawCardsStack2');
+        const arrright = safeQuerySelector('#arrright');
+        const arrleft = safeQuerySelector('#arrleft');
+        const drawCardsStack1 = safeQuerySelector('#drawCardsStack1');
+        const drawCardsStack2 = safeQuerySelector('#drawCardsStack2');
         
         if (deck.length > 0) {
             updateUICardElements('DrawCard1', deck, 0);

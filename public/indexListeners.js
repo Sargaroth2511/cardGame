@@ -423,11 +423,8 @@ onlineForm.addEventListener ('click', e => {
                     
 
     }
-    // console.log(typeof e.target.value)
-    // localStorage.setItem('difficulty', e.target.value);    
-    // difPopout.style.display = 'none';
-    // gameStart.textContent = 'Spiel starten';
-    // chooseDeckPopout.style.display = 'grid';
+    // Removed commented-out code for difficulty setting
+    // The difficulty is now properly handled in the form submission
  });
 
 

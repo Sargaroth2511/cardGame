@@ -35,34 +35,38 @@ const startGame = () => {
     const prepareUIForGameUI = (HTMLElementCardNumber, num, startGamevsCPU) => {
         setCardPropertyNames();
         clearInterval(dotinterval);
-    isPlayingOnline ? player2Name.textContent = otherDatabaseDoc.name:
+    if (player2Name) {
+        isPlayingOnline ? player2Name.textContent = otherDatabaseDoc.name:
               player2Name.textContent = 'Computer';
+    }
 
         if (num <= 0.5){
-            whostarts.textContent = `${onlineName} fängt an!`
+            if (whostarts) whostarts.textContent = `${onlineName} fängt an!`
             setCardButtonsEnabledForTurn('', false, true);
         } else {
             setCardButtonsEnabledForTurn('', true, false);
-            isPlayingOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
+            if (whostarts) {
+                isPlayingOnline ? whostarts.textContent = `${otherPlayer} fängt an!`:
                           whostarts.textContent = `Der Computer fängt an!`;
+            }
         };  
 
         setTimeout(() => {
-            waitshufflePopouter.style.display = 'none';
+            if (waitshufflePopouter) waitshufflePopouter.style.display = 'none';
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
-            player1Cover.style.display = 'none';
-            whostarts.textContent = '';
-            startgame.style.display = 'none';
-            player1Deck.style.display = 'grid';
-            player2Deck.style.display = 'none';
-            HTMLElementCardNumber.style.display = 'block';
+            if (player1Cover) player1Cover.style.display = 'none';
+            if (whostarts) whostarts.textContent = '';
+            if (startgame) startgame.style.display = 'none';
+            if (player1Deck) player1Deck.style.display = 'grid';
+            if (player2Deck) player2Deck.style.display = 'none';
+            if (HTMLElementCardNumber) HTMLElementCardNumber.style.display = 'block';
 
             if (!isPlayingOnline){
                 sorteDecks();
                 startGamevsCPU();
             };
-        }, 3000);
+        }, GAME_CONSTANTS.UI_TRANSITION_DELAY);
 
 
       
@@ -72,25 +76,25 @@ const startGame = () => {
     function updateUIForOtherStarter(){
         setCardPropertyNames();
         clearInterval(dotinterval);
-        player1Card.classList.replace('c1', 'c2');
-        player2Card.classList.replace('c2', 'c1');
-        compbar1.classList.replace('compbar1', 'compbar2');
-        compbar2.classList.replace('compbar2', 'compbar1');
-        compbar1.appendChild(innerBar2);
-        compbar2.appendChild(innerBar1);
-        player2Deck.classList.replace('player2Deck', 'player1Deck');
+        if (player1Card) player1Card.classList.replace('c1', 'c2');
+        if (player2Card) player2Card.classList.replace('c2', 'c1');
+        if (compbar1) compbar1.classList.replace('compbar1', 'compbar2');
+        if (compbar2) compbar2.classList.replace('compbar2', 'compbar1');
+        if (compbar1 && innerBar2) compbar1.appendChild(innerBar2);
+        if (compbar2 && innerBar1) compbar2.appendChild(innerBar1);
+        if (player2Deck) player2Deck.classList.replace('player2Deck', 'player1Deck');
 
         setTimeout (() => {
-            waitshufflePopouter.style.display = 'none';
+            if (waitshufflePopouter) waitshufflePopouter.style.display = 'none';
             if (typeof startButton !== 'undefined' && startButton) startButton.disabled = false;
             if (typeof isWaitingForReady !== 'undefined') isWaitingForReady = false;
-            player2Cover.style.display = 'none'
-            whostarts.textContent = '';
-            startgame.style.display = 'none';
-            player2Deck.style.display = 'grid'
-            player1Deck.style.display = 'none'
-            cardNumberp2.style.display = 'block'
-        },3000); 
+            if (player2Cover) player2Cover.style.display = 'none'
+            if (whostarts) whostarts.textContent = '';
+            if (startgame) startgame.style.display = 'none';
+            if (player2Deck) player2Deck.style.display = 'grid'
+            if (player1Deck) player1Deck.style.display = 'none'
+            if (cardNumberp2) cardNumberp2.style.display = 'block'
+        }, GAME_CONSTANTS.UI_TRANSITION_DELAY); 
     };
 
     function setCardPropertyNames (){
@@ -190,16 +194,16 @@ const startGame = () => {
             .then((doc) => {
                 let docu = doc.data();
                 if (docu.myTurn === 'yes'){
-                    whostarts.textContent = `${otherPlayer} fängt an!`
+                    if (whostarts) whostarts.textContent = `${otherPlayer} fängt an!`
                     setCardButtonsEnabledForTurn('', false, true);
                 } else if (docu.myTurn === 'no'){
-                    whostarts.textContent = `${onlineName} fängt an!`
+                    if (whostarts) whostarts.textContent = `${onlineName} fängt an!`
                     setCardButtonsEnabledForTurn('', true, false);
                 }
                 }).catch((err) => {
                     // Error getting documents - silently handle
                 });
-            player2Name.textContent = otherDatabaseDoc.name;
+            if (player2Name) player2Name.textContent = otherDatabaseDoc.name;
         };
     };
 };

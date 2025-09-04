@@ -409,7 +409,7 @@ const setDBdocs = () => {
     db.collection('Users').doc(uniqueOnlineName).get()
     .then(doc => {
         let userDoc = doc.data();
-        if (typeof scoreHTML !== 'undefined'){
+        if (typeof scoreHTML !== 'undefined' && scoreHTML && scoreHTML.children && scoreHTML.children[1]){
           userDoc.Score !== undefined ? scoreHTML.children[1].textContent = userDoc.Score :
                                         scoreHTML.children[1].textContent = 0;  
         };                                
@@ -424,30 +424,30 @@ setDBdocs();
 
 const startDotinterval = () => {
   dotinterval = setInterval(() => {
-    if (window.dotsGoingUp)
-        animatedpoints.innerHTML += '.';
-    else {
-        animatedpoints.innerHTML = animatedpoints.innerHTML.substring (1, animatedpoints.innerHTML.length);
-        if (animatedpoints.innerHTML === '')
+    if (window.dotsGoingUp && animatedpoints)
+        animatedpoints.textContent += '.';
+    else if (animatedpoints) {
+        animatedpoints.textContent = animatedpoints.textContent.substring (1, animatedpoints.textContent.length);
+        if (animatedpoints.textContent === '')
             window.dotsGoingUp = true;
     };
-    if (animatedpoints.innerHTML.length > 10)
+    if (animatedpoints && animatedpoints.textContent.length > 10)
         window.dotsGoingUp = false;    
-  }, 100);
+  }, GAME_CONSTANTS.DOT_ANIMATION_INTERVAL);
 }; 
 
 
 const toggleWaitingPopup = (text, display, animateDots) =>{
   
-  waiting.textContent = text;
-  waitshufflePopouter.style.display = display;
+  if (waiting) waiting.textContent = text;
+  if (waitshufflePopouter) waitshufflePopouter.style.display = display;
 
   // Ensure we don't stack multiple dot intervals
   if (dotinterval) {
     clearInterval(dotinterval);
   }
   if (typeof animatedpoints !== 'undefined' && animatedpoints) {
-    animatedpoints.innerHTML = '';
+    animatedpoints.textContent = '';
   }
   window.dotsGoingUp = true;
 

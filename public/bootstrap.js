@@ -21,6 +21,7 @@
     if (isGamePage()) {
       const gameScripts = [
         'debug/debugOverlay.js', // optional overlay (enabled via localStorage or ?debug=1)
+        'gameConstants.js',      // centralized game constants
         'decks.js',              // provides deck data, globals, and helpers (setDBdocs, etc.)
         'declarations.js',
         'turn.js',

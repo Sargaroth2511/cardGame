@@ -47,12 +47,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
     finishTurnAndResetUI();
 
     function showComparePopup(headingString){
-        if (isPlayingOnline) {
+        if (isPlayingOnline && preventDocBeeingClicked) {
             preventDocBeeingClicked.style.display = 'grid';
         }
-        popupHeader.textContent = headingString;
-        compPopup.style.display = 'flex';
-        compPopupOuter.style.display = 'flex';
+        if (popupHeader) popupHeader.textContent = headingString;
+        if (compPopup) compPopup.style.display = 'flex';
+        if (compPopupOuter) compPopupOuter.style.display = 'flex';
     };
 
     async function animateStatBar(barHTMLElement, barLengthPercentage, cardValue,
@@ -60,12 +60,12 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
         let promise = new Promise (resolve => {
             let output = 0;
             let barAnimationInterval = setInterval(() => {
-                output += 3;
-                barHTMLElement.style.width = `${output}%`;
+                output += GAME_CONSTANTS.BAR_ANIMATION_INCREMENT;
+                if (barHTMLElement) barHTMLElement.style.width = `${output}%`;
                 
                 if (output > barLengthPercentage){
                     clearInterval(barAnimationInterval);
-                    barHTMLElement.textContent = `${cardValue} ${unit}`;
+                    if (barHTMLElement) barHTMLElement.textContent = `${cardValue} ${unit}`;
 
                     if (barHTMLElement === innerBar1){
                         animateBarCallback(innerBar2, p2BarPercent, p2Value, animateStatBar) 
@@ -77,7 +77,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
                         }; 
                     };
                 }; 
-            }, 15);
+            }, GAME_CONSTANTS.ANIMATION_INTERVAL);
         });
         return promise;
     };
@@ -133,22 +133,22 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
             };
 
             function addCssAnimation(HTMLElement, animationClass){
-                HTMLElement.classList.add(animationClass);
+                if (HTMLElement) HTMLElement.classList.add(animationClass);
             };  
 
             function animateDrawStacks(drawCardAnimation1, drawCardAnimation2){
                 if (drawDeck.length > 0){
-                    arrright.style.display = 'none';
-                    arrleft.style.display = 'none';
-                    drawCardsStack1.classList.add(drawCardAnimation1);
-                    drawCardsStack2.classList.add(drawCardAnimation2);
+                    if (arrright) arrright.style.display = 'none';
+                    if (arrleft) arrleft.style.display = 'none';
+                    if (drawCardsStack1) drawCardsStack1.classList.add(drawCardAnimation1);
+                    if (drawCardsStack2) drawCardsStack2.classList.add(drawCardAnimation2);
                     drawDeck.length = 0;
                 };
             };        
         };
     };    
 const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
-    HTMLElement.classList.remove(...classArray)
+    if (HTMLElement) HTMLElement.classList.remove(...classArray)
 }
     let winner,
         firstPlayer = onlineName,
@@ -159,15 +159,15 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
     if (!isPlayingOnline){    
         switch (expr){
             case 'medium':
-                factor = 2;
+                factor = GAME_CONSTANTS.DIFFICULTY_MULTIPLIERS.MEDIUM;
                 break;
             case 'hard':
-                factor = 3;
+                factor = GAME_CONSTANTS.DIFFICULTY_MULTIPLIERS.HARD;
                 break;
             default:
-                factor = 1;
+                factor = GAME_CONSTANTS.DIFFICULTY_MULTIPLIERS.EASY;
         };
-    } else factor = 1;    
+    } else factor = GAME_CONSTANTS.DIFFICULTY_MULTIPLIERS.EASY;    
 
     if (!isPlayerOne){
         [firstPlayer, secondPlayer] = [secondPlayer, firstPlayer]
@@ -176,15 +176,15 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
     if (play1Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, factor) : calcPoints(play2Deck, factor);
         isPlayingOnline ? winner = secondPlayer : winner = 'Computer';
-        endgameouter.style.display = 'grid'
-        whoWins.textContent = `${winner} hat gewonnen!`;   
+        if (endgameouter) endgameouter.style.display = 'grid'
+        if (whoWins) whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
     } else if (play2Deck.length === 0){
         isPlayerOne ? calcPoints(play1Deck, 1) : calcPoints(play2Deck, 1);
         winner = firstPlayer;
-        endgameouter.style.display = 'grid'
-        whoWins.textContent = `${winner} hat gewonnen!`;   
+        if (endgameouter) endgameouter.style.display = 'grid'
+        if (whoWins) whoWins.textContent = `${winner} hat gewonnen!`;   
         drawCards = [];
         return winner;
     } else {
@@ -198,16 +198,18 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
            docRef = db.collection('Users').doc(uniqueOnlineName);
        docRef.get().then(doc => {
             let userDoc = doc.data();
-            userDoc.Score !== undefined ? (docRef.update({'Score' : score+userDoc.Score}),
+            if (scoreHTML && scoreHTML.children && scoreHTML.children[1]) {
+                userDoc.Score !== undefined ? (docRef.update({'Score' : score+userDoc.Score}),
                                           scoreHTML.children[1].textContent = score+userDoc.Score):
                                           (docRef.update({'Score': score}),
                                           scoreHTML.children[1].textContent = score);
+            }
        });
     };
 };
 
 const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
-    HTMLElement.classList.remove(...classArray)
+    if (HTMLElement) HTMLElement.classList.remove(...classArray)
 }
 
 const checkForWinner = () => {
@@ -215,13 +217,13 @@ const checkForWinner = () => {
         // Check if either player has no cards left
         if (play1Deck.length === 0) {
             // Player 2 wins
-            whoWins.textContent = isPlayingOnline ? `${otherPlayer} gewinnt!` : 'Computer gewinnt!';
-            endgameouter.style.display = 'grid';
+            if (whoWins) whoWins.textContent = isPlayingOnline ? `${otherPlayer} gewinnt!` : 'Computer gewinnt!';
+            if (endgameouter) endgameouter.style.display = 'grid';
             resolve(true);
         } else if (play2Deck.length === 0) {
             // Player 1 wins
-            whoWins.textContent = isPlayingOnline ? `${onlineName} gewinnt!` : 'Du gewinnst!';
-            endgameouter.style.display = 'grid';
+            if (whoWins) whoWins.textContent = isPlayingOnline ? `${onlineName} gewinnt!` : 'Du gewinnst!';
+            if (endgameouter) endgameouter.style.display = 'grid';
             resolve(true);
         } else {
             // No winner yet
@@ -245,21 +247,22 @@ const finishTurnAndResetUI = async () => {
     
 
     (function resetUI(){
-    if (isPlayingOnline){
+    if (isPlayingOnline && preventDocBeeingClicked){
             preventDocBeeingClicked.style.display = 'none';
         };   
-        compPopupOuter.style.display = 'none';
-        innerBars.forEach (e => {
-            e.textContent = '0';
-            e.style.width = '0';
-        });         
-        let cssanimationClasses = ['drawstackAnimationp1c1', 'drawstackAnimationp2c1',
-                                  'drawstackAnimationp1c2', 'drawstackAnimationp2c2', 
-                                  'animationCard1', 'animationCard2', 'animationDrawCard1',
-                                  'animationDrawCard2'];
+        if (compPopupOuter) compPopupOuter.style.display = 'none';
+        if (innerBars) {
+            innerBars.forEach (e => {
+                if (e) {
+                    e.textContent = '0';
+                    e.style.width = '0';
+                }
+            });
+        }
+        let cssanimationClasses = GAME_CONSTANTS.CSS_ANIMATION_CLASSES;
         let cssAnimatedElements = [drawCardsStack1, drawCardsStack2, animatedCardp1, animatedCardp2]
         cssAnimatedElements.forEach (e => {
-            removeCssAnimationClasses(e, ...cssanimationClasses)
+            if (e) removeCssAnimationClasses(e, ...cssanimationClasses)
         });
     })();
 
@@ -276,6 +279,8 @@ const finishTurnAndResetUI = async () => {
 
 
 const setCardButtonsEnabledForTurn = (unitString, disableCard1Buttons, disableCard2Buttons) => {
+    if (!form1 || !form2) return;
+    
     let elements1 = form1.elements,
         elements2 = form2.elements;
 
@@ -324,9 +329,9 @@ const comparePropertyAndAssignCards = (prop, unitString) => {
         };
     };    
     function switchWhosNext(){
-        if(vMaxBtn2.disabled) {
+        if(vMaxBtn2 && vMaxBtn2.disabled) {
             setCardButtonsEnabledForTurn('', true, false);
-        } else if (vMaxBtn.disabled) {
+        } else if (vMaxBtn && vMaxBtn.disabled) {
             setCardButtonsEnabledForTurn('', false, true);
         };
     };
