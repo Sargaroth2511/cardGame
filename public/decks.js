@@ -534,6 +534,13 @@ const getUsers = async (nextStartGame, unsubListener) => {
     }
   }
 
+// Expose global variables and functions for browser use
+window.isPlayingOnline = isPlayingOnline;
+window.getStatus = getStatus;
+window.onlineName = onlineName;
+window.currentUser = currentUser;
+window.uniqueOnlineName = uniqueOnlineName;
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     sortID,
@@ -542,12 +549,15 @@ if (typeof module !== 'undefined' && module.exports) {
     getStatus,
     // parse, // REMOVED: Security risk
     LuxuryCar,
-    AutosalonCar,
+    ShowroomCar,
     CardProperties,
     updateCardsWithChildren,
     createCardDiv,
     Sound,
     isPlayingOnline,
-    drawDeck
+    drawDeck,
+    allDecks,
+    deckShortCuts,
+    allDeckProperties
   };
 }

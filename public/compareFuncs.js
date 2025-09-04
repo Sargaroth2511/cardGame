@@ -284,17 +284,27 @@ const finishTurnAndResetUI = async () => {
 const setCardButtonsEnabledForTurn = (unitString, disableCard1Buttons, disableCard2Buttons) => {
     if (!window.GameUI?.form1 || !window.GameUI?.form2) return;
 
-    let elements1 = window.GameUI.form1.elements,
-        elements2 = window.GameUI.form2.elements;    allDeckProperties[chosenDeck].forEach(e => {
-        if (e.unit === unitString && e.lowerIsBetter === true){
-            [disableCard1Buttons, disableCard2Buttons] = [disableCard2Buttons, disableCard1Buttons];
-        };    
-    });    
-    for (let ii = 0; ii < elements1.length; ii++) {
-    elements1[ii].disabled = disableCard1Buttons;
+    // Get only the button elements from the forms
+    let buttons1 = window.GameUI.form1.querySelectorAll('button');
+    let buttons2 = window.GameUI.form2.querySelectorAll('button');
+
+    // Handle "lower is better" properties if unitString is provided
+    if (unitString && allDeckProperties[chosenDeck]) {
+        allDeckProperties[chosenDeck].forEach(e => {
+            if (e.unit === unitString && e.lowerIsBetter === true){
+                [disableCard1Buttons, disableCard2Buttons] = [disableCard2Buttons, disableCard1Buttons];
+            };
+        });
+    }
+
+    // Set disabled state for player 1 buttons
+    for (let i = 0; i < buttons1.length; i++) {
+        buttons1[i].disabled = disableCard1Buttons;
     };
-    for (let i = 0; i < elements2.length; i++) {
-    elements2[i].disabled = disableCard2Buttons;
+
+    // Set disabled state for player 2 buttons
+    for (let i = 0; i < buttons2.length; i++) {
+        buttons2[i].disabled = disableCard2Buttons;
     };
 };
 

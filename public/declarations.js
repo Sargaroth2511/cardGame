@@ -20,6 +20,35 @@ function safeQuerySelectorAll(selector) {
     return elements;
 }
 
+// Helper functions for showing/hiding elements
+function showElements(displayValue, ...elements) {
+    elements.forEach(element => {
+        if (element) {
+            if (Array.isArray(element)) {
+                element.forEach(el => {
+                    if (el) el.style.display = displayValue;
+                });
+            } else {
+                element.style.display = displayValue;
+            }
+        }
+    });
+}
+
+function hideElements(...elements) {
+    elements.forEach(element => {
+        if (element) {
+            if (Array.isArray(element)) {
+                element.forEach(el => {
+                    if (el) el.style.display = 'none';
+                });
+            } else {
+                element.style.display = 'none';
+            }
+        }
+    });
+}
+
 // Safe replacement for the dangerous parse() function
 function getSelector(selectorName) {
     if (selectorMap.hasOwnProperty(selectorName)) {
@@ -102,6 +131,8 @@ window.GameUI = {
     safeQuerySelector,
     safeQuerySelectorAll,
     getSelector,
+    showElements,
+    hideElements,
 
     // Button Selectors
     vMaxBtn: safeQuerySelector('#vmaxbtn1'),
@@ -217,6 +248,8 @@ const {
 window.safeQuerySelector = safeQuerySelector;
 window.safeQuerySelectorAll = safeQuerySelectorAll;
 window.getSelector = getSelector;
+window.showElements = showElements;
+window.hideElements = hideElements;
 
 
 const updateUICardElements = (deckSubstring, deckArray, deckposition) => {
