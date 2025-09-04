@@ -7,6 +7,7 @@ const removeCssAnimationClasses = (HTMLElement, ...classArray ) => {
 const finishTurnAndResetUI = async () => {
     let promise = new Promise((resolve, reject) => {
     if(isPlayingOnline){
+            window.debug?.log('Set nextTurn ok (self)');
             db.collection(ourGameName).doc(uniqueOnlineName).update({ nextTurn: 'ok'})
             .then(() => {
                 resolve();

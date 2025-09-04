@@ -502,7 +502,7 @@ const getUsers = async (nextStartGame, unsubListener) => {
         startNumber: num,
         isRdy: 'yes'
       });
-      
+      try { window.debug?.log('Set isRdy yes', { startNumber: num }); } catch(e){}
       toggleWaitingPopup('Warte auf anderen Spieler', 'grid', startDotinterval);
       
       await new Promise((resolve) => {

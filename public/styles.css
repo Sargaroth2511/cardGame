@@ -1266,6 +1266,48 @@ button[type='submit'] {
     transition: box-shadow .15s ease, filter .15s ease, background-color .15s ease;
 }
 
+/* --- Send Link (WhatsApp) card polish --- */
+#sendOuter .choose-form {
+    width: 24rem;                 /* consistent compact card */
+    height: 22rem;                /* shorter than deck chooser */
+    grid-template-rows: auto 1fr; /* title + content area */
+    justify-items: center;        /* center content */
+    align-items: center;          /* vertical centering */
+    padding: 4.5rem 1.5rem 3rem;  /* space for title at top */
+}
+
+/* In send popup, keep the title in normal flow to avoid overlap */
+#sendOuter .choose-form > div:first-child {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 0.75rem;
+    align-self: start;
+}
+
+#sendOuter #whatsappButton {
+    position: static;             /* remove absolute positioning */
+    height: 3.4rem;               /* moderate icon size */
+    width: auto;
+    margin-top: 0.5rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    justify-self: center;
+    align-self: center;
+}
+
+#sendOuter #sendBackbtn {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    height: 1.8rem;
+    font-size: 0.95rem;
+    padding: 0 0.8rem;
+    width: auto;
+    border-radius: 5px;           /* match classic menu buttons */
+}
+
 /* Disable global hover grow inside difficulty chooser to avoid title overlap */
 .choose-form button[type='submit']:hover {
     transform: none; /* keep size stable */

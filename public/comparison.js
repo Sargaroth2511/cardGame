@@ -35,6 +35,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
 
     // Prevent re-entry while in progress
     isComparisonInProgress = true;
+    try { window.debug?.set('compInProgress', true); window.debug?.log('Compare start', { propertyKey, unit, p1Value, p2Value }); } catch(e){}
 
     showComparePopup(headingLabel);
 
@@ -70,6 +71,7 @@ const runComparisonSequence = async (p1Value, p2Value, maxBarValue, propertyKey,
                         resolve();
                     } else {
                         isComparisonInProgress = false;
+                        try { window.debug?.set('compInProgress', false); window.debug?.log('Bars done'); } catch(e){}
                             if (isPlayingOnline){
                             db.collection(ourGameName).doc(uniqueOnlineName).update({wantsToCheck: ''});
                         }; 
