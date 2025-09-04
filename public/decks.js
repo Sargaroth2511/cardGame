@@ -5,7 +5,7 @@ const playgroundElement = document.querySelector('.playground');
 
 
 
-let isPlayingOnline = Boolean;
+let isPlayingOnline = false;
 
 
 // Deck Constructors
@@ -166,9 +166,9 @@ const sortID = (a, b,) => {
   return 0;
 }
 
-function parse(str) {
-  return Function(`'use strict'; return (${str})`)()
-}
+// REMOVED: Dangerous parse() function that used Function() for dynamic evaluation
+// This was a security risk allowing arbitrary code execution
+// Replaced with safe selectorMap in declarations.js
 
 const luxusCarDeckSortID = Array.from(luxuryCarDeck.sort(sortID));
 
@@ -540,7 +540,7 @@ if (typeof module !== 'undefined' && module.exports) {
     searchID,
     sorteDecks,
     getStatus,
-    parse,
+    // parse, // REMOVED: Security risk
     LuxuryCar,
     AutosalonCar,
     CardProperties,

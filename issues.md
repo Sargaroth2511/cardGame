@@ -1,13 +1,13 @@
 **Security**
 
-- **Arbitrary code execution risk (HIGH):** `public/decks.js` line ~170 defines `parse(str)` using `Function()` to evaluate arbitrary strings. This enables code injection if any untrusted input reaches it. Replace with explicit mapping or a safe parser; never evaluate dynamic strings.
+- **Arbitrary code execution risk (HIGH):** ~~`public/decks.js` line ~170 defines `parse(str)` using `Function()` to evaluate arbitrary strings. This enables code injection if any untrusted input reaches it. Replace with explicit mapping or a safe parser; never evaluate dynamic strings.~~ ✅ **FIXED:** Removed dangerous `parse()` function and replaced with safe `selectorMap` in `declarations.js`. Updated tests to reflect security improvements.
 - **Firebase listener robustness (MEDIUM):** `public/firebaseListeners.js` uses `onSnapshot` without storing unsubscribe functions. This can leak memory and keep network activity after navigation. Return and invoke unsubscribers on teardown.
 - **Unsanitized HTML writes (LOW):** `public/decks.js` manipulates `animatedpoints.innerHTML` repeatedly. While current values are dots, prefer `textContent` to avoid accidental HTML injection if content changes.
 - **External scripts without SRI/CSP (LOW):** `public/index.html` loads third‑party scripts (Firebase, Font Awesome) without Subresource Integrity and there's no documented CSP. Consider adding CSP and SRI where feasible.
 
 **Correctness/Bugs**
 
-- **Invalid boolean initialization (HIGH):** `public/decks.js` sets `let isPlayingOnline = Boolean;` which assigns the Function object, not a boolean. Initialize to `false` and set via `getStatus()`.
+- **Invalid boolean initialization (HIGH):** ~~`public/decks.js` sets `let isPlayingOnline = Boolean;` which assigns the Function object, not a boolean. Initialize to `false` and set via `getStatus()`.~~ ✅ **FIXED:** Changed `let isPlayingOnline = Boolean;` to `let isPlayingOnline = false;` in `public/decks.js`.
 - **Duplicate/conflicting implementations (HIGH):** `public/comparison.js` and `public/compareFuncs.js` contain near‑identical logic (`isComparisonInProgress`, `compareTopCardsByIndex`, `runComparisonSequence`, `playAI`). This risks drift and double definitions in the global scope. Consolidate into one module.
 - **Multiple AI implementations (MEDIUM):** `public/ai.js` and duplicated AI in `compareFuncs.js` overlap. Keep a single source of truth.
 - **Global reliance on missing DOM nodes (MEDIUM):** Many scripts query elements at load time (`document.querySelector(...)`) and immediately use them without null checks. In pages where elements are absent, this causes errors. Add guards or initialize on DOMContentLoaded within scoped modules.

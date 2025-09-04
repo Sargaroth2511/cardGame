@@ -24,7 +24,7 @@
         'decks.js',              // provides deck data, globals, and helpers (setDBdocs, etc.)
         'declarations.js',
         'turn.js',
-        'comparison.js',
+        'compareFuncs.js',       // consolidated comparison and game logic functions
         'ai.js',
         'firebaseListeners.js',
         'startGame.js',
