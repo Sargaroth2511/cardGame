@@ -1,0 +1,45 @@
+# Content Security Policy Configuration
+# This file contains the CSP policy for the Quartett application
+
+# Default policy - only allow same-origin resources
+default-src 'self'
+
+# Scripts - allow specific trusted domains
+script-src 'self' 'unsafe-inline' \
+  https://www.gstatic.com \
+  https://kit.fontawesome.com \
+  https://ka-f.fontawesome.com \
+  https://www.googletagmanager.com \
+  https://*.firebaseapp.com \
+  https://*.googleapis.com
+
+# Styles - allow specific trusted domains
+style-src 'self' 'unsafe-inline' \
+  https://fonts.googleapis.com \
+  https://kit.fontawesome.com \
+  https://ka-f.fontawesome.com \
+  https://fonts.gstatic.com
+
+# Fonts - allow specific trusted domains
+font-src 'self' \
+  https://fonts.gstatic.com \
+  https://ka-f.fontawesome.com
+
+# Images - allow local and external images
+img-src 'self' data: https:
+
+# Connections - allow specific APIs and services
+connect-src 'self' \
+  https://*.firebaseapp.com \
+  https://*.googleapis.com \
+  https://*.firebaseio.com \
+  https://*.google-analytics.com \
+  https://firestore.googleapis.com \
+  https://firebase.googleapis.com \
+  https://www.google-analytics.com \
+  https://www.googletagmanager.com \
+  https://ka-f.fontawesome.com
+
+# Frames - allow Firebase auth popups
+frame-src 'self' \
+  https://*.firebaseapp.com
